@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Very Important Message 🍫</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="app">
+
+        <!-- SCREEN 1 -->
+        <section class="card" id="screen-start">
+
+            <div class="emoji">👀</div>
+
+            <p class="tiny">PRIVATE MESSAGE</p>
+
+            <h1>
+                Yesterday someone scammed me… 😭
+            </h1>
+
+            <p>
+                I still can't believe what happened.
+            </p>
+
+            <button class="primary" id="startBtn">
+                Do you want to know? 👀
+            </button>
+
+        </section>
+
+
+        <!-- SCREEN 2 -->
+        <section class="card hidden" id="screen-loading">
+
+            <div class="spinner"></div>
+
+            <h1>
+                Checking the evidence…
+            </h1>
+
+            <p id="loadingText">
+                Opening yesterday's incident…
+            </p>
+
+        </section>
+
+
+        <!-- SCREEN 3 -->
+        <section class="card hidden" id="screen-scam">
+
+            <div class="big-emoji">
+                😂
+            </div>
+
+            <p class="tiny">
+                SCAM DETECTED
+            </p>
+
+            <h1>
+                You got scammed yesterday! 😭
+            </h1>
+
+            <p>
+                Wait… actually, <strong>I</strong> got scammed.
+            </p>
+
+            <button class="primary" id="evidenceBtn">
+                Show me the scam 📸
+            </button>
+
+        </section>
+
+
+        <!-- SCREEN 4 -->
+        <section class="card hidden" id="screen-evidence">
+
+            <p class="tiny">
+                THE EVIDENCE
+            </p>
+
+            <h1>
+                Now you remember? 👀
+            </h1>
+
+            <img
+                class="screenshot"
+                src="assets/chat-screenshot.jpg"
+                alt="Chat screenshot"
+            >
+
+            <div class="quote">
+                “I'll go with Dairy Milk 🤣”
+            </div>
+
+            <p class="message">
+                And then… where is my Dairy Milk? 🥲🍫
+            </p>
+
+            <button class="primary" id="claimBtn">
+                Okay okay… what do you want? 😭
+            </button>
+
+        </section>
+
+
+        <!-- SCREEN 5 -->
+        <section class="card hidden" id="screen-form">
+
+            <div class="big-emoji">
+                🍫
+            </div>
+
+            <p class="tiny">
+                FINAL QUESTION
+            </p>
+
+            <h1>
+                When are you buying my Dairy Milk?
+            </h1>
+
+            <p>
+                Type your answer below.
+                This is going straight into my secret complaint department. 😂
+            </p>
+
+            <!-- Google Apps Script -->
+            <form
+                id="replyForm"
+                action="YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
+                method="POST"
+                target="submitFrame"
+            >
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name (optional)"
+                    maxlength="50"
+                >
+
+                <textarea
+                    name="reply"
+                    placeholder="I will buy it when..."
+                    maxlength="500"
+                    required
+                ></textarea>
+
+                <button
+                    class="primary"
+                    type="submit"
+                >
+                    Send my promise 🍫
+                </button>
+
+            </form>
+
+            <iframe
+                name="submitFrame"
+                id="submitFrame"
+                class="hidden-frame"
+            ></iframe>
+
+            <p class="privacy-note">
+                Only the answer you type here is saved to the connected Google Sheet.
+            </p>
+
+        </section>
+
+
+        <!-- SCREEN 6 -->
+        <section class="card hidden" id="screen-done">
+
+            <div class="big-emoji">
+                🍫❤️
+            </div>
+
+            <h1>
+                Promise received! 😂
+            </h1>
+
+            <p>
+                Your Dairy Milk commitment has been officially recorded.
+            </p>
+
+            <p class="small">
+                No more excuses. I'll be waiting. 👀
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Made with 0% seriousness and 100% chocolate expectations 😂
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
