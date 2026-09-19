@@ -4,192 +4,248 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>A Very Important Message 🍫</title>
+    <title>A Little Something From Sherly 💌</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <!-- Background decorations -->
+    <div class="stars"></div>
+    <div class="hearts"></div>
+
     <main class="app">
 
         <!-- SCREEN 1 -->
-        <section class="card" id="screen-start">
+        <section class="card screen" id="screen-start">
 
-            <div class="emoji">👀</div>
-
-            <p class="tiny">PRIVATE MESSAGE</p>
+            <div class="emoji">💌</div>
 
             <h1>
-               Hi Sherly Yesterday someone scammed me… 😭
+                Hey Christopher...
             </h1>
 
             <p>
-                I still can't believe what happened.
+                There’s something Sherly has been wanting
+                to tell you.
+            </p>
+
+            <p class="small">
+                And she finally found the courage. ❤️
             </p>
 
             <button class="primary" id="startBtn">
-                Do you want to know? 👀
+                Open the message 💗
             </button>
 
         </section>
 
 
         <!-- SCREEN 2 -->
-        <section class="card hidden" id="screen-loading">
+        <section class="card screen hidden" id="screen-loading">
 
-            <div class="spinner"></div>
+            <div class="heart-loader">
+                ❤️
+            </div>
 
             <h1>
-                Checking the evidence…
+                Just a moment...
             </h1>
 
             <p id="loadingText">
-                Opening yesterday's incident…
+                Finding the right words... 💭
             </p>
 
         </section>
 
 
         <!-- SCREEN 3 -->
-        <section class="card hidden" id="screen-scam">
+        <section class="card screen hidden" id="screen-secret">
 
-            <div class="big-emoji">
-                😂
+            <div class="emoji">
+                👀
             </div>
 
             <p class="tiny">
-                SCAM DETECTED
+                SECRET MESSAGE
             </p>
 
             <h1>
-                Sherly, you scammed me yesterday! 😭
+                Christopher,
+                this isn't a normal message...
             </h1>
 
             <p>
-                Wait… actually, <strong>I</strong> got scammed.
+                Someone has been hiding
+                a little secret from you.
             </p>
 
-            <button class="primary" id="evidenceBtn">
-                Show me the scam 📸
+            <button class="primary" id="revealBtn">
+                Find out who... 💌
             </button>
 
         </section>
 
 
         <!-- SCREEN 4 -->
-        <section class="card hidden" id="screen-evidence">
+        <section class="card screen hidden" id="screen-sherly">
+
+            <div class="big-heart">
+                ❤️
+            </div>
 
             <p class="tiny">
-                THE EVIDENCE
+                THE SECRET
             </p>
 
             <h1>
-                Now you remember? 👀
+                It's Sherly. ❤️
             </h1>
 
-            <img
-                class="screenshot"
-                src="assets/chat-screenshot.jpg"
-                alt="Chat screenshot"
-            >
-
-            <div class="quote">
-                “I'll go with Dairy Milk 🤣”
-            </div>
-
-            <p class="message">
-                And then… where is my Dairy Milk? 🥲🍫
+            <p>
+                And she has something
+                very important to tell you.
             </p>
 
-            <button class="primary" id="claimBtn">
-                Okay okay… what do you want? 😭
+            <button class="primary" id="messageBtn">
+                There's more... 💌
             </button>
 
         </section>
 
 
         <!-- SCREEN 5 -->
-        <section class="card hidden" id="screen-form">
+        <section class="card screen hidden" id="screen-message">
 
-            <div class="big-emoji">
-                🍫
+            <div class="emoji">
+                🌹
             </div>
 
             <p class="tiny">
-                FINAL QUESTION
+                FROM SHERLY
             </p>
 
             <h1>
-                When are you buying my Dairy Milk?
+                Christopher Sebastin...
             </h1>
 
             <p>
-                Type your answer below.
-                This is going straight into my secret complaint department. 😂
+                I don't know exactly when it happened,
+                but somewhere along the way...
             </p>
 
-            <!-- Google Apps Script -->
-            <form
-                id="replyForm"
-                action="https://script.google.com/macros/s/AKfycbxvbdKbssi3SutVta-8iAEDPqYvzh2w9hREtefqVsIMTfEHbd2p3cmQXhDE6aTcT6xR/exec"
-                method="POST"
-                target="submitFrame"
-            >
+            <div class="quote">
+                You became someone very special to me. ❤️
+            </div>
 
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Your name (optional)"
-                    maxlength="50"
-                >
-
-                <textarea
-                    name="reply"
-                    placeholder="I will buy it when..."
-                    maxlength="500"
-                    required
-                ></textarea>
-
-                <button
-                    class="primary"
-                    type="submit"
-                >
-                    Send my promise 🍫
-                </button>
-
-            </form>
-
-            <iframe
-                name="submitFrame"
-                id="submitFrame"
-                class="hidden-frame"
-            ></iframe>
-
-            <p class="privacy-note">
-                Only the answer you type here is saved to the connected Google Sheet.
+            <p>
+                Your smile, your presence,
+                and even our little conversations
+                started meaning more than I expected.
             </p>
+
+            <button class="primary" id="proposalBtn">
+                There's one more thing... 💍
+            </button>
 
         </section>
 
 
         <!-- SCREEN 6 -->
-        <section class="card hidden" id="screen-done">
+        <section class="card screen proposal hidden" id="screen-proposal">
 
-            <div class="big-emoji">
-                🍫❤️
+            <div class="big-heart">
+                💗
             </div>
 
+            <p class="tiny">
+                ONE LAST QUESTION
+            </p>
+
             <h1>
-                Promise received! 😂
+                Christopher,
             </h1>
 
             <p>
-                Your Dairy Milk commitment has been officially recorded.
+                I've been trying to find the courage
+                to say this...
             </p>
 
+            <h2>
+                I LIKE YOU. ❤️
+            </h2>
+
+            <p>
+                Not just a little.
+                <br>
+                Not just as a friend.
+            </p>
+
+            <div class="quote">
+                I have fallen for you. ❤️
+            </div>
+
+            <h2 class="question">
+                Will you be mine? 💍
+            </h2>
+
+            <div class="buttons">
+
+                <button class="yes-btn" id="yesBtn">
+                    YES ❤️
+                </button>
+
+                <button class="no-btn" id="noBtn" disabled>
+                    NO
+                </button>
+
+            </div>
+
+            <p class="no-hint">
+                *Looks like there's only one option 😌❤️
+            </p>
+
+        </section>
+
+
+        <!-- SCREEN 7 -->
+        <section class="card screen hidden" id="screen-yes">
+
+            <div class="celebration">
+                🎉
+            </div>
+
+            <div class="big-heart">
+                ❤️
+            </div>
+
+            <h1>
+                SHE SAID YES! 🎉
+            </h1>
+
+            <p>
+                Christopher said YES!
+            </p>
+
+            <div class="love-names">
+                Sherly ❤️ Christopher
+            </div>
+
+            <p>
+                Maybe this is the beginning
+                of something beautiful. ✨
+            </p>
+
+            <div class="quote">
+                One question.<br>
+                One answer.<br>
+                One beautiful beginning. 💍
+            </div>
+
             <p class="small">
-                No more excuses. I'll be waiting. 👀
+                With love,<br>
+                Sherly Celestina ❤️
             </p>
 
         </section>
@@ -198,7 +254,7 @@
 
 
     <footer>
-        Made with 0% seriousness and 100% chocolate expectations 😂
+        Made with a little courage & a lot of feelings. 💌
     </footer>
 
 
