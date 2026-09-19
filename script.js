@@ -9,15 +9,16 @@ const screens = [
 ];
 
 
-// =========================
-// SCREEN SWITCHING
-// =========================
+// =====================================
+// SCREEN SWITCH
+// =====================================
 
 function showScreen(id) {
 
     screens.forEach(function(screen) {
 
-        const element = document.getElementById(screen);
+        const element =
+            document.getElementById(screen);
 
         if (element) {
             element.classList.add("hidden");
@@ -25,7 +26,8 @@ function showScreen(id) {
 
     });
 
-    const target = document.getElementById(id);
+    const target =
+        document.getElementById(id);
 
     if (target) {
         target.classList.remove("hidden");
@@ -34,127 +36,155 @@ function showScreen(id) {
 }
 
 
-// =========================
+// =====================================
 // START
-// =========================
+// =====================================
 
-document.getElementById("startBtn").addEventListener("click", function() {
+document
+    .getElementById("startBtn")
+    .addEventListener("click", function() {
 
-    showScreen("screen-loading");
+        showScreen("screen-loading");
 
-    const loadingText =
-        document.getElementById("loadingText");
+        const text =
+            document.getElementById("loadingText");
 
-    const messages = [
-        "Finding the right words... 💭",
-        "Gathering some courage... 🥹",
-        "Checking the heart... ❤️",
-        "Okay... here we go. 💌"
-    ];
+        const messages = [
 
-    let index = 0;
+            "Finding the right words... 💭",
 
-    const timer = setInterval(function() {
+            "Gathering some courage... 🥹",
 
-        loadingText.textContent = messages[index];
+            "Listening to her heart... ❤️",
 
-        index++;
+            "Almost ready... 🦋",
 
-        if (index >= messages.length) {
-            clearInterval(timer);
-        }
+            "Okay... here we go. 💌"
 
-    }, 700);
+        ];
 
+        let index = 0;
 
-    setTimeout(function() {
+        const timer =
+            setInterval(function() {
 
-        showScreen("screen-secret");
+                text.textContent =
+                    messages[index];
 
-    }, 3200);
+                index++;
 
-});
+                if (index >= messages.length) {
+                    clearInterval(timer);
+                }
 
-
-// =========================
-// REVEAL SHERLY
-// =========================
-
-document.getElementById("revealBtn").addEventListener("click", function() {
-
-    showScreen("screen-sherly");
-
-});
+            }, 650);
 
 
-// =========================
+        setTimeout(function() {
+
+            showScreen("screen-secret");
+
+        }, 3500);
+
+    });
+
+
+// =====================================
+// REVEAL
+// =====================================
+
+document
+    .getElementById("revealBtn")
+    .addEventListener("click", function() {
+
+        showScreen("screen-sherly");
+
+        createMiniHearts();
+
+    });
+
+
+// =====================================
 // SHERLY MESSAGE
-// =========================
+// =====================================
 
-document.getElementById("messageBtn").addEventListener("click", function() {
+document
+    .getElementById("messageBtn")
+    .addEventListener("click", function() {
 
-    showScreen("screen-message");
+        showScreen("screen-message");
 
-});
+        createMiniHearts();
+
+    });
 
 
-// =========================
+// =====================================
 // PROPOSAL
-// =========================
+// =====================================
 
-document.getElementById("proposalBtn").addEventListener("click", function() {
+document
+    .getElementById("proposalBtn")
+    .addEventListener("click", function() {
 
-    showScreen("screen-proposal");
+        showScreen("screen-proposal");
 
-});
+        createMiniHearts();
 
-
-// =========================
-// YES BUTTON
-// =========================
-
-document.getElementById("yesBtn").addEventListener("click", function() {
-
-    showScreen("screen-yes");
-
-    createHearts();
-
-});
+    });
 
 
-// =========================
-// NO BUTTON
-// =========================
+// =====================================
+// YES
+// =====================================
 
-// The NO button is intentionally disabled.
-// It cannot be clicked.
+document
+    .getElementById("yesBtn")
+    .addEventListener("click", function() {
+
+        showScreen("screen-yes");
+
+        createLoveExplosion();
+
+        createButterflies();
+
+    });
 
 
-// =========================
-// CELEBRATION HEARTS
-// =========================
+// =====================================
+// CREATE FLOATING HEARTS
+// =====================================
 
-function createHearts() {
+function createMiniHearts() {
 
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 8; i++) {
 
-        const heart = document.createElement("div");
+        const heart =
+            document.createElement("div");
 
-        heart.textContent = "❤️";
+        heart.textContent =
+            Math.random() > 0.5
+                ? "❤️"
+                : "💕";
 
         heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "%";
-        heart.style.bottom = "-30px";
+
+        heart.style.left =
+            Math.random() * 100 + "%";
+
+        heart.style.bottom =
+            "-40px";
 
         heart.style.fontSize =
-            (15 + Math.random() * 25) + "px";
+            (15 + Math.random() * 20) + "px";
 
-        heart.style.zIndex = "9999";
+        heart.style.zIndex = "20";
 
-        heart.style.pointerEvents = "none";
+        heart.style.pointerEvents =
+            "none";
 
         heart.style.transition =
-            "transform 4s ease-out, opacity 4s ease-out";
+            "transform 5s ease-out, opacity 5s ease-out";
 
         document.body.appendChild(heart);
 
@@ -162,7 +192,8 @@ function createHearts() {
         setTimeout(function() {
 
             heart.style.transform =
-                `translateY(-${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`;
+                `translateY(-${window.innerHeight + 100}px)
+                 rotate(${Math.random() * 360}deg)`;
 
             heart.style.opacity = "0";
 
@@ -173,8 +204,186 @@ function createHearts() {
 
             heart.remove();
 
-        }, 4200);
+        }, 5200);
 
     }
 
 }
+
+
+// =====================================
+// BIG LOVE EXPLOSION
+// =====================================
+
+function createLoveExplosion() {
+
+    const symbols = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💘",
+        "💝",
+        "🌹",
+        "✨",
+        "🦋"
+    ];
+
+    for (let i = 0; i < 45; i++) {
+
+        const item =
+            document.createElement("div");
+
+        item.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+        item.style.position =
+            "fixed";
+
+        item.style.left =
+            "50%";
+
+        item.style.top =
+            "50%";
+
+        item.style.fontSize =
+            (16 + Math.random() * 28) + "px";
+
+        item.style.zIndex =
+            "9999";
+
+        item.style.pointerEvents =
+            "none";
+
+        item.style.transition =
+            "transform 2.5s ease-out, opacity 2.5s ease-out";
+
+        document.body.appendChild(item);
+
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const distance =
+            150 + Math.random() * 400;
+
+        const x =
+            Math.cos(angle) * distance;
+
+        const y =
+            Math.sin(angle) * distance;
+
+
+        setTimeout(function() {
+
+            item.style.transform =
+                `translate(${x}px, ${y}px)
+                 rotate(${Math.random() * 720}deg)
+                 scale(${0.8 + Math.random()})`;
+
+            item.style.opacity = "0";
+
+        }, 50);
+
+
+        setTimeout(function() {
+
+            item.remove();
+
+        }, 2800);
+
+    }
+
+}
+
+
+// =====================================
+// EXTRA BUTTERFLIES
+// =====================================
+
+function createButterflies() {
+
+    const butterflies = [
+        "🦋",
+        "🦋",
+        "🦋",
+        "🦋",
+        "🦋",
+        "🦋"
+    ];
+
+    butterflies.forEach(function(symbol, index) {
+
+        const butterfly =
+            document.createElement("div");
+
+        butterfly.textContent =
+            symbol;
+
+        butterfly.style.position =
+            "fixed";
+
+        butterfly.style.left =
+            "50%";
+
+        butterfly.style.top =
+            "50%";
+
+        butterfly.style.fontSize =
+            (25 + Math.random() * 20) + "px";
+
+        butterfly.style.zIndex =
+            "9998";
+
+        butterfly.style.pointerEvents =
+            "none";
+
+        butterfly.style.transition =
+            "transform 4s ease-out, opacity 4s ease-out";
+
+        document.body.appendChild(butterfly);
+
+
+        setTimeout(function() {
+
+            const direction =
+                index % 2 === 0
+                    ? 1
+                    : -1;
+
+            butterfly.style.transform =
+                `translate(
+                    ${direction * (150 + Math.random() * 300)}px,
+                    ${-(150 + Math.random() * 500)}px
+                )
+                rotate(${direction * 360}deg)`;
+
+            butterfly.style.opacity = "0";
+
+        }, 100);
+
+
+        setTimeout(function() {
+
+            butterfly.remove();
+
+        }, 4300);
+
+    });
+
+}
+
+
+// =====================================
+// KEEP NO DISABLED
+// =====================================
+
+const noButton =
+    document.getElementById("noBtn");
+
+noButton.disabled = true;
