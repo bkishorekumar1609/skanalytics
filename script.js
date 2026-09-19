@@ -1,140 +1,180 @@
 const screens = [
     "screen-start",
     "screen-loading",
-    "screen-scam",
-    "screen-evidence",
-    "screen-form",
-    "screen-done"
+    "screen-secret",
+    "screen-sherly",
+    "screen-message",
+    "screen-proposal",
+    "screen-yes"
 ];
 
 
-// Show one screen and hide the others
+// =========================
+// SCREEN SWITCHING
+// =========================
 
-function show(id) {
+function showScreen(id) {
 
     screens.forEach(function(screen) {
 
-        document
-            .getElementById(screen)
-            .classList
-            .add("hidden");
+        const element = document.getElementById(screen);
+
+        if (element) {
+            element.classList.add("hidden");
+        }
 
     });
 
-    document
-        .getElementById(id)
-        .classList
-        .remove("hidden");
+    const target = document.getElementById(id);
+
+    if (target) {
+        target.classList.remove("hidden");
+    }
+
 }
 
 
+// =========================
+// START
+// =========================
 
-// STEP 1
-// User clicks "Do you want to know?"
+document.getElementById("startBtn").addEventListener("click", function() {
 
-document
-    .getElementById("startBtn")
-    .addEventListener("click", function() {
+    showScreen("screen-loading");
 
-        show("screen-loading");
+    const loadingText =
+        document.getElementById("loadingText");
 
+    const messages = [
+        "Finding the right words... 💭",
+        "Gathering some courage... 🥹",
+        "Checking the heart... ❤️",
+        "Okay... here we go. 💌"
+    ];
 
-        const text =
-            document.getElementById("loadingText");
+    let index = 0;
 
+    const timer = setInterval(function() {
 
-        const messages = [
+        loadingText.textContent = messages[index];
 
-            "Opening yesterday's incident…",
+        index++;
 
-            "Checking the chat history…",
+        if (index >= messages.length) {
+            clearInterval(timer);
+        }
 
-            "Finding the missing chocolate…",
-
-            "Calculating emotional damage…"
-
-        ];
-
-
-        let i = 0;
-
-
-        const timer =
-            setInterval(function() {
-
-                text.textContent =
-                    messages[i];
-
-                i++;
+    }, 700);
 
 
-                if (i === messages.length) {
+    setTimeout(function() {
 
-                    clearInterval(timer);
+        showScreen("screen-secret");
 
-                }
+    }, 3200);
 
-            }, 650);
+});
 
 
+// =========================
+// REVEAL SHERLY
+// =========================
 
-        // After 3 seconds show the prank
+document.getElementById("revealBtn").addEventListener("click", function() {
+
+    showScreen("screen-sherly");
+
+});
+
+
+// =========================
+// SHERLY MESSAGE
+// =========================
+
+document.getElementById("messageBtn").addEventListener("click", function() {
+
+    showScreen("screen-message");
+
+});
+
+
+// =========================
+// PROPOSAL
+// =========================
+
+document.getElementById("proposalBtn").addEventListener("click", function() {
+
+    showScreen("screen-proposal");
+
+});
+
+
+// =========================
+// YES BUTTON
+// =========================
+
+document.getElementById("yesBtn").addEventListener("click", function() {
+
+    showScreen("screen-yes");
+
+    createHearts();
+
+});
+
+
+// =========================
+// NO BUTTON
+// =========================
+
+// The NO button is intentionally disabled.
+// It cannot be clicked.
+
+
+// =========================
+// CELEBRATION HEARTS
+// =========================
+
+function createHearts() {
+
+    for (let i = 0; i < 25; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.textContent = "❤️";
+
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.bottom = "-30px";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 25) + "px";
+
+        heart.style.zIndex = "9999";
+
+        heart.style.pointerEvents = "none";
+
+        heart.style.transition =
+            "transform 4s ease-out, opacity 4s ease-out";
+
+        document.body.appendChild(heart);
+
 
         setTimeout(function() {
 
-            show("screen-scam");
+            heart.style.transform =
+                `translateY(-${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`;
 
-        }, 3000);
+            heart.style.opacity = "0";
 
-    });
-
-
-
-// STEP 2
-// Show evidence
-
-document
-    .getElementById("evidenceBtn")
-    .addEventListener("click", function() {
-
-        show("screen-evidence");
-
-    });
-
-
-
-// STEP 3
-// Go to the Dairy Milk question
-
-document
-    .getElementById("claimBtn")
-    .addEventListener("click", function() {
-
-        show("screen-form");
-
-    });
-
-
-
-// STEP 4
-// Submit the reply
-
-document
-    .getElementById("replyForm")
-    .addEventListener("submit", function() {
-
-        /*
-            The form is submitted to Google Apps Script
-            inside the hidden iframe.
-
-            This allows the page to stay open.
-        */
+        }, 50);
 
 
         setTimeout(function() {
 
-            show("screen-done");
+            heart.remove();
 
-        }, 900);
+        }, 4200);
 
-    });
+    }
+
+}
