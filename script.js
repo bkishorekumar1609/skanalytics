@@ -1,275 +1,544 @@
-const apologyCard = document.getElementById("apologyCard");
-const messageCard = document.getElementById("messageCard");
-const questionCard = document.getElementById("questionCard");
-const yesCard = document.getElementById("yesCard");
-const noCard = document.getElementById("noCard");
+/* =========================
+   GET ELEMENTS
+========================= */
 
-const continueBtn = document.getElementById("continueBtn");
-const questionBtn = document.getElementById("questionBtn");
+const pages = [
+    document.getElementById("page1"),
+    document.getElementById("page2"),
+    document.getElementById("page3"),
+    document.getElementById("page4"),
+    document.getElementById("pageYes"),
+    document.getElementById("pageNo"),
+    document.getElementById("pageFinal")
+];
+
+const startBtn = document.getElementById("startBtn");
+const sorryBtn = document.getElementById("sorryBtn");
+const courtBtn = document.getElementById("courtBtn");
+
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-const tryAgainBtn = document.getElementById("tryAgainBtn");
 
-const replyForm = document.getElementById("replyForm");
-const replyInput = document.getElementById("replyInput");
+const submitPunishment =
+    document.getElementById("submitPunishment");
+
+const tryAgainBtn = null;
+
+const punishment =
+    document.getElementById("punishment");
+
+const punishmentError =
+    document.getElementById("punishmentError");
+
+const responseForm =
+    document.getElementById("responseForm");
+
+const replyInput =
+    document.getElementById("replyInput");
 
 
 /* =========================
-   SCREEN SWITCHING
+   SHOW PAGE
 ========================= */
 
-function showScreen(screen) {
+function showPage(page) {
 
-    const screens = [
-        apologyCard,
-        messageCard,
-        questionCard,
-        yesCard,
-        noCard
-    ];
-
-    screens.forEach(function(item) {
+    pages.forEach(function(item) {
         item.classList.add("hidden");
     });
 
-    screen.classList.remove("hidden");
+    page.classList.remove("hidden");
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
+    createBurst();
 }
 
 
 /* =========================
-   SAVE RESPONSE TO GOOGLE SHEET
+   TYPING ANIMATION
 ========================= */
 
-function saveResponse(response) {
+const typingText =
+    document.getElementById("typingText");
 
-    replyInput.value = response;
+const message =
+    "I need to say sorry for something...";
 
-    /*
-     * Submit silently to Google Apps Script.
-     * The iframe prevents the user from leaving the website.
-     */
-    replyForm.submit();
+let typingIndex = 0;
+
+function typeMessage() {
+
+    if (typingIndex < message.length) {
+
+        typingText.textContent +=
+            message.charAt(typingIndex);
+
+        typingIndex++;
+
+        setTimeout(
+            typeMessage,
+            55
+        );
+    }
+}
+
+setTimeout(
+    typeMessage,
+    700
+);
+
+
+/* =========================
+   PAGE 1
+========================= */
+
+startBtn.addEventListener(
+    "click",
+    function() {
+
+        showPage(
+            document.getElementById("page2")
+        );
+
+    }
+);
+
+
+/* =========================
+   PAGE 2
+========================= */
+
+sorryBtn.addEventListener(
+    "click",
+    function() {
+
+        showPage(
+            document.getElementById("page3")
+        );
+
+    }
+);
+
+
+/* =========================
+   PAGE 3
+========================= */
+
+courtBtn.addEventListener(
+    "click",
+    function() {
+
+        showPage(
+            document.getElementById("page4")
+        );
+
+    }
+);
+
+
+/* =========================
+   SAVE TO GOOGLE SHEETS
+========================= */
+
+function saveResponse(text) {
+
+    replyInput.value = text;
+
+    responseForm.submit();
 }
 
 
 /* =========================
-   FIRST BUTTON
+   YES
 ========================= */
 
-continueBtn.addEventListener("click", function() {
+yesBtn.addEventListener(
+    "click",
+    function() {
 
-    showScreen(messageCard);
+        /*
+         * This is immediately saved
+         * to Google Sheets.
+         */
 
-    createHeartBurst(8);
-});
+        saveResponse(
+            "YES - Apology accepted ✅"
+        );
+
+        showPage(
+            document.getElementById("pageYes")
+        );
+
+        createBigCelebration();
+
+    }
+);
 
 
 /* =========================
-   SECOND BUTTON
+   NO
 ========================= */
 
-questionBtn.addEventListener("click", function() {
+noBtn.addEventListener(
+    "click",
+    function() {
 
-    showScreen(questionCard);
+        /*
+         * First record that she
+         * rejected the apology.
+         */
 
-    createHeartBurst(12);
-});
+        saveResponse(
+            "NO - Punishment requested ❌"
+        );
+
+        showPage(
+            document.getElementById("pageNo")
+        );
+
+    }
+);
 
 
 /* =========================
-   YES BUTTON
+   SUBMIT PUNISHMENT
 ========================= */
 
-yesBtn.addEventListener("click", function() {
+submitPunishment.addEventListener(
+    "click",
+    function() {
 
-    saveResponse("Yes, I accept your sorry ❤️");
+        const text =
+            punishment.value.trim();
 
-    showScreen(yesCard);
+        if (!text) {
 
-    createHeartBurst(35);
-    createConfetti(45);
-});
+            punishmentError.textContent =
+                "You have to give me a punishment 😂";
+
+            punishment.focus();
+
+            return;
+        }
+
+        /*
+         * Save the actual punishment.
+         */
+
+        saveResponse(
+            "NO - Punishment: " + text
+        );
+
+        punishmentError.textContent = "";
+
+        showPage(
+            document.getElementById("pageFinal")
+        );
+
+        createBigCelebration();
+
+    }
+);
 
 
 /* =========================
-   NO BUTTON
+   FLOATING EMOJIS
 ========================= */
 
-noBtn.addEventListener("click", function() {
+const floatingEmojis =
+    document.getElementById(
+        "floatingEmojis"
+    );
 
-    saveResponse("Not yet 😭");
+function createFloatingEmoji() {
 
-    showScreen(noCard);
-
-    createHeartBurst(5);
-});
-
-
-/* =========================
-   TRY AGAIN
-========================= */
-
-tryAgainBtn.addEventListener("click", function() {
-
-    showScreen(questionCard);
-
-    createHeartBurst(10);
-});
-
-
-/* =========================
-   FLOATING HEARTS
-========================= */
-
-function createHeart() {
-
-    const heart = document.createElement("div");
-
-    heart.className = "heart";
+    const item =
+        document.createElement("div");
 
     const emojis = [
-        "❤️",
-        "💗",
-        "💖",
-        "💕",
-        "💓",
-        "💞"
+        "😂",
+        "📞",
+        "😭",
+        "🤝",
+        "⚖️",
+        "✨",
+        "📱",
+        "🤣",
+        "😅"
     ];
 
-    heart.textContent =
-        emojis[Math.floor(Math.random() * emojis.length)];
+    item.textContent =
+        emojis[
+            Math.floor(
+                Math.random() *
+                emojis.length
+            )
+        ];
 
-    heart.style.left =
+    item.style.position =
+        "fixed";
+
+    item.style.left =
         Math.random() * 100 + "vw";
 
-    heart.style.fontSize =
-        (14 + Math.random() * 22) + "px";
+    item.style.bottom =
+        "-50px";
 
-    heart.style.animationDuration =
-        (5 + Math.random() * 6) + "s";
+    item.style.fontSize =
+        15 + Math.random() * 20 + "px";
 
-    document.body.appendChild(heart);
+    item.style.zIndex =
+        "1";
 
-    setTimeout(function() {
-        heart.remove();
-    }, 12000);
+    item.style.pointerEvents =
+        "none";
+
+    const duration =
+        5 + Math.random() * 6;
+
+    item.animate(
+        [
+            {
+                transform:
+                    "translateY(0) rotate(0deg)",
+                opacity:
+                    0
+            },
+            {
+                transform:
+                    "translateY(-110vh) rotate(360deg)",
+                opacity:
+                    .65
+            },
+            {
+                transform:
+                    "translateY(-120vh) rotate(720deg)",
+                opacity:
+                    0
+            }
+        ],
+        {
+            duration:
+                duration * 1000,
+
+            easing:
+                "linear"
+        }
+    );
+
+    floatingEmojis.appendChild(item);
+
+    setTimeout(
+        function() {
+            item.remove();
+        },
+        duration * 1000
+    );
 }
 
-
-/* Create hearts continuously */
-
-setInterval(function() {
-
-    createHeart();
-
-}, 700);
+setInterval(
+    createFloatingEmoji,
+    600
+);
 
 
 /* =========================
-   HEART BURST
+   BUTTON BURST
 ========================= */
 
-function createHeartBurst(amount) {
+function createBurst() {
 
-    for (let i = 0; i < amount; i++) {
+    const emojis = [
+        "✨",
+        "😂",
+        "📞",
+        "🤝"
+    ];
 
-        setTimeout(function() {
+    for (
+        let i = 0;
+        i < 8;
+        i++
+    ) {
 
-            const heart = document.createElement("div");
+        setTimeout(
+            function() {
 
-            heart.className = "heart";
+                const item =
+                    document.createElement("div");
 
-            heart.textContent = "❤️";
+                item.textContent =
+                    emojis[
+                        Math.floor(
+                            Math.random() *
+                            emojis.length
+                        )
+                    ];
 
-            heart.style.left =
-                (40 + Math.random() * 20) + "vw";
+                item.style.position =
+                    "fixed";
 
-            heart.style.fontSize =
-                (18 + Math.random() * 20) + "px";
+                item.style.left =
+                    35 + Math.random() * 30 + "vw";
 
-            heart.style.animationDuration =
-                (3 + Math.random() * 3) + "s";
+                item.style.top =
+                    40 + Math.random() * 20 + "vh";
 
-            document.body.appendChild(heart);
+                item.style.fontSize =
+                    "24px";
 
-            setTimeout(function() {
-                heart.remove();
-            }, 7000);
+                item.style.zIndex =
+                    "1000";
 
-        }, i * 80);
+                item.style.pointerEvents =
+                    "none";
+
+                item.animate(
+                    [
+                        {
+                            transform:
+                                "translate(0,0) scale(.4)",
+                            opacity:
+                                1
+                        },
+                        {
+                            transform:
+                                `translate(
+                                    ${(Math.random() - .5) * 300}px,
+                                    ${(Math.random() - .5) * 250}px
+                                )
+                                scale(1.2)
+                                rotate(360deg)`,
+                            opacity:
+                                0
+                        }
+                    ],
+                    {
+                        duration:
+                            900,
+
+                        easing:
+                            "cubic-bezier(.2,.8,.2,1)"
+                    }
+                );
+
+                document.body.appendChild(item);
+
+                setTimeout(
+                    function() {
+                        item.remove();
+                    },
+                    1000
+                );
+
+            },
+            i * 70
+        );
     }
 }
 
 
 /* =========================
-   CONFETTI
+   BIG CELEBRATION
 ========================= */
 
-function createConfetti(amount) {
+function createBigCelebration() {
 
     const emojis = [
         "🎉",
-        "✨",
-        "💖",
-        "❤️",
         "🥳",
-        "💕"
+        "😂",
+        "✨",
+        "🤝",
+        "📞",
+        "🎊",
+        "🤣",
+        "👏"
     ];
 
-    for (let i = 0; i < amount; i++) {
+    for (
+        let i = 0;
+        i < 45;
+        i++
+    ) {
 
-        setTimeout(function() {
+        setTimeout(
+            function() {
 
-            const piece = document.createElement("div");
+                const item =
+                    document.createElement("div");
 
-            piece.style.position = "fixed";
-            piece.style.left =
-                Math.random() * 100 + "vw";
+                item.textContent =
+                    emojis[
+                        Math.floor(
+                            Math.random() *
+                            emojis.length
+                        )
+                    ];
 
-            piece.style.top = "-40px";
+                item.style.position =
+                    "fixed";
 
-            piece.style.fontSize =
-                (18 + Math.random() * 20) + "px";
+                item.style.left =
+                    Math.random() * 100 + "vw";
 
-            piece.style.zIndex = "999";
+                item.style.top =
+                    "-40px";
 
-            piece.textContent =
-                emojis[Math.floor(Math.random() * emojis.length)];
+                item.style.fontSize =
+                    18 + Math.random() * 22 + "px";
 
-            document.body.appendChild(piece);
+                item.style.zIndex =
+                    "2000";
 
-            const duration =
-                2000 + Math.random() * 3000;
+                item.style.pointerEvents =
+                    "none";
 
-            piece.animate(
-                [
+                const duration =
+                    1800 +
+                    Math.random() * 2500;
+
+                item.animate(
+                    [
+                        {
+                            transform:
+                                "translateY(0) rotate(0deg)",
+                            opacity:
+                                1
+                        },
+                        {
+                            transform:
+                                `translateY(110vh)
+                                 rotate(${360 + Math.random() * 720}deg)`,
+                            opacity:
+                                0
+                        }
+                    ],
                     {
-                        transform:
-                            "translateY(0) rotate(0deg)",
-                        opacity: 1
-                    },
-                    {
-                        transform:
-                            "translateY(110vh) rotate(720deg)",
-                        opacity: 0
+                        duration:
+                            duration,
+
+                        easing:
+                            "cubic-bezier(.2,.8,.3,1)"
                     }
-                ],
-                {
-                    duration: duration,
-                    easing: "cubic-bezier(.2,.8,.3,1)"
-                }
-            );
+                );
 
-            setTimeout(function() {
-                piece.remove();
-            }, duration + 100);
+                document.body.appendChild(item);
 
-        }, i * 40);
+                setTimeout(
+                    function() {
+                        item.remove();
+                    },
+                    duration + 100
+                );
+
+            },
+            i * 40
+        );
     }
 }
 
@@ -278,29 +547,33 @@ function createConfetti(amount) {
    BACKGROUND PARTICLES
 ========================= */
 
-function createParticles() {
+const background =
+    document.getElementById(
+        "background"
+    );
 
-    const container =
-        document.getElementById("particles");
+for (
+    let i = 0;
+    i < 40;
+    i++
+) {
 
-    for (let i = 0; i < 35; i++) {
+    const particle =
+        document.createElement("div");
 
-        const particle =
-            document.createElement("div");
+    particle.className =
+        "bg-particle";
 
-        particle.className = "particle";
+    particle.style.left =
+        Math.random() * 100 + "vw";
 
-        particle.style.left =
-            Math.random() * 100 + "vw";
+    particle.style.animationDuration =
+        8 + Math.random() * 12 + "s";
 
-        particle.style.animationDuration =
-            (8 + Math.random() * 12) + "s";
+    particle.style.animationDelay =
+        Math.random() * 10 + "s";
 
-        particle.style.animationDelay =
-            Math.random() * 8 + "s";
-
-        container.appendChild(particle);
-    }
+    background.appendChild(
+        particle
+    );
 }
-
-createParticles();
