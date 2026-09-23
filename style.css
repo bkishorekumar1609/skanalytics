@@ -22,16 +22,29 @@ body {
     color: white;
 
     background:
-        radial-gradient(circle at 20% 20%, rgba(255, 105, 180, 0.22), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.25), transparent 30%),
-        linear-gradient(135deg, #10051c, #210b2f, #090313);
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(76, 111, 255, 0.25),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(150, 80, 255, 0.22),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #080b1a,
+            #111735,
+            #080914
+        );
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    padding: 24px;
+    padding: 20px;
 
     overflow-x: hidden;
 }
@@ -43,7 +56,8 @@ body {
 
 .app {
     width: 100%;
-    max-width: 520px;
+    max-width: 540px;
+
     position: relative;
     z-index: 10;
 }
@@ -56,24 +70,27 @@ body {
 .card {
     width: 100%;
 
-    padding: 42px 30px;
+    padding: 40px 30px;
 
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.09);
+    background:
+        rgba(255, 255, 255, 0.08);
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border:
+        1px solid rgba(255, 255, 255, 0.15);
 
-    border-radius: 30px;
+    border-radius: 28px;
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
     box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.45),
+        0 25px 80px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
-    animation: cardIn 0.7s ease;
+    animation:
+        cardEnter 0.7s cubic-bezier(.2,.8,.2,1);
 }
 
 .hidden {
@@ -82,220 +99,144 @@ body {
 
 
 /* =========================
-   TEXT
+   BADGES
 ========================= */
 
-.small-label {
+.top-badge,
+.warning,
+.court-title {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.13);
+
     font-size: 11px;
-    letter-spacing: 3px;
     font-weight: 800;
 
-    color: rgba(255, 255, 255, 0.48);
+    letter-spacing: 2px;
 
-    margin-bottom: 15px;
+    color:
+        rgba(255, 255, 255, 0.65);
+
+    margin-bottom: 20px;
 }
 
+
+/* =========================
+   HEADINGS
+========================= */
+
 h1 {
-    margin: 0 0 20px;
+    margin:
+        0 0 18px;
 
-    font-size: 40px;
-    line-height: 1.12;
+    font-size: 38px;
 
-    font-weight: 850;
+    line-height: 1.15;
 
-    background: linear-gradient(
-        90deg,
-        #ffffff,
-        #ffd6ed,
-        #ffffff
-    );
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #aebeff,
+            #ffffff
+        );
 
     background-size: 200% auto;
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    animation: shineText 4s linear infinite;
+    animation:
+        titleShine 5s linear infinite;
 }
 
 p {
-    margin: 0 0 20px;
+    margin:
+        0 0 20px;
 
     font-size: 17px;
-    line-height: 1.65;
 
-    color: rgba(255, 255, 255, 0.80);
+    line-height: 1.6;
+
+    color:
+        rgba(255, 255, 255, 0.78);
 }
 
-.main-text {
-    font-size: 18px;
+.subtitle {
+    font-size: 19px;
 }
 
 
 /* =========================
-   PHONE ANIMATION
+   PHONE
 ========================= */
 
-.phone-animation {
-    display: flex;
-    justify-content: center;
-
-    margin-bottom: 24px;
-}
-
-.phone-ring {
-    width: 90px;
-    height: 90px;
+.big-phone {
+    width: 100px;
+    height: 100px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 46px;
+    margin:
+        0 auto 25px;
 
     border-radius: 50%;
 
+    font-size: 52px;
+
     background:
-        linear-gradient(
-            135deg,
-            rgba(255, 105, 180, 0.25),
-            rgba(155, 89, 182, 0.25)
-        );
+        rgba(76, 111, 255, 0.15);
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
-
-    box-shadow:
-        0 0 0 0 rgba(255, 105, 180, 0.5);
+    border:
+        1px solid rgba(120, 145, 255, 0.25);
 
     animation:
-        phoneShake 1.3s infinite,
-        phoneGlow 2s infinite;
+        phoneShake 1.5s infinite,
+        glow 2s infinite;
 }
 
 
 /* =========================
-   CALL BOX
+   TYPING
 ========================= */
 
-.call-box {
-    margin: 25px 0;
+.typing-box {
+    min-height: 65px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+    margin:
+        25px 0;
 
-.call-item {
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 14px 16px;
-
-    text-align: left;
-
-    background: rgba(0, 0, 0, 0.20);
-
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    padding: 18px;
 
     border-radius: 16px;
-
-    animation: slideIn 0.7s ease backwards;
-}
-
-.call-item:nth-child(1) {
-    animation-delay: 0.2s;
-}
-
-.call-item:nth-child(2) {
-    animation-delay: 0.4s;
-}
-
-.call-item:nth-child(3) {
-    animation-delay: 0.6s;
-}
-
-.call-item > span {
-    font-size: 27px;
-}
-
-.call-item strong {
-    display: block;
-
-    color: white;
-
-    font-size: 15px;
-}
-
-.call-item small {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #ff9ccc;
-
-    font-size: 12px;
-}
-
-
-/* =========================
-   APOLOGY
-========================= */
-
-.apology-text {
-    padding: 16px;
-
-    border-radius: 16px;
-
-    background: rgba(255, 105, 180, 0.08);
-
-    border: 1px solid rgba(255, 105, 180, 0.16);
-}
-
-.apology-text strong {
-    color: #ffb6d9;
-}
-
-.sorry-line {
-    color: #ffc5df;
-    font-weight: 700;
-}
-
-
-/* =========================
-   PROMISE
-========================= */
-
-.promise-box {
-    margin: 25px 0;
-
-    padding: 22px;
-
-    border-radius: 20px;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(255, 105, 180, 0.12),
-            rgba(155, 89, 182, 0.10)
-        );
+        rgba(0, 0, 0, 0.20);
 
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border:
+        1px solid rgba(255, 255, 255, 0.10);
 
-    animation: gentleFloat 3s ease-in-out infinite;
+    font-size: 16px;
+
+    color:
+        #cbd5ff;
 }
 
-.promise-icon {
-    font-size: 44px;
-
-    margin-bottom: 5px;
-
-    animation: handshake 2s infinite;
-}
-
-.promise-box p {
-    margin-bottom: 10px;
+.cursor {
+    animation:
+        blink 0.7s infinite;
 }
 
 
@@ -303,9 +244,10 @@ p {
    BUTTONS
 ========================= */
 
-.primary,
+.main-btn,
 .yes-btn,
-.no-btn {
+.no-btn,
+.punish-btn {
     width: 100%;
 
     border: none;
@@ -316,93 +258,571 @@ p {
 
     font-size: 16px;
 
-    font-weight: 800;
+    font-weight: 850;
 
     cursor: pointer;
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.primary {
-    color: #26051a;
+.main-btn {
+    color: white;
 
     background:
         linear-gradient(
             135deg,
-            #ff8fc7,
-            #ffc1e0
+            #526dff,
+            #8b5cf6
         );
 
     box-shadow:
-        0 10px 30px rgba(255, 105, 180, 0.20);
+        0 12px 30px rgba(82, 109, 255, .25);
 }
 
-.primary:hover,
+.main-btn:hover,
 .yes-btn:hover,
-.no-btn:hover {
-    transform: translateY(-3px);
+.no-btn:hover,
+.punish-btn:hover {
+    transform:
+        translateY(-3px)
+        scale(1.01);
 }
 
-.primary:active,
+.main-btn:active,
 .yes-btn:active,
-.no-btn:active {
-    transform: scale(0.97);
+.no-btn:active,
+.punish-btn:active {
+    transform:
+        scale(.97);
 }
 
 
 /* =========================
-   QUESTION
+   APP CALL CARDS
 ========================= */
 
-.question-heart {
-    font-size: 65px;
+.apps {
+    display:
+        flex;
 
-    margin-bottom: 15px;
-
-    animation:
-        heartbeat 1.2s infinite;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
+    flex-direction:
+        column;
 
     gap: 12px;
 
-    margin-top: 30px;
+    margin:
+        25px 0;
+}
+
+.app-card {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap: 14px;
+
+    padding:
+        15px;
+
+    border-radius:
+        17px;
+
+    background:
+        rgba(0, 0, 0, .22);
+
+    border:
+        1px solid rgba(255, 255, 255, .10);
+
+    text-align:
+        left;
+
+    animation:
+        slideIn .6s backwards;
+}
+
+.app-card:nth-child(1) {
+    animation-delay:
+        .15s;
+}
+
+.app-card:nth-child(2) {
+    animation-delay:
+        .3s;
+}
+
+.app-card:nth-child(3) {
+    animation-delay:
+        .45s;
+}
+
+.app-icon {
+    font-size:
+        29px;
+}
+
+.app-card strong {
+    display:
+        block;
+
+    font-size:
+        15px;
+}
+
+.app-card span {
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    font-size:
+        12px;
+
+    color:
+        #aebeff;
+}
+
+.ring {
+    margin-left:
+        auto;
+
+    font-size:
+        20px;
+
+    animation:
+        ring .8s infinite;
+}
+
+
+/* =========================
+   ONLINE BOX
+========================= */
+
+.online-box {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    flex-wrap:
+        wrap;
+
+    justify-content:
+        center;
+
+    padding:
+        16px;
+
+    margin:
+        20px 0;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255, 80, 80, .08);
+
+    border:
+        1px solid rgba(255, 100, 100, .16);
+}
+
+.online-box span {
+    width:
+        100%;
+
+    color:
+        #ff9292;
+
+    font-weight:
+        800;
+}
+
+.online-dot {
+    width:
+        9px;
+
+    height:
+        9px;
+
+    border-radius:
+        50%;
+
+    background:
+        #55ff8a;
+
+    box-shadow:
+        0 0 12px #55ff8a;
+
+    animation:
+        pulse 1.2s infinite;
+}
+
+
+/* =========================
+   FRIEND MESSAGE
+========================= */
+
+.friend-message {
+    padding:
+        20px;
+
+    margin:
+        25px 0;
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(82, 109, 255, .09);
+
+    border:
+        1px solid rgba(120, 145, 255, .15);
+
+    animation:
+        float 3s ease-in-out infinite;
+}
+
+.friend-icon {
+    font-size:
+        45px;
+
+    margin-bottom:
+        8px;
+}
+
+.friend-message p {
+    margin:
+        0;
+}
+
+
+/* =========================
+   PROMISE
+========================= */
+
+.promise {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        7px;
+
+    padding:
+        20px;
+
+    margin:
+        20px 0;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+.promise span {
+    font-size:
+        30px;
+}
+
+.promise strong {
+    color:
+        #b7c4ff;
+}
+
+.promise small {
+    color:
+        rgba(255,255,255,.55);
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================
+   COURT
+========================= */
+
+.court-icon {
+    font-size:
+        70px;
+
+    margin-bottom:
+        10px;
+
+    animation:
+        balance 2s infinite;
+}
+
+.choice-buttons {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        12px;
+
+    margin-top:
+        28px;
 }
 
 .yes-btn {
-    color: white;
+    color:
+        white;
 
     background:
         linear-gradient(
             135deg,
-            #ff4f9a,
-            #ff77b7
+            #16a34a,
+            #22c55e
         );
 
     box-shadow:
-        0 10px 30px rgba(255, 79, 154, 0.25);
+        0 10px 30px rgba(34,197,94,.2);
 }
 
 .no-btn {
-    color: white;
+    color:
+        white;
 
-    background: rgba(255, 255, 255, 0.08);
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #ef4444
+        );
 
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 10px 30px rgba(239,68,68,.18);
 }
 
-.tiny-note {
-    margin-top: 20px;
-    margin-bottom: 0;
+.judge {
+    display:
+        flex;
 
-    font-size: 12px;
+    align-items:
+        center;
 
-    color: rgba(255, 255, 255, 0.40);
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    margin-top:
+        22px;
+
+    font-size:
+        25px;
+}
+
+.judge span {
+    font-size:
+        11px;
+
+    color:
+        rgba(255,255,255,.4);
+}
+
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success-animation {
+    font-size:
+        75px;
+
+    animation:
+        celebration .7s infinite alternate;
+}
+
+.party {
+    font-size:
+        25px;
+
+    margin:
+        10px 0 20px;
+
+    animation:
+        party 1s infinite alternate;
+}
+
+.accepted,
+.received {
+    display:
+        inline-block;
+
+    padding:
+        12px 20px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(34,197,94,.12);
+
+    border:
+        1px solid rgba(34,197,94,.25);
+
+    color:
+        #7dffad;
+
+    font-weight:
+        900;
+
+    margin-bottom:
+        25px;
+
+    animation:
+        glowGreen 2s infinite;
+}
+
+.stamp {
+    display:
+        inline-block;
+
+    padding:
+        18px;
+
+    margin:
+        10px 0 20px;
+
+    border:
+        2px dashed rgba(125,255,173,.4);
+
+    border-radius:
+        12px;
+
+    transform:
+        rotate(-3deg);
+
+    color:
+        #7dffad;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+}
+
+
+/* =========================
+   PUNISHMENT
+========================= */
+
+.punishment-animation {
+    font-size:
+        65px;
+
+    animation:
+        shake .8s infinite;
+}
+
+.jail {
+    padding:
+        18px;
+
+    margin:
+        20px 0;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(220,38,38,.09);
+
+    border:
+        1px solid rgba(239,68,68,.18);
+
+    color:
+        #ffaaaa;
+
+    line-height:
+        1.8;
+}
+
+textarea {
+    width:
+        100%;
+
+    min-height:
+        130px;
+
+    resize:
+        vertical;
+
+    padding:
+        16px;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(0,0,0,.25);
+
+    color:
+        white;
+
+    font-family:
+        inherit;
+
+    font-size:
+        16px;
+
+    outline:
+        none;
+
+    margin-bottom:
+        14px;
+}
+
+textarea:focus {
+    border-color:
+        #7c8cff;
+
+    box-shadow:
+        0 0 20px rgba(82,109,255,.15);
+}
+
+.punish-btn {
+    color:
+        white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f97316,
+            #ef4444
+        );
+}
+
+.error {
+    color:
+        #ff9999;
+
+    font-size:
+        13px;
+
+    margin:
+        12px 0 0;
 }
 
 
@@ -410,92 +830,59 @@ p {
    FINAL
 ========================= */
 
-.celebration {
-    font-size: 65px;
+.final-animation {
+    font-size:
+        70px;
 
     animation:
-        celebration 1s infinite alternate;
+        float 2s infinite ease-in-out;
 }
 
-.heart-big {
-    font-size: 70px;
+.final-emojis {
+    font-size:
+        35px;
 
-    margin-bottom: 20px;
+    margin:
+        25px 0;
 
     animation:
-        heartbeat 1.2s infinite;
+        party 1.2s infinite alternate;
 }
 
-.floating-heart {
-    animation:
-        heartbeat 1.2s infinite,
-        gentleFloat 3s ease-in-out infinite;
-}
+.small-text {
+    font-size:
+        12px;
 
-.promise-final {
-    display: inline-block;
-
-    padding: 12px 20px;
-
-    border-radius: 999px;
-
-    background: rgba(255, 105, 180, 0.12);
-
-    color: #ffc1df;
-
-    font-weight: 800;
-
-    animation: pulseGlow 2s infinite;
-}
-
-.sad-animation {
-    font-size: 70px;
-
-    animation:
-        sadShake 1.5s infinite;
+    color:
+        rgba(255,255,255,.4);
 }
 
 
 /* =========================
-   FLOATING HEARTS
+   BACKGROUND
 ========================= */
 
-.heart {
-    position: fixed;
+.bg-particle {
+    position:
+        fixed;
 
-    bottom: -50px;
+    width:
+        4px;
 
-    font-size: 20px;
+    height:
+        4px;
 
-    pointer-events: none;
+    border-radius:
+        50%;
 
-    z-index: 1;
+    background:
+        rgba(255,255,255,.35);
 
-    opacity: 0;
+    pointer-events:
+        none;
 
-    animation: floatHeart linear forwards;
-}
-
-
-/* =========================
-   PARTICLES
-========================= */
-
-.particle {
-    position: fixed;
-
-    width: 4px;
-    height: 4px;
-
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.45);
-
-    pointer-events: none;
-
-    z-index: 0;
-
-    animation: particleFloat linear infinite;
+    animation:
+        particleFloat linear infinite;
 }
 
 
@@ -504,32 +891,39 @@ p {
 ========================= */
 
 footer {
-    width: 100%;
-    max-width: 520px;
+    width:
+        100%;
 
-    text-align: center;
+    max-width:
+        540px;
 
-    margin-top: 16px;
+    text-align:
+        center;
 
-    font-size: 11px;
+    margin-top:
+        14px;
 
-    color: rgba(255, 255, 255, 0.35);
+    font-size:
+        10px;
 
-    position: relative;
-    z-index: 10;
+    color:
+        rgba(255,255,255,.3);
+
+    position:
+        relative;
+
+    z-index:
+        10;
 }
 
 
 /* =========================
-   HIDDEN FORM
+   HIDDEN IFRAME
 ========================= */
 
-#replyForm {
-    display: none;
-}
-
-.hidden-frame {
-    display: none;
+#submitFrame {
+    display:
+        none;
 }
 
 
@@ -537,213 +931,241 @@ footer {
    ANIMATIONS
 ========================= */
 
-@keyframes cardIn {
+@keyframes cardEnter {
 
     from {
-        opacity: 0;
-        transform: translateY(35px) scale(0.96);
+        opacity:
+            0;
+
+        transform:
+            translateY(35px)
+            scale(.94);
     }
 
     to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        opacity:
+            1;
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
+@keyframes titleShine {
+
+    to {
+        background-position:
+            200% center;
+    }
+}
+
+@keyframes phoneShake {
+
+    0%,100% {
+        transform:
+            rotate(0);
+    }
+
+    10% {
+        transform:
+            rotate(-12deg);
+    }
+
+    20% {
+        transform:
+            rotate(12deg);
+    }
+
+    30% {
+        transform:
+            rotate(-10deg);
+    }
+
+    40% {
+        transform:
+            rotate(10deg);
+    }
+
+    50% {
+        transform:
+            rotate(0);
+    }
+}
+
+@keyframes glow {
+
+    0%,100% {
+        box-shadow:
+            0 0 0 rgba(82,109,255,0);
+    }
+
+    50% {
+        box-shadow:
+            0 0 35px rgba(82,109,255,.35);
+    }
+}
+
+@keyframes blink {
+
+    50% {
+        opacity:
+            0;
+    }
+}
 
 @keyframes slideIn {
 
     from {
-        opacity: 0;
-        transform: translateX(-25px);
+        opacity:
+            0;
+
+        transform:
+            translateX(-30px);
     }
 
     to {
-        opacity: 1;
-        transform: translateX(0);
+        opacity:
+            1;
+
+        transform:
+            translateX(0);
     }
 }
 
+@keyframes ring {
 
-@keyframes phoneShake {
-
-    0%, 100% {
-        transform: rotate(0deg);
+    0%,100% {
+        transform:
+            rotate(0);
     }
 
-    10% {
-        transform: rotate(-12deg);
+    25% {
+        transform:
+            rotate(-15deg);
     }
 
-    20% {
-        transform: rotate(12deg);
+    75% {
+        transform:
+            rotate(15deg);
     }
+}
 
-    30% {
-        transform: rotate(-10deg);
+@keyframes pulse {
+
+    50% {
+        transform:
+            scale(1.5);
+
+        opacity:
+            .5;
     }
+}
 
-    40% {
-        transform: rotate(10deg);
+@keyframes float {
+
+    0%,100% {
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: rotate(0deg);
+        transform:
+            translateY(-8px);
     }
 }
 
+@keyframes balance {
 
-@keyframes phoneGlow {
-
-    0%, 100% {
-        box-shadow:
-            0 0 0 0 rgba(255, 105, 180, 0.45);
+    0%,100% {
+        transform:
+            rotate(-4deg);
     }
 
     50% {
-        box-shadow:
-            0 0 0 18px rgba(255, 105, 180, 0);
+        transform:
+            rotate(4deg);
     }
 }
-
-
-@keyframes heartbeat {
-
-    0%, 100% {
-        transform: scale(1);
-    }
-
-    15% {
-        transform: scale(1.18);
-    }
-
-    30% {
-        transform: scale(1);
-    }
-
-    45% {
-        transform: scale(1.12);
-    }
-
-    60% {
-        transform: scale(1);
-    }
-}
-
-
-@keyframes gentleFloat {
-
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-
-@keyframes handshake {
-
-    0%, 100% {
-        transform: rotate(0);
-    }
-
-    50% {
-        transform: rotate(-8deg);
-    }
-}
-
-
-@keyframes shineText {
-
-    to {
-        background-position: 200% center;
-    }
-}
-
-
-@keyframes pulseGlow {
-
-    0%, 100% {
-        box-shadow: 0 0 0 rgba(255, 105, 180, 0);
-    }
-
-    50% {
-        box-shadow:
-            0 0 25px rgba(255, 105, 180, 0.20);
-    }
-}
-
 
 @keyframes celebration {
 
     from {
-        transform: scale(1) rotate(-5deg);
+        transform:
+            scale(1)
+            rotate(-6deg);
     }
 
     to {
-        transform: scale(1.15) rotate(5deg);
+        transform:
+            scale(1.2)
+            rotate(6deg);
     }
 }
 
+@keyframes party {
 
-@keyframes sadShake {
+    from {
+        transform:
+            scale(1);
+    }
 
-    0%, 100% {
-        transform: translateX(0);
+    to {
+        transform:
+            scale(1.1)
+            rotate(2deg);
+    }
+}
+
+@keyframes glowGreen {
+
+    50% {
+        box-shadow:
+            0 0 30px rgba(34,197,94,.25);
+    }
+}
+
+@keyframes shake {
+
+    0%,100% {
+        transform:
+            translateX(0);
     }
 
     25% {
-        transform: translateX(-7px);
+        transform:
+            translateX(-7px)
+            rotate(-3deg);
     }
 
     75% {
-        transform: translateX(7px);
+        transform:
+            translateX(7px)
+            rotate(3deg);
     }
 }
-
-
-@keyframes floatHeart {
-
-    0% {
-        transform:
-            translateY(0)
-            scale(0.5)
-            rotate(0deg);
-
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform:
-            translateY(-110vh)
-            scale(1.2)
-            rotate(360deg);
-
-        opacity: 0;
-    }
-}
-
 
 @keyframes particleFloat {
 
     from {
-        transform: translateY(100vh);
-        opacity: 0;
+        transform:
+            translateY(110vh);
+
+        opacity:
+            0;
     }
 
     20% {
-        opacity: 0.6;
+        opacity:
+            .6;
     }
 
     to {
-        transform: translateY(-20vh);
-        opacity: 0;
+        transform:
+            translateY(-20vh);
+
+        opacity:
+            0;
     }
 }
 
@@ -752,58 +1174,47 @@ footer {
    MOBILE
 ========================= */
 
-@media (max-width: 600px) {
+@media (max-width:600px) {
 
     body {
-        padding: 16px 12px;
+        padding:
+            14px 11px;
     }
 
     .card {
-        padding: 34px 20px;
-        border-radius: 25px;
+        padding:
+            32px 19px;
+
+        border-radius:
+            24px;
     }
 
     h1 {
-        font-size: 31px;
+        font-size:
+            30px;
     }
 
     p {
-        font-size: 16px;
+        font-size:
+            15.5px;
     }
 
-    .phone-ring {
-        width: 78px;
-        height: 78px;
-        font-size: 40px;
+    .big-phone {
+        width:
+            82px;
+
+        height:
+            82px;
+
+        font-size:
+            42px;
     }
 
-    .call-item {
-        padding: 13px;
-    }
-
-    .primary,
+    .main-btn,
     .yes-btn,
-    .no-btn {
-        padding: 16px;
-    }
-
-    footer {
-        font-size: 9px;
+    .no-btn,
+    .punish-btn {
+        padding:
+            16px;
     }
 }
-
-
-@media (max-width: 380px) {
-
-    .card {
-        padding: 28px 17px;
-    }
-
-    h1 {
-        font-size: 27px;
-    }
-
-    p {
-        font-size: 15px;
-    }
-  }
