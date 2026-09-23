@@ -1,34 +1,33 @@
 const screens = [
-    "screenApology",
-    "screenMessage",
-    "screenQuestion",
-    "screenYes",
-    "screenPunishment",
-    "screenPunishmentDone"
+    "screen1",
+    "screen2",
+    "screen3",
+    "screen4",
+    "screen5",
+    "screen6",
+    "screen7"
 ];
 
-const apologyNext = document.getElementById("apologyNext");
-const questionNext = document.getElementById("questionNext");
+const continueBtn = document.getElementById("continueBtn");
+const promiseBtn = document.getElementById("promiseBtn");
+const questionBtn = document.getElementById("questionBtn");
 
-const yesButton = document.getElementById("yesButton");
-const noButton = document.getElementById("noButton");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 
-const submitPunishment =
-    document.getElementById("submitPunishment");
+const punishmentBtn =
+    document.getElementById("punishmentBtn");
 
-const tryAgainButton = document.getElementById("tryAgainButton");
+const tryAgainBtn = null;
 
-const punishmentText =
-    document.getElementById("punishmentText");
+const punishmentInput =
+    document.getElementById("punishmentInput");
 
-const punishmentDisplay =
-    document.getElementById("punishmentDisplay");
+const charCount =
+    document.getElementById("charCount");
 
-const punishmentError =
-    document.getElementById("punishmentError");
-
-const characterCount =
-    document.getElementById("characterCount");
+const errorMessage =
+    document.getElementById("errorMessage");
 
 const replyForm =
     document.getElementById("replyForm");
@@ -37,24 +36,23 @@ const replyInput =
     document.getElementById("replyInput");
 
 
-/* =========================================
+/* =========================
    CHANGE SCREEN
-========================================= */
+========================= */
 
-function showScreen(screenId) {
+function showScreen(id) {
 
-    screens.forEach(function(id) {
+    screens.forEach(function(screenId) {
 
-        const screen =
-            document.getElementById(id);
+        document
+            .getElementById(screenId)
+            .classList.remove("active");
 
-        screen.classList.add("hidden");
     });
 
-    const selected =
-        document.getElementById(screenId);
-
-    selected.classList.remove("hidden");
+    document
+        .getElementById(id)
+        .classList.add("active");
 
     window.scrollTo({
         top: 0,
@@ -63,174 +61,497 @@ function showScreen(screenId) {
 }
 
 
-/* =========================================
+/* =========================
+   PHONE VIBRATION
+========================= */
+
+function vibrate() {
+
+    if (
+        "vibrate" in navigator
+    ) {
+
+        navigator.vibrate(60);
+
+    }
+}
+
+
+/* =========================
    SAVE TO GOOGLE SHEET
-========================================= */
+========================= */
 
 function saveResponse(response) {
 
-    /*
-       The response is placed inside the hidden
-       form and submitted to Google Apps Script.
-    */
-
     replyInput.value = response;
+
+    /*
+     * Submit silently through the hidden iframe.
+     *
+     * This sends:
+     *
+     * name = Sherly
+     * reply = user's choice
+     */
 
     replyForm.submit();
 }
 
 
-/* =========================================
-   SCREEN 1 → SCREEN 2
-========================================= */
+/* =========================
+   SCREEN 1
+========================= */
 
-apologyNext.addEventListener(
+continueBtn.addEventListener(
     "click",
     function() {
 
-        showScreen("screenMessage");
+        vibrate();
 
-        createBurst("✨", 15);
-        createBurst("⭐", 10);
+        showScreen("screen2");
+
+        startTyping();
+
+        createSmallHeartBurst(3);
     }
 );
 
 
-/* =========================================
-   SCREEN 2 → SCREEN 3
-========================================= */
+/* =========================
+   SCREEN 2
+========================= */
 
-questionNext.addEventListener(
+promiseBtn.addEventListener(
     "click",
     function() {
 
-        showScreen("screenQuestion");
+        vibrate();
 
-        createBurst("✨", 18);
-        createBurst("⭐", 12);
+        showScreen("screen3");
+
+        createSmallHeartBurst(4);
     }
 );
 
 
-/* =========================================
+/* =========================
+   SCREEN 3
+========================= */
+
+questionBtn.addEventListener(
+    "click",
+    function() {
+
+        vibrate();
+
+        showScreen("screen4");
+    }
+);
+
+
+/* =========================
    YES
-========================================= */
+========================= */
 
-yesButton.addEventListener(
+yesBtn.addEventListener(
     "click",
     function() {
+
+        vibrate();
 
         /*
-           This is what will appear in Google Sheet.
-        */
+         * This is exactly what
+         * will appear in Google Sheet.
+         */
 
         saveResponse(
-            "ACCEPTED MY SORRY 😊"
+            "ACCEPTED ❤️ - She accepted my apology."
         );
 
-        showScreen("screenYes");
+        showScreen("screen6");
 
-        createBurst("🎉", 25);
-        createBurst("✨", 25);
-        createBurst("⭐", 20);
+        createConfetti(30);
 
-        createConfetti(50);
+        createSmallHeartBurst(10);
     }
 );
 
 
-/* =========================================
+/* =========================
    NO
-========================================= */
+========================= */
 
-noButton.addEventListener(
+noBtn.addEventListener(
     "click",
     function() {
 
-        showScreen("screenPunishment");
+        vibrate();
 
-        createBurst("😤", 8);
-        createBurst("⚡", 8);
+        showScreen("screen5");
+
+        punishmentInput.focus();
     }
 );
 
 
-/* =========================================
-   PUNISHMENT CHARACTER COUNT
-========================================= */
+/* =========================
+   CHARACTER COUNT
+========================= */
 
-punishmentText.addEventListener(
+punishmentInput.addEventListener(
     "input",
     function() {
 
-        characterCount.textContent =
-            punishmentText.value.length;
+        charCount.textContent =
+            punishmentInput.value.length;
+
+        errorMessage.textContent = "";
+
     }
 );
 
 
-/* =========================================
-   SUBMIT PUNISHMENT
-========================================= */
+/* =========================
+   PUNISHMENT SUBMIT
+========================= */
 
-submitPunishment.addEventListener(
+punishmentBtn.addEventListener(
     "click",
     function() {
 
         const punishment =
-            punishmentText.value.trim();
+            punishmentInput.value.trim();
 
-        /*
-           Don't allow an empty punishment.
-        */
 
         if (!punishment) {
 
-            punishmentError.style.display =
-                "block";
+            errorMessage.textContent =
+                "You have to give me a punishment 😭";
 
-            punishmentText.focus();
+            punishmentInput.focus();
 
             return;
         }
 
-        punishmentError.style.display =
-            "none";
+
+        vibrate();
 
 
         /*
-           Show the punishment on final screen.
-        */
+         * The punishment will be saved
+         * directly into the Reply column.
+         */
 
-        punishmentDisplay.textContent =
+        const response =
+            "NOT ACCEPTED 😭 - Punishment: " +
             punishment;
 
 
-        /*
-           Save BOTH the fact that she rejected
-           the apology and the punishment.
-        */
-
-        saveResponse(
-            "NOT ACCEPTED — PUNISHMENT: " +
-            punishment
-        );
+        saveResponse(response);
 
 
-        /*
-           Show final screen.
-        */
-
-        showScreen(
-            "screenPunishmentDone"
-        );
+        showScreen("screen7");
 
 
-        createBurst("😭", 12);
-        createBurst("📜", 8);
+        createSmallHeartBurst(5);
+
+        createConfetti(12);
     }
 );
 
+
+/* =========================
+   TYPING ANIMATION
+========================= */
+
+let typingStarted = false;
+
+function startTyping() {
+
+    if (typingStarted) {
+        return;
+    }
+
+    typingStarted = true;
+
+    const textElement =
+        document.getElementById("typingText");
+
+
+    const message =
+        "I know you tried calling me on Instagram, WhatsApp and Google Chat. I saw that I missed your calls, and I'm genuinely sorry. I wasn't trying to ignore you. I should have picked up.";
+
+
+    let index = 0;
+
+
+    function type() {
+
+        if (index < message.length) {
+
+            textElement.textContent +=
+                message.charAt(index);
+
+            index++;
+
+            setTimeout(
+                type,
+                25
+            );
+
+        }
+    }
+
+
+    type();
+}
+
+
+/* =========================
+   LIMITED HEARTS
+========================= */
+
+function createSmallHeart() {
+
+    const container =
+        document.getElementById(
+            "floatingHearts"
+        );
+
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.className =
+        "floating-heart";
+
+
+    const hearts = [
+        "❤️",
+        "💗",
+        "💕"
+    ];
+
+
+    heart.textContent =
+        hearts[
+            Math.floor(
+                Math.random() *
+                hearts.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 3) + "s";
+
+
+    container.appendChild(heart);
+
+
+    setTimeout(
+        function() {
+            heart.remove();
+        },
+        8500
+    );
+}
+
+
+/*
+ * Only one heart every few seconds.
+ * This keeps the page clean.
+ */
+
+setInterval(
+    function() {
+
+        createSmallHeart();
+
+    },
+    2500
+);
+
+
+/* =========================
+   SMALL HEART BURST
+========================= */
+
+function createSmallHeartBurst(amount) {
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(
+            function() {
+
+                createSmallHeart();
+
+            },
+            i * 150
+        );
+    }
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+function createConfetti(amount) {
+
+    const emojis = [
+        "🎉",
+        "✨",
+        "❤️",
+        "💗",
+        "🥳"
+    ];
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(
+            function() {
+
+                const item =
+                    document.createElement("div");
+
+
+                item.textContent =
+                    emojis[
+                        Math.floor(
+                            Math.random() *
+                            emojis.length
+                        )
+                    ];
+
+
+                item.style.position =
+                    "fixed";
+
+
+                item.style.left =
+                    Math.random() * 100 + "vw";
+
+
+                item.style.top =
+                    "-40px";
+
+
+                item.style.fontSize =
+                    (16 +
+                    Math.random() * 20) +
+                    "px";
+
+
+                item.style.zIndex =
+                    "999";
+
+
+                document.body.appendChild(
+                    item
+                );
+
+
+                const animation =
+                    item.animate(
+                        [
+                            {
+                                transform:
+                                    "translateY(0) rotate(0deg)",
+                                opacity: 1
+                            },
+                            {
+                                transform:
+                                    "translateY(110vh) rotate(600deg)",
+                                opacity: 0
+                            }
+                        ],
+                        {
+                            duration:
+                                2200 +
+                                Math.random() * 1800,
+
+                            easing:
+                                "cubic-bezier(.2,.8,.3,1)"
+                        }
+                    );
+
+
+                animation.onfinish =
+                    function() {
+                        item.remove();
+                    };
+
+            },
+            i * 45
+        );
+    }
+}
+
+
+/* =========================
+   BACKGROUND PARTICLES
+========================= */
+
+function createParticles() {
+
+    const container =
+        document.getElementById(
+            "particles"
+        );
+
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        const particle =
+            document.createElement("div");
+
+
+        particle.className =
+            "particle";
+
+
+        particle.style.left =
+            Math.random() * 100 + "vw";
+
+
+        particle.style.animationDuration =
+            (8 +
+            Math.random() * 12) +
+            "s";
+
+
+        particle.style.animationDelay =
+            Math.random() * 10 +
+            "s";
+
+
+        container.appendChild(
+            particle
+        );
+    }
+}
+
+
+createParticles();
 
 /* =========================================
    FLOATING BACKGROUND ICONS
