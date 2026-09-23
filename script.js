@@ -50,17 +50,16 @@ function showScreen(id) {
 
     screenIds.forEach(function(screenId) {
 
-        const screen =
-            document.getElementById(screenId);
+        document
+            .getElementById(screenId)
+            .classList.remove("active");
 
-        screen.classList.remove("active");
     });
 
 
-    const target =
-        document.getElementById(id);
-
-    target.classList.add("active");
+    document
+        .getElementById(id)
+        .classList.add("active");
 
 
     window.scrollTo({
@@ -71,22 +70,21 @@ function showScreen(id) {
 
 
 /* =========================
-   VIBRATION
+   PHONE VIBRATION
 ========================= */
 
 function vibrate() {
 
-    if (
-        navigator.vibrate
-    ) {
+    if (navigator.vibrate) {
 
         navigator.vibrate(50);
+
     }
 }
 
 
 /* =========================
-   GOOGLE SHEET
+   SAVE TO GOOGLE SHEET
 ========================= */
 
 function saveResponse(response) {
@@ -111,7 +109,7 @@ continueBtn.addEventListener(
 
         startTyping();
 
-        heartBurst(3);
+        sadEmojiBurst(3);
     }
 );
 
@@ -128,7 +126,7 @@ promiseBtn.addEventListener(
 
         showScreen("screen3");
 
-        heartBurst(4);
+        sadEmojiBurst(2);
     }
 );
 
@@ -167,9 +165,9 @@ yesBtn.addEventListener(
         showScreen("screen6");
 
 
-        createConfetti(35);
+        createConfetti(22);
 
-        heartBurst(8);
+        smallHeartBurst(2);
     }
 );
 
@@ -185,6 +183,9 @@ noBtn.addEventListener(
         vibrate();
 
         showScreen("screen5");
+
+        sadEmojiBurst(5);
+
 
         setTimeout(
             function() {
@@ -231,6 +232,8 @@ punishmentBtn.addEventListener(
             errorMessage.textContent =
                 "Please give me a punishment 😭";
 
+            sadEmojiBurst(2);
+
             punishmentInput.focus();
 
             return;
@@ -249,9 +252,9 @@ punishmentBtn.addEventListener(
         showScreen("screen7");
 
 
-        createConfetti(18);
+        sadEmojiBurst(4);
 
-        heartBurst(4);
+        createConfetti(10);
     }
 );
 
@@ -304,77 +307,19 @@ function startTyping() {
 
 
 /* =========================
-   LIMITED FLOATING HEARTS
+   SAD EMOJI BURST
 ========================= */
 
-function createHeart() {
+function sadEmojiBurst(amount) {
 
-    const container =
-        document.getElementById(
-            "floatingHearts"
-        );
-
-
-    const heart =
-        document.createElement("div");
-
-
-    heart.className =
-        "floating-heart";
-
-
-    const choices = [
-        "💜",
-        "💗"
+    const emojis = [
+        "🥺",
+        "😭",
+        "😔",
+        "🥲",
+        "😢"
     ];
 
-
-    heart.textContent =
-        choices[
-            Math.floor(
-                Math.random() *
-                choices.length
-            )
-        ];
-
-
-    heart.style.left =
-        Math.random() * 100 + "%";
-
-
-    heart.style.animationDuration =
-        (5 + Math.random() * 3) + "s";
-
-
-    container.appendChild(heart);
-
-
-    setTimeout(
-        function() {
-
-            heart.remove();
-
-        },
-        8500
-    );
-}
-
-
-/*
- * Only one heart every 3 seconds.
- */
-
-setInterval(
-    createHeart,
-    3000
-);
-
-
-/* =========================
-   HEART BURST
-========================= */
-
-function heartBurst(amount) {
 
     for (
         let i = 0;
@@ -383,8 +328,191 @@ function heartBurst(amount) {
     ) {
 
         setTimeout(
-            createHeart,
-            i * 180
+            function() {
+
+                const emoji =
+                    document.createElement("div");
+
+
+                emoji.textContent =
+                    emojis[
+                        Math.floor(
+                            Math.random() *
+                            emojis.length
+                        )
+                    ];
+
+
+                emoji.style.position =
+                    "fixed";
+
+
+                emoji.style.left =
+                    (35 +
+                    Math.random() * 30) +
+                    "vw";
+
+
+                emoji.style.top =
+                    "45vh";
+
+
+                emoji.style.fontSize =
+                    (24 +
+                    Math.random() * 15) +
+                    "px";
+
+
+                emoji.style.zIndex =
+                    "9999";
+
+
+                emoji.style.pointerEvents =
+                    "none";
+
+
+                document.body.appendChild(
+                    emoji
+                );
+
+
+                const animation =
+                    emoji.animate(
+                        [
+                            {
+                                transform:
+                                    "translate(0,0) scale(.6) rotate(0deg)",
+                                opacity: 0
+                            },
+
+                            {
+                                transform:
+                                    "translate(" +
+                                    (Math.random() * 80 - 40) +
+                                    "px,-60px) scale(1.2) rotate(-8deg)",
+                                opacity: 1
+                            },
+
+                            {
+                                transform:
+                                    "translate(" +
+                                    (Math.random() * 120 - 60) +
+                                    "px,-150px) scale(.9) rotate(8deg)",
+                                opacity: 0
+                            }
+                        ],
+                        {
+                            duration: 1600,
+
+                            easing:
+                                "cubic-bezier(.2,.8,.3,1)"
+                        }
+                    );
+
+
+                animation.onfinish =
+                    function() {
+
+                        emoji.remove();
+
+                    };
+
+            },
+            i * 140
+        );
+    }
+}
+
+
+/* =========================
+   ONLY A TINY HEART BURST
+========================= */
+
+function smallHeartBurst(amount) {
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(
+            function() {
+
+                const heart =
+                    document.createElement("div");
+
+
+                heart.textContent = "💜";
+
+
+                heart.style.position =
+                    "fixed";
+
+
+                heart.style.left =
+                    (45 +
+                    Math.random() * 10) +
+                    "vw";
+
+
+                heart.style.top =
+                    "55vh";
+
+
+                heart.style.fontSize =
+                    "18px";
+
+
+                heart.style.zIndex =
+                    "9999";
+
+
+                heart.style.pointerEvents =
+                    "none";
+
+
+                document.body.appendChild(
+                    heart
+                );
+
+
+                const animation =
+                    heart.animate(
+                        [
+                            {
+                                transform:
+                                    "translateY(0) scale(.5)",
+                                opacity: 0
+                            },
+
+                            {
+                                transform:
+                                    "translateY(-100px) scale(1)",
+                                opacity: .8
+                            },
+
+                            {
+                                transform:
+                                    "translateY(-180px) scale(.7)",
+                                opacity: 0
+                            }
+                        ],
+                        {
+                            duration: 1600
+                        }
+                    );
+
+
+                animation.onfinish =
+                    function() {
+
+                        heart.remove();
+
+                    };
+
+            },
+            i * 200
         );
     }
 }
@@ -400,8 +528,7 @@ function createConfetti(amount) {
         "💜",
         "✨",
         "🎉",
-        "💗",
-        "🥳"
+        "💗"
     ];
 
 
@@ -431,14 +558,15 @@ function createConfetti(amount) {
                     "fixed";
 
                 item.style.left =
-                    Math.random() * 100 + "vw";
+                    Math.random() * 100 +
+                    "vw";
 
                 item.style.top =
                     "-40px";
 
                 item.style.fontSize =
                     (15 +
-                    Math.random() * 20) +
+                    Math.random() * 18) +
                     "px";
 
                 item.style.zIndex =
@@ -458,16 +586,17 @@ function createConfetti(amount) {
                                     "translateY(0) rotate(0deg)",
                                 opacity: 1
                             },
+
                             {
                                 transform:
-                                    "translateY(110vh) rotate(720deg)",
+                                    "translateY(110vh) rotate(600deg)",
                                 opacity: 0
                             }
                         ],
                         {
                             duration:
                                 2200 +
-                                Math.random() * 1800,
+                                Math.random() * 1600,
 
                             easing:
                                 "cubic-bezier(.2,.8,.3,1)"
@@ -483,14 +612,14 @@ function createConfetti(amount) {
                     };
 
             },
-            i * 50
+            i * 60
         );
     }
 }
 
 
 /* =========================
-   BACKGROUND PARTICLES
+   PURPLE PARTICLES
 ========================= */
 
 function createParticles() {
@@ -503,7 +632,7 @@ function createParticles() {
 
     for (
         let i = 0;
-        i < 30;
+        i < 28;
         i++
     ) {
 
@@ -516,7 +645,8 @@ function createParticles() {
 
 
         particle.style.left =
-            Math.random() * 100 + "vw";
+            Math.random() * 100 +
+            "vw";
 
 
         particle.style.animationDuration =
