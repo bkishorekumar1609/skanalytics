@@ -1,4 +1,4 @@
-const screens = [
+const screenIds = [
     "screen1",
     "screen2",
     "screen3",
@@ -8,17 +8,23 @@ const screens = [
     "screen7"
 ];
 
-const continueBtn = document.getElementById("continueBtn");
-const promiseBtn = document.getElementById("promiseBtn");
-const questionBtn = document.getElementById("questionBtn");
+const continueBtn =
+    document.getElementById("continueBtn");
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
+const promiseBtn =
+    document.getElementById("promiseBtn");
+
+const questionBtn =
+    document.getElementById("questionBtn");
+
+const yesBtn =
+    document.getElementById("yesBtn");
+
+const noBtn =
+    document.getElementById("noBtn");
 
 const punishmentBtn =
     document.getElementById("punishmentBtn");
-
-const tryAgainBtn = null;
 
 const punishmentInput =
     document.getElementById("punishmentInput");
@@ -37,22 +43,25 @@ const replyInput =
 
 
 /* =========================
-   CHANGE SCREEN
+   SCREEN CONTROL
 ========================= */
 
 function showScreen(id) {
 
-    screens.forEach(function(screenId) {
+    screenIds.forEach(function(screenId) {
 
-        document
-            .getElementById(screenId)
-            .classList.remove("active");
+        const screen =
+            document.getElementById(screenId);
 
+        screen.classList.remove("active");
     });
 
-    document
-        .getElementById(id)
-        .classList.add("active");
+
+    const target =
+        document.getElementById(id);
+
+    target.classList.add("active");
+
 
     window.scrollTo({
         top: 0,
@@ -62,37 +71,27 @@ function showScreen(id) {
 
 
 /* =========================
-   PHONE VIBRATION
+   VIBRATION
 ========================= */
 
 function vibrate() {
 
     if (
-        "vibrate" in navigator
+        navigator.vibrate
     ) {
 
-        navigator.vibrate(60);
-
+        navigator.vibrate(50);
     }
 }
 
 
 /* =========================
-   SAVE TO GOOGLE SHEET
+   GOOGLE SHEET
 ========================= */
 
 function saveResponse(response) {
 
     replyInput.value = response;
-
-    /*
-     * Submit silently through the hidden iframe.
-     *
-     * This sends:
-     *
-     * name = Sherly
-     * reply = user's choice
-     */
 
     replyForm.submit();
 }
@@ -112,7 +111,7 @@ continueBtn.addEventListener(
 
         startTyping();
 
-        createSmallHeartBurst(3);
+        heartBurst(3);
     }
 );
 
@@ -129,7 +128,7 @@ promiseBtn.addEventListener(
 
         showScreen("screen3");
 
-        createSmallHeartBurst(4);
+        heartBurst(4);
     }
 );
 
@@ -159,20 +158,18 @@ yesBtn.addEventListener(
 
         vibrate();
 
-        /*
-         * This is exactly what
-         * will appear in Google Sheet.
-         */
 
         saveResponse(
-            "ACCEPTED ❤️ - She accepted my apology."
+            "YES ❤️ - She accepted my apology."
         );
+
 
         showScreen("screen6");
 
-        createConfetti(30);
 
-        createSmallHeartBurst(10);
+        createConfetti(35);
+
+        heartBurst(8);
     }
 );
 
@@ -189,7 +186,14 @@ noBtn.addEventListener(
 
         showScreen("screen5");
 
-        punishmentInput.focus();
+        setTimeout(
+            function() {
+
+                punishmentInput.focus();
+
+            },
+            400
+        );
     }
 );
 
@@ -206,13 +210,12 @@ punishmentInput.addEventListener(
             punishmentInput.value.length;
 
         errorMessage.textContent = "";
-
     }
 );
 
 
 /* =========================
-   PUNISHMENT SUBMIT
+   PUNISHMENT
 ========================= */
 
 punishmentBtn.addEventListener(
@@ -226,7 +229,7 @@ punishmentBtn.addEventListener(
         if (!punishment) {
 
             errorMessage.textContent =
-                "You have to give me a punishment 😭";
+                "Please give me a punishment 😭";
 
             punishmentInput.focus();
 
@@ -237,31 +240,24 @@ punishmentBtn.addEventListener(
         vibrate();
 
 
-        /*
-         * The punishment will be saved
-         * directly into the Reply column.
-         */
-
-        const response =
-            "NOT ACCEPTED 😭 - Punishment: " +
-            punishment;
-
-
-        saveResponse(response);
+        saveResponse(
+            "NO 😭 - Punishment: " +
+            punishment
+        );
 
 
         showScreen("screen7");
 
 
-        createSmallHeartBurst(5);
+        createConfetti(18);
 
-        createConfetti(12);
+        heartBurst(4);
     }
 );
 
 
 /* =========================
-   TYPING ANIMATION
+   TYPEWRITER
 ========================= */
 
 let typingStarted = false;
@@ -274,44 +270,44 @@ function startTyping() {
 
     typingStarted = true;
 
-    const textElement =
+
+    const typingText =
         document.getElementById("typingText");
 
 
     const message =
-        "I know you tried calling me on Instagram, WhatsApp and Google Chat. I saw that I missed your calls, and I'm genuinely sorry. I wasn't trying to ignore you. I should have picked up.";
+        "I know you tried calling me on Instagram, WhatsApp and Google Chat. I was online, but I didn't pick up your calls. I'm really sorry. I wasn't trying to ignore you. I should have picked up.";
 
 
     let index = 0;
 
 
-    function type() {
+    function typeNext() {
 
         if (index < message.length) {
 
-            textElement.textContent +=
+            typingText.textContent +=
                 message.charAt(index);
 
             index++;
 
             setTimeout(
-                type,
-                25
+                typeNext,
+                24
             );
-
         }
     }
 
 
-    type();
+    typeNext();
 }
 
 
 /* =========================
-   LIMITED HEARTS
+   LIMITED FLOATING HEARTS
 ========================= */
 
-function createSmallHeart() {
+function createHeart() {
 
     const container =
         document.getElementById(
@@ -327,18 +323,17 @@ function createSmallHeart() {
         "floating-heart";
 
 
-    const hearts = [
-        "❤️",
-        "💗",
-        "💕"
+    const choices = [
+        "💜",
+        "💗"
     ];
 
 
     heart.textContent =
-        hearts[
+        choices[
             Math.floor(
                 Math.random() *
-                hearts.length
+                choices.length
             )
         ];
 
@@ -356,7 +351,9 @@ function createSmallHeart() {
 
     setTimeout(
         function() {
+
             heart.remove();
+
         },
         8500
     );
@@ -364,25 +361,20 @@ function createSmallHeart() {
 
 
 /*
- * Only one heart every few seconds.
- * This keeps the page clean.
+ * Only one heart every 3 seconds.
  */
 
 setInterval(
-    function() {
-
-        createSmallHeart();
-
-    },
-    2500
+    createHeart,
+    3000
 );
 
 
 /* =========================
-   SMALL HEART BURST
+   HEART BURST
 ========================= */
 
-function createSmallHeartBurst(amount) {
+function heartBurst(amount) {
 
     for (
         let i = 0;
@@ -391,12 +383,8 @@ function createSmallHeartBurst(amount) {
     ) {
 
         setTimeout(
-            function() {
-
-                createSmallHeart();
-
-            },
-            i * 150
+            createHeart,
+            i * 180
         );
     }
 }
@@ -408,10 +396,10 @@ function createSmallHeartBurst(amount) {
 
 function createConfetti(amount) {
 
-    const emojis = [
-        "🎉",
+    const items = [
+        "💜",
         "✨",
-        "❤️",
+        "🎉",
         "💗",
         "🥳"
     ];
@@ -431,10 +419,10 @@ function createConfetti(amount) {
 
 
                 item.textContent =
-                    emojis[
+                    items[
                         Math.floor(
                             Math.random() *
-                            emojis.length
+                            items.length
                         )
                     ];
 
@@ -442,23 +430,19 @@ function createConfetti(amount) {
                 item.style.position =
                     "fixed";
 
-
                 item.style.left =
                     Math.random() * 100 + "vw";
-
 
                 item.style.top =
                     "-40px";
 
-
                 item.style.fontSize =
-                    (16 +
+                    (15 +
                     Math.random() * 20) +
                     "px";
 
-
                 item.style.zIndex =
-                    "999";
+                    "9999";
 
 
                 document.body.appendChild(
@@ -476,7 +460,7 @@ function createConfetti(amount) {
                             },
                             {
                                 transform:
-                                    "translateY(110vh) rotate(600deg)",
+                                    "translateY(110vh) rotate(720deg)",
                                 opacity: 0
                             }
                         ],
@@ -493,11 +477,13 @@ function createConfetti(amount) {
 
                 animation.onfinish =
                     function() {
+
                         item.remove();
+
                     };
 
             },
-            i * 45
+            i * 50
         );
     }
 }
@@ -552,229 +538,3 @@ function createParticles() {
 
 
 createParticles();
-
-/* =========================================
-   FLOATING BACKGROUND ICONS
-========================================= */
-
-function createFloatingIcon() {
-
-    const item =
-        document.createElement("div");
-
-    item.className =
-        "floating-item";
-
-    const icons = [
-        "⭐",
-        "✨",
-        "🌟",
-        "💫",
-        "📞",
-        "😊",
-        "🥺",
-        "☁️"
-    ];
-
-    item.textContent =
-        icons[
-            Math.floor(
-                Math.random() * icons.length
-            )
-        ];
-
-    item.style.left =
-        Math.random() * 100 + "vw";
-
-    item.style.fontSize =
-        (14 + Math.random() * 20) + "px";
-
-    item.style.animationDuration =
-        (7 + Math.random() * 8) + "s";
-
-    document.body.appendChild(item);
-
-    setTimeout(
-        function() {
-            item.remove();
-        },
-        16000
-    );
-}
-
-
-/*
-   Create floating objects continuously.
-*/
-
-setInterval(
-    createFloatingIcon,
-    600
-);
-
-
-/* =========================================
-   BURST EFFECT
-========================================= */
-
-function createBurst(symbol, amount) {
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        setTimeout(
-            function() {
-
-                const item =
-                    document.createElement("div");
-
-                item.className =
-                    "floating-item";
-
-                item.textContent =
-                    symbol;
-
-                item.style.left =
-                    (35 + Math.random() * 30) +
-                    "vw";
-
-                item.style.fontSize =
-                    (16 + Math.random() * 20) +
-                    "px";
-
-                item.style.animationDuration =
-                    (3 + Math.random() * 3) +
-                    "s";
-
-                document.body.appendChild(item);
-
-                setTimeout(
-                    function() {
-                        item.remove();
-                    },
-                    7000
-                );
-
-            },
-            i * 70
-        );
-    }
-}
-
-
-/* =========================================
-   CONFETTI
-========================================= */
-
-function createConfetti(amount) {
-
-    const items = [
-        "🎉",
-        "✨",
-        "⭐",
-        "🌟",
-        "💫",
-        "🥳",
-        "😊"
-    ];
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        setTimeout(
-            function() {
-
-                const piece =
-                    document.createElement("div");
-
-                piece.style.position =
-                    "fixed";
-
-                piece.style.left =
-                    Math.random() * 100 +
-                    "vw";
-
-                piece.style.top =
-                    "-50px";
-
-                piece.style.fontSize =
-                    (16 + Math.random() * 22) +
-                    "px";
-
-                piece.style.zIndex =
-                    "999";
-
-                piece.textContent =
-                    items[
-                        Math.floor(
-                            Math.random() *
-                            items.length
-                        )
-                    ];
-
-                document.body.appendChild(piece);
-
-
-                const duration =
-                    2000 +
-                    Math.random() * 3000;
-
-
-                piece.animate(
-                    [
-                        {
-                            transform:
-                                "translateY(0) rotate(0deg)",
-                            opacity: 1
-                        },
-
-                        {
-                            transform:
-                                "translateY(110vh) rotate(720deg)",
-                            opacity: 0
-                        }
-                    ],
-                    {
-                        duration:
-                            duration,
-
-                        easing:
-                            "cubic-bezier(.2,.8,.3,1)"
-                    }
-                );
-
-
-                setTimeout(
-                    function() {
-                        piece.remove();
-                    },
-                    duration + 100
-                );
-
-            },
-            i * 35
-        );
-    }
-}
-
-
-/* =========================================
-   INITIAL BACKGROUND
-========================================= */
-
-for (
-    let i = 0;
-    i < 12;
-    i++
-) {
-    setTimeout(
-        createFloatingIcon,
-        i * 300
-    );
-}
