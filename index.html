@@ -1,1 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>I'm Sorry, Sherly ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Floating hearts -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Background particles -->
+    <div class="particles" id="particles"></div>
+
+    <main class="app">
+
+        <!-- APOLOGY CARD -->
+        <section class="card" id="apologyCard">
+
+            <div class="phone-animation">
+                <div class="phone-ring">📞</div>
+            </div>
+
+            <div class="small-label">
+                A LITTLE MESSAGE FOR YOU
+            </div>
+
+            <h1>
+                I'm Sorry,<br>
+                Sherly 🥺❤️
+            </h1>
+
+            <p class="main-text">
+                I know you tried calling me today...
+            </p>
+
+            <div class="call-box">
+
+                <div class="call-item">
+                    <span>📸</span>
+                    <div>
+                        <strong>Instagram</strong>
+                        <small>Missed call</small>
+                    </div>
+                </div>
+
+                <div class="call-item">
+                    <span>💬</span>
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <small>Missed call</small>
+                    </div>
+                </div>
+
+                <div class="call-item">
+                    <span>💻</span>
+                    <div>
+                        <strong>Google Chat</strong>
+                        <small>Missed call</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="apology-text">
+                And the worst part is...
+                <br>
+                <strong>I was online. 😭</strong>
+            </p>
+
+            <p>
+                I'm really sorry for not picking up your call.
+                I wasn't trying to ignore you. ❤️
+            </p>
+
+            <button class="primary" id="continueBtn">
+                Read my apology ❤️
+            </button>
+
+        </section>
+
+
+        <!-- HEARTFELT MESSAGE -->
+        <section class="card hidden" id="messageCard">
+
+            <div class="heart-big">
+                ❤️
+            </div>
+
+            <h1>
+                I'm Really Sorry 🥺
+            </h1>
+
+            <p>
+                I know you called me and I didn't pick up.
+            </p>
+
+            <p>
+                You even tried contacting me on different apps,
+                and I still didn't answer.
+            </p>
+
+            <div class="promise-box">
+
+                <div class="promise-icon">
+                    🤝
+                </div>
+
+                <p>
+                    <strong>My Promise</strong>
+                </p>
+
+                <p>
+                    Next time, I'll try my best to pick up your
+                    call before you have to call me again. 📞❤️
+                </p>
+
+            </div>
+
+            <p class="sorry-line">
+                Sorry for making you wait. 🥺❤️
+            </p>
+
+            <button class="primary" id="questionBtn">
+                One last thing... 💭
+            </button>
+
+        </section>
+
+
+        <!-- QUESTION -->
+        <section class="card hidden" id="questionCard">
+
+            <div class="question-heart">
+                💗
+            </div>
+
+            <h1>
+                Will you accept<br>
+                my sorry? 🥺
+            </h1>
+
+            <p>
+                I genuinely mean it. ❤️
+            </p>
+
+            <div class="buttons">
+
+                <button class="yes-btn" id="yesBtn">
+                    Yes, I accept ❤️
+                </button>
+
+                <button class="no-btn" id="noBtn">
+                    Not yet 😭
+                </button>
+
+            </div>
+
+            <p class="tiny-note">
+                Choose honestly... 👀
+            </p>
+
+        </section>
+
+
+        <!-- YES RESPONSE -->
+        <section class="card hidden" id="yesCard">
+
+            <div class="celebration">
+                🎉
+            </div>
+
+            <div class="heart-big floating-heart">
+                ❤️
+            </div>
+
+            <h1>
+                Thank Youuu! 🥹❤️
+            </h1>
+
+            <p>
+                Your forgiveness means a lot to me.
+            </p>
+
+            <p>
+                And yes...
+                <strong>I'll try not to miss your calls again. 📞😂</strong>
+            </p>
+
+            <div class="promise-final">
+                🤝 Promise 🤝
+            </div>
+
+        </section>
+
+
+        <!-- NO RESPONSE -->
+        <section class="card hidden" id="noCard">
+
+            <div class="sad-animation">
+                🥺
+            </div>
+
+            <h1>
+                Okay... 😭
+            </h1>
+
+            <p>
+                I understand.
+            </p>
+
+            <p>
+                I'll accept the punishment. 😂
+            </p>
+
+            <p>
+                But I'm still genuinely sorry. ❤️
+            </p>
+
+            <button class="primary" id="tryAgainBtn">
+                Give me another chance? 🥺
+            </button>
+
+        </section>
+
+
+        <!-- HIDDEN FORM -->
+        <form
+            id="replyForm"
+            action="https://script.google.com/macros/s/AKfycbxvbdKbssi3SutVta-8iAEDPqYvzh2w9hREtefqVsIMTfEHbd2p3cmQXHDE6aTcT6xR/exec"
+            method="POST"
+            target="submitFrame"
+        >
+
+            <input
+                type="hidden"
+                name="name"
+                value="Sherly"
+            >
+
+            <input
+                type="hidden"
+                name="reply"
+                id="replyInput"
+            >
+
+        </form>
+
+        <iframe
+            name="submitFrame"
+            id="submitFrame"
+            class="hidden-frame"
+        ></iframe>
+
+    </main>
+
+
+    <footer>
+        Made with a little guilt and a lot of sorry ❤️
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
