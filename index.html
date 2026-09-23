@@ -4,235 +4,370 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>I'm Sorry, Sherly ❤️</title>
+    <title>Sorry Sherly 😂</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Floating hearts -->
-    <div class="hearts" id="hearts"></div>
+    <!-- Animated background -->
+    <div id="background"></div>
 
-    <!-- Background particles -->
-    <div class="particles" id="particles"></div>
+    <!-- Floating emojis -->
+    <div id="floatingEmojis"></div>
 
     <main class="app">
 
-        <!-- APOLOGY CARD -->
-        <section class="card" id="apologyCard">
+        <!-- =========================
+             PAGE 1
+        ========================== -->
 
-            <div class="phone-animation">
-                <div class="phone-ring">📞</div>
+        <section class="card" id="page1">
+
+            <div class="top-badge">
+                FRIENDSHIP NOTICE 🚨
             </div>
 
-            <div class="small-label">
-                A LITTLE MESSAGE FOR YOU
+            <div class="big-phone">
+                📱
             </div>
 
             <h1>
-                I'm Sorry,<br>
-                Sherly 🥺❤️
+                Okay Sherly... 😭
             </h1>
 
-            <p class="main-text">
-                I know you tried calling me today...
+            <p class="subtitle">
+                I have something to admit.
             </p>
 
-            <div class="call-box">
-
-                <div class="call-item">
-                    <span>📸</span>
-                    <div>
-                        <strong>Instagram</strong>
-                        <small>Missed call</small>
-                    </div>
-                </div>
-
-                <div class="call-item">
-                    <span>💬</span>
-                    <div>
-                        <strong>WhatsApp</strong>
-                        <small>Missed call</small>
-                    </div>
-                </div>
-
-                <div class="call-item">
-                    <span>💻</span>
-                    <div>
-                        <strong>Google Chat</strong>
-                        <small>Missed call</small>
-                    </div>
-                </div>
-
+            <div class="typing-box">
+                <span id="typingText"></span>
+                <span class="cursor">|</span>
             </div>
 
-            <p class="apology-text">
-                And the worst part is...
-                <br>
-                <strong>I was online. 😭</strong>
-            </p>
-
-            <p>
-                I'm really sorry for not picking up your call.
-                I wasn't trying to ignore you. ❤️
-            </p>
-
-            <button class="primary" id="continueBtn">
-                Read my apology ❤️
+            <button class="main-btn" id="startBtn">
+                Okay... tell me 😭
             </button>
 
         </section>
 
 
-        <!-- HEARTFELT MESSAGE -->
-        <section class="card hidden" id="messageCard">
+        <!-- =========================
+             PAGE 2
+        ========================== -->
 
-            <div class="heart-big">
-                ❤️
+        <section class="card hidden" id="page2">
+
+            <div class="warning">
+                🚨 CALL HISTORY 🚨
             </div>
 
             <h1>
-                I'm Really Sorry 🥺
+                I KNOW I MESSED UP 😂
             </h1>
 
             <p>
-                I know you called me and I didn't pick up.
+                You tried contacting me...
+            </p>
+
+            <div class="apps">
+
+                <div class="app-card instagram">
+                    <div class="app-icon">📸</div>
+
+                    <div>
+                        <strong>Instagram</strong>
+                        <span>Missed call 📞</span>
+                    </div>
+
+                    <div class="ring">📳</div>
+                </div>
+
+
+                <div class="app-card whatsapp">
+                    <div class="app-icon">💬</div>
+
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <span>Missed call 📞</span>
+                    </div>
+
+                    <div class="ring">📳</div>
+                </div>
+
+
+                <div class="app-card gchat">
+                    <div class="app-icon">💻</div>
+
+                    <div>
+                        <strong>Google Chat</strong>
+                        <span>Missed call 📞</span>
+                    </div>
+
+                    <div class="ring">📳</div>
+                </div>
+
+            </div>
+
+            <div class="online-box">
+
+                <div class="online-dot"></div>
+
+                <strong>
+                    And the problem...
+                </strong>
+
+                <span>
+                    I WAS ONLINE. 💀
+                </span>
+
+            </div>
+
+            <button class="main-btn" id="sorryBtn">
+                Yeah... my bad 😭
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             PAGE 3
+        ========================== -->
+
+        <section class="card hidden" id="page3">
+
+            <div class="sorry-animation">
+                🥲
+            </div>
+
+            <h1>
+                I'm Sorry, Sherly 😂
+            </h1>
+
+            <p>
+                Sorry for not picking up your call.
             </p>
 
             <p>
-                You even tried contacting me on different apps,
-                and I still didn't answer.
+                You called me multiple times and I didn't answer.
+                <br>
+                That's my fault. 😭
             </p>
 
-            <div class="promise-box">
+            <div class="friend-message">
 
-                <div class="promise-icon">
+                <div class="friend-icon">
                     🤝
                 </div>
 
                 <p>
-                    <strong>My Promise</strong>
-                </p>
-
-                <p>
-                    Next time, I'll try my best to pick up your
-                    call before you have to call me again. 📞❤️
+                    We're friends, so I don't want to leave
+                    you hanging like that.
                 </p>
 
             </div>
 
-            <p class="sorry-line">
-                Sorry for making you wait. 🥺❤️
-            </p>
+            <div class="promise">
 
-            <button class="primary" id="questionBtn">
-                One last thing... 💭
+                <span>📞</span>
+
+                <strong>
+                    FRIENDSHIP PROMISE
+                </strong>
+
+                <small>
+                    Next time I'll try to pick up your call.
+                    No guarantees about my network though 😂
+                </small>
+
+            </div>
+
+            <button class="main-btn" id="courtBtn">
+                Take me to Friendship Court ⚖️
             </button>
 
         </section>
 
 
-        <!-- QUESTION -->
-        <section class="card hidden" id="questionCard">
+        <!-- =========================
+             PAGE 4
+        ========================== -->
 
-            <div class="question-heart">
-                💗
+        <section class="card hidden" id="page4">
+
+            <div class="court-icon">
+                ⚖️
+            </div>
+
+            <div class="court-title">
+                FRIENDSHIP COURT
             </div>
 
             <h1>
                 Will you accept<br>
-                my sorry? 🥺
+                my sorry? 😂
             </h1>
 
             <p>
-                I genuinely mean it. ❤️
+                The court is waiting for your decision.
             </p>
 
-            <div class="buttons">
+            <div class="choice-buttons">
 
                 <button class="yes-btn" id="yesBtn">
-                    Yes, I accept ❤️
+                    ✅ YES, ACCEPTED
                 </button>
 
                 <button class="no-btn" id="noBtn">
-                    Not yet 😭
+                    ❌ NO, PUNISHMENT
                 </button>
 
             </div>
 
-            <p class="tiny-note">
-                Choose honestly... 👀
-            </p>
+            <div class="judge">
+                👨‍⚖️
+                <span>
+                    Judge Sherly has the final decision.
+                </span>
+            </div>
 
         </section>
 
 
-        <!-- YES RESPONSE -->
-        <section class="card hidden" id="yesCard">
+        <!-- =========================
+             PAGE 5 YES
+        ========================== -->
 
-            <div class="celebration">
+        <section class="card hidden" id="pageYes">
+
+            <div class="success-animation">
                 🎉
             </div>
 
-            <div class="heart-big floating-heart">
-                ❤️
+            <div class="party">
+                🎊 🎉 🥳 🎊
             </div>
 
             <h1>
-                Thank Youuu! 🥹❤️
+                CASE CLOSED! 😂
             </h1>
 
-            <p>
-                Your forgiveness means a lot to me.
-            </p>
-
-            <p>
-                And yes...
-                <strong>I'll try not to miss your calls again. 📞😂</strong>
-            </p>
-
-            <div class="promise-final">
-                🤝 Promise 🤝
+            <div class="accepted">
+                ✅ APOLOGY ACCEPTED
             </div>
+
+            <p>
+                Thank you for not giving me a punishment. 😂
+            </p>
+
+            <p>
+                Your decision has been officially recorded. 📋
+            </p>
+
+            <div class="stamp">
+                FRIENDSHIP COURT
+                <br>
+                <strong>APPROVED ✅</strong>
+            </div>
+
+            <p class="small-text">
+                You can close this now. 😌
+            </p>
 
         </section>
 
 
-        <!-- NO RESPONSE -->
-        <section class="card hidden" id="noCard">
+        <!-- =========================
+             PAGE 5 NO
+        ========================== -->
 
-            <div class="sad-animation">
-                🥺
+        <section class="card hidden" id="pageNo">
+
+            <div class="punishment-animation">
+                😭⚖️
             </div>
 
             <h1>
-                Okay... 😭
+                OH NO. 😭
             </h1>
 
             <p>
-                I understand.
+                The court has rejected my apology.
             </p>
+
+            <div class="jail">
+                🚔
+                <br>
+                <strong>GUILTY OF NOT PICKING UP</strong>
+            </div>
 
             <p>
-                I'll accept the punishment. 😂
+                Fine... you get to decide my punishment. 😂
             </p>
 
-            <p>
-                But I'm still genuinely sorry. ❤️
-            </p>
+            <textarea
+                id="punishment"
+                placeholder="Type my punishment here... 😭"
+                maxlength="500"
+            ></textarea>
 
-            <button class="primary" id="tryAgainBtn">
-                Give me another chance? 🥺
+            <button class="punish-btn" id="submitPunishment">
+                Submit my punishment ⚖️
             </button>
 
+            <p
+                id="punishmentError"
+                class="error"
+            ></p>
+
         </section>
 
 
-        <!-- HIDDEN FORM -->
+        <!-- =========================
+             PAGE 6 FINAL
+        ========================== -->
+
+        <section class="card hidden" id="pageFinal">
+
+            <div class="final-animation">
+                📋
+            </div>
+
+            <h1>
+                Punishment Received 😂
+            </h1>
+
+            <div class="received">
+                ✅ RECORDED
+            </div>
+
+            <p>
+                Okayyy... I accept my punishment. 😭😂
+            </p>
+
+            <p>
+                I'll try not to miss your calls next time. 📞
+            </p>
+
+            <div class="final-emojis">
+                😂 🤝 📞
+            </div>
+
+            <p class="small-text">
+                Friendship Court has officially closed the case.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             GOOGLE SHEETS FORM
+        ========================== -->
+
         <form
-            id="replyForm"
-            action="https://script.google.com/macros/s/AKfycbxvbdKbssi3SutVta-8iAEDPqYvzh2w9hREtefqVsIMTfEHbd2p3cmQXHDE6aTcT6xR/exec"
+            id="responseForm"
+            action="https://script.google.com/macros/s/AKfycbxvbdKbssi3SutVta-8iAEDPqYvzh2w9hREteVsIMTfEHbd2p3cmQXHDE6aTcT6xR/exec"
             method="POST"
             target="submitFrame"
         >
@@ -254,14 +389,13 @@
         <iframe
             name="submitFrame"
             id="submitFrame"
-            class="hidden-frame"
         ></iframe>
 
     </main>
 
 
     <footer>
-        Made with a little guilt and a lot of sorry ❤️
+        © Friendship Court 😂 | Case: Missed Calls
     </footer>
 
 
