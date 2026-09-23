@@ -2,13 +2,12 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    margin: 0;
+html {
     min-height: 100%;
 }
 
 body {
+    margin: 0;
     min-height: 100vh;
 
     font-family:
@@ -23,20 +22,25 @@ body {
 
     background:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(76, 111, 255, 0.25),
+            circle at 15% 15%,
+            rgba(255, 180, 80, 0.18),
             transparent 30%
         ),
         radial-gradient(
-            circle at 80% 80%,
-            rgba(150, 80, 255, 0.22),
+            circle at 85% 20%,
+            rgba(100, 180, 255, 0.15),
             transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(255, 120, 180, 0.15),
+            transparent 35%
         ),
         linear-gradient(
             135deg,
-            #080b1a,
-            #111735,
-            #080914
+            #101827,
+            #17263d 50%,
+            #0b1322
         );
 
     display: flex;
@@ -44,9 +48,31 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding: 20px;
+    padding: 22px;
 
     overflow-x: hidden;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+#background {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 0%,
+            rgba(0, 0, 0, 0.12) 70%,
+            rgba(0, 0, 0, 0.35) 100%
+        );
+
+    z-index: 0;
 }
 
 
@@ -56,7 +82,7 @@ body {
 
 .app {
     width: 100%;
-    max-width: 540px;
+    max-width: 530px;
 
     position: relative;
     z-index: 10;
@@ -70,27 +96,29 @@ body {
 .card {
     width: 100%;
 
-    padding: 40px 30px;
+    padding: 42px 30px;
 
     text-align: center;
 
     background:
-        rgba(255, 255, 255, 0.08);
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.12),
+            rgba(255,255,255,0.055)
+        );
 
-    border:
-        1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255,255,255,0.18);
 
-    border-radius: 28px;
+    border-radius: 30px;
 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 
     box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        0 30px 90px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.08);
 
-    animation:
-        cardEnter 0.7s cubic-bezier(.2,.8,.2,1);
+    animation: cardEnter 0.65s cubic-bezier(.2,.8,.2,1);
 }
 
 .hidden {
@@ -99,47 +127,24 @@ body {
 
 
 /* =========================
-   BADGES
+   TEXT
 ========================= */
 
-.top-badge,
-.warning,
-.court-title {
-    display: inline-block;
-
-    padding: 8px 14px;
-
-    border-radius: 999px;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    border:
-        1px solid rgba(255, 255, 255, 0.13);
-
+.label {
     font-size: 11px;
-    font-weight: 800;
+    font-weight: 900;
+    letter-spacing: 3px;
 
-    letter-spacing: 2px;
+    color: rgba(255,255,255,0.45);
 
-    color:
-        rgba(255, 255, 255, 0.65);
-
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-
-/* =========================
-   HEADINGS
-========================= */
-
 h1 {
-    margin:
-        0 0 18px;
+    margin: 0 0 20px;
 
-    font-size: 38px;
-
-    line-height: 1.15;
+    font-size: 39px;
+    line-height: 1.12;
 
     font-weight: 900;
 
@@ -147,7 +152,7 @@ h1 {
         linear-gradient(
             90deg,
             #ffffff,
-            #aebeff,
+            #ffe2a8,
             #ffffff
         );
 
@@ -156,23 +161,19 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    animation:
-        titleShine 5s linear infinite;
+    animation: textShine 4s linear infinite;
 }
 
 p {
-    margin:
-        0 0 20px;
+    margin: 0 0 20px;
 
     font-size: 17px;
+    line-height: 1.65;
 
-    line-height: 1.6;
-
-    color:
-        rgba(255, 255, 255, 0.78);
+    color: rgba(255,255,255,0.80);
 }
 
-.subtitle {
+.large-text {
     font-size: 19px;
 }
 
@@ -181,62 +182,162 @@ p {
    PHONE
 ========================= */
 
-.big-phone {
-    width: 100px;
-    height: 100px;
+.phone-wrapper {
+    width: 120px;
+    height: 120px;
+
+    margin: 0 auto 25px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-circle {
+    width: 82px;
+    height: 82px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin:
-        0 auto 25px;
+    font-size: 42px;
 
     border-radius: 50%;
 
-    font-size: 52px;
-
     background:
-        rgba(76, 111, 255, 0.15);
+        linear-gradient(
+            145deg,
+            rgba(255,190,90,0.25),
+            rgba(255,120,150,0.18)
+        );
 
-    border:
-        1px solid rgba(120, 145, 255, 0.25);
+    border: 1px solid rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 0 30px rgba(255,190,90,0.18);
 
     animation:
-        phoneShake 1.5s infinite,
-        glow 2s infinite;
+        phoneShake 1.3s infinite,
+        phoneFloat 3s ease-in-out infinite;
+
+    position: relative;
+    z-index: 5;
+}
+
+.ring {
+    position: absolute;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255,190,90,0.25);
+
+    animation: ringPulse 2s infinite;
+}
+
+.ring1 {
+    width: 90px;
+    height: 90px;
+}
+
+.ring2 {
+    width: 105px;
+    height: 105px;
+
+    animation-delay: 0.4s;
+}
+
+.ring3 {
+    width: 120px;
+    height: 120px;
+
+    animation-delay: 0.8s;
 }
 
 
 /* =========================
-   TYPING
+   CALL LIST
 ========================= */
 
-.typing-box {
-    min-height: 65px;
+.message-box {
+    display: flex;
+    flex-direction: column;
 
-    margin:
-        25px 0;
+    gap: 10px;
 
-    padding: 18px;
-
-    border-radius: 16px;
-
-    background:
-        rgba(0, 0, 0, 0.20);
-
-    border:
-        1px solid rgba(255, 255, 255, 0.10);
-
-    font-size: 16px;
-
-    color:
-        #cbd5ff;
+    margin: 26px 0;
 }
 
-.cursor {
-    animation:
-        blink 0.7s infinite;
+.message-line {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    border-radius: 17px;
+
+    background: rgba(0,0,0,0.18);
+
+    border: 1px solid rgba(255,255,255,0.09);
+
+    text-align: left;
+
+    animation: slideRight 0.6s backwards;
+}
+
+.message-line:nth-child(1) {
+    animation-delay: 0.15s;
+}
+
+.message-line:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.message-line:nth-child(3) {
+    animation-delay: 0.45s;
+}
+
+.message-line span {
+    font-weight: 800;
+
+    flex: 1;
+}
+
+.message-line b {
+    color: #ffcf75;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   ONLINE WARNING
+========================= */
+
+.online-warning {
+    padding: 16px;
+
+    margin: 20px 0;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,190,90,0.08);
+
+    border:
+        1px solid rgba(255,190,90,0.18);
+
+    color: rgba(255,255,255,0.8);
+
+    animation: warningPulse 2.2s infinite;
+}
+
+.online-warning strong {
+    color: #ffd47c;
 }
 
 
@@ -244,17 +345,17 @@ p {
    BUTTONS
 ========================= */
 
-.main-btn,
-.yes-btn,
-.no-btn,
-.punish-btn {
+.main-button,
+.yes-button,
+.no-button,
+.punishment-button {
     width: 100%;
 
     border: none;
 
-    padding: 17px 20px;
+    border-radius: 17px;
 
-    border-radius: 16px;
+    padding: 17px 20px;
 
     font-size: 16px;
 
@@ -263,461 +364,262 @@ p {
     cursor: pointer;
 
     transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.main-btn {
+.main-button {
+    color: #182033;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd36f,
+            #ffb98c
+        );
+
+    box-shadow:
+        0 12px 35px rgba(255,190,90,0.20);
+}
+
+.main-button:hover,
+.yes-button:hover,
+.no-button:hover,
+.punishment-button:hover {
+    transform: translateY(-3px);
+}
+
+.main-button:active,
+.yes-button:active,
+.no-button:active,
+.punishment-button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   APOLOGY SCREEN
+========================= */
+
+.big-emoji {
+    font-size: 70px;
+
+    margin-bottom: 18px;
+
+    animation:
+        sadBounce 2s infinite;
+}
+
+.sorry-card {
+    padding: 22px;
+
+    margin: 24px 0;
+
+    border-radius: 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.03)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+}
+
+.sorry-icon {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+
+    animation: littleBounce 1.5s infinite;
+}
+
+.sorry-card p {
+    margin-bottom: 10px;
+}
+
+.promise {
+    padding: 22px;
+
+    margin: 24px 0;
+
+    border-radius: 21px;
+
+    background:
+        rgba(120,190,255,0.08);
+
+    border:
+        1px solid rgba(120,190,255,0.15);
+
+    animation:
+        gentleFloat 3s ease-in-out infinite;
+}
+
+.promise-icon {
+    font-size: 43px;
+
+    margin-bottom: 8px;
+
+    animation:
+        handshake 2s infinite;
+}
+
+.promise p {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question-animation {
+    font-size: 75px;
+
+    margin-bottom: 15px;
+
+    animation:
+        questionBounce 1.5s infinite;
+}
+
+.choice-buttons {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+.yes-button {
     color: white;
 
     background:
         linear-gradient(
             135deg,
-            #526dff,
-            #8b5cf6
+            #38c98b,
+            #69dfa9
         );
 
     box-shadow:
-        0 12px 30px rgba(82, 109, 255, .25);
+        0 12px 30px rgba(56,201,139,0.18);
 }
 
-.main-btn:hover,
-.yes-btn:hover,
-.no-btn:hover,
-.punish-btn:hover {
-    transform:
-        translateY(-3px)
-        scale(1.01);
-}
-
-.main-btn:active,
-.yes-btn:active,
-.no-btn:active,
-.punish-btn:active {
-    transform:
-        scale(.97);
-}
-
-
-/* =========================
-   APP CALL CARDS
-========================= */
-
-.apps {
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    gap: 12px;
-
-    margin:
-        25px 0;
-}
-
-.app-card {
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap: 14px;
-
-    padding:
-        15px;
-
-    border-radius:
-        17px;
-
-    background:
-        rgba(0, 0, 0, .22);
-
-    border:
-        1px solid rgba(255, 255, 255, .10);
-
-    text-align:
-        left;
-
-    animation:
-        slideIn .6s backwards;
-}
-
-.app-card:nth-child(1) {
-    animation-delay:
-        .15s;
-}
-
-.app-card:nth-child(2) {
-    animation-delay:
-        .3s;
-}
-
-.app-card:nth-child(3) {
-    animation-delay:
-        .45s;
-}
-
-.app-icon {
-    font-size:
-        29px;
-}
-
-.app-card strong {
-    display:
-        block;
-
-    font-size:
-        15px;
-}
-
-.app-card span {
-    display:
-        block;
-
-    margin-top:
-        3px;
-
-    font-size:
-        12px;
-
-    color:
-        #aebeff;
-}
-
-.ring {
-    margin-left:
-        auto;
-
-    font-size:
-        20px;
-
-    animation:
-        ring .8s infinite;
-}
-
-
-/* =========================
-   ONLINE BOX
-========================= */
-
-.online-box {
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        9px;
-
-    flex-wrap:
-        wrap;
-
-    justify-content:
-        center;
-
-    padding:
-        16px;
-
-    margin:
-        20px 0;
-
-    border-radius:
-        16px;
-
-    background:
-        rgba(255, 80, 80, .08);
-
-    border:
-        1px solid rgba(255, 100, 100, .16);
-}
-
-.online-box span {
-    width:
-        100%;
-
-    color:
-        #ff9292;
-
-    font-weight:
-        800;
-}
-
-.online-dot {
-    width:
-        9px;
-
-    height:
-        9px;
-
-    border-radius:
-        50%;
-
-    background:
-        #55ff8a;
-
-    box-shadow:
-        0 0 12px #55ff8a;
-
-    animation:
-        pulse 1.2s infinite;
-}
-
-
-/* =========================
-   FRIEND MESSAGE
-========================= */
-
-.friend-message {
-    padding:
-        20px;
-
-    margin:
-        25px 0;
-
-    border-radius:
-        20px;
-
-    background:
-        rgba(82, 109, 255, .09);
-
-    border:
-        1px solid rgba(120, 145, 255, .15);
-
-    animation:
-        float 3s ease-in-out infinite;
-}
-
-.friend-icon {
-    font-size:
-        45px;
-
-    margin-bottom:
-        8px;
-}
-
-.friend-message p {
-    margin:
-        0;
-}
-
-
-/* =========================
-   PROMISE
-========================= */
-
-.promise {
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    gap:
-        7px;
-
-    padding:
-        20px;
-
-    margin:
-        20px 0;
-
-    border-radius:
-        18px;
-
-    background:
-        rgba(255,255,255,.06);
-}
-
-.promise span {
-    font-size:
-        30px;
-}
-
-.promise strong {
-    color:
-        #b7c4ff;
-}
-
-.promise small {
-    color:
-        rgba(255,255,255,.55);
-
-    line-height:
-        1.5;
-}
-
-
-/* =========================
-   COURT
-========================= */
-
-.court-icon {
-    font-size:
-        70px;
-
-    margin-bottom:
-        10px;
-
-    animation:
-        balance 2s infinite;
-}
-
-.choice-buttons {
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    gap:
-        12px;
-
-    margin-top:
-        28px;
-}
-
-.yes-btn {
-    color:
-        white;
+.no-button {
+    color: white;
 
     background:
         linear-gradient(
             135deg,
-            #16a34a,
-            #22c55e
+            #7b6d8f,
+            #665975
         );
-
-    box-shadow:
-        0 10px 30px rgba(34,197,94,.2);
 }
 
-.no-btn {
-    color:
-        white;
+.tiny {
+    margin-top: 20px;
+    margin-bottom: 0;
 
-    background:
-        linear-gradient(
-            135deg,
-            #dc2626,
-            #ef4444
-        );
+    font-size: 11px;
 
-    box-shadow:
-        0 10px 30px rgba(239,68,68,.18);
-}
-
-.judge {
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        8px;
-
-    margin-top:
-        22px;
-
-    font-size:
-        25px;
-}
-
-.judge span {
-    font-size:
-        11px;
-
-    color:
-        rgba(255,255,255,.4);
+    color: rgba(255,255,255,0.40);
 }
 
 
 /* =========================
-   SUCCESS
+   YES SCREEN
 ========================= */
 
-.success-animation {
-    font-size:
-        75px;
+.celebration-icon {
+    font-size: 75px;
 
     animation:
-        celebration .7s infinite alternate;
+        celebrate 1s infinite alternate;
 }
 
-.party {
-    font-size:
-        25px;
+.bounce-emoji {
+    font-size: 55px;
 
-    margin:
-        10px 0 20px;
+    margin: 8px 0 15px;
 
     animation:
-        party 1s infinite alternate;
+        littleBounce 1.3s infinite;
 }
 
-.accepted,
-.received {
-    display:
-        inline-block;
+.accepted-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    padding:
-        12px 20px;
+    gap: 7px;
 
-    border-radius:
-        999px;
+    padding: 20px;
+
+    margin: 25px 0;
+
+    border-radius: 20px;
 
     background:
-        rgba(34,197,94,.12);
+        rgba(56,201,139,0.10);
 
     border:
-        1px solid rgba(34,197,94,.25);
-
-    color:
-        #7dffad;
-
-    font-weight:
-        900;
-
-    margin-bottom:
-        25px;
+        1px solid rgba(56,201,139,0.22);
 
     animation:
-        glowGreen 2s infinite;
+        successGlow 2s infinite;
 }
 
-.stamp {
-    display:
-        inline-block;
+.accepted-box .check {
+    width: 50px;
+    height: 50px;
 
-    padding:
-        18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    margin:
-        10px 0 20px;
+    border-radius: 50%;
+
+    background: #38c98b;
+
+    font-size: 28px;
+    font-weight: 900;
+
+    animation:
+        checkPop 0.7s ease;
+}
+
+.accepted-box strong {
+    font-size: 19px;
+}
+
+.accepted-box span {
+    font-size: 13px;
+
+    color: rgba(255,255,255,0.55);
+}
+
+.final-message {
+    display: inline-block;
+
+    padding: 12px 20px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,210,100,0.10);
 
     border:
-        2px dashed rgba(125,255,173,.4);
+        1px solid rgba(255,210,100,0.16);
 
-    border-radius:
-        12px;
+    color: #ffd87c;
 
-    transform:
-        rotate(-3deg);
+    font-weight: 800;
 
-    color:
-        #7dffad;
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
+    animation:
+        badgePulse 2s infinite;
 }
 
 
@@ -725,164 +627,187 @@ p {
    PUNISHMENT
 ========================= */
 
-.punishment-animation {
-    font-size:
-        65px;
+.punishment-icon {
+    font-size: 72px;
+
+    margin-bottom: 15px;
 
     animation:
-        shake .8s infinite;
+        angryShake 1.2s infinite;
 }
 
-.jail {
-    padding:
-        18px;
+.warning-box {
+    padding: 20px;
 
-    margin:
-        20px 0;
+    margin: 25px 0;
 
-    border-radius:
-        18px;
+    border-radius: 20px;
 
     background:
-        rgba(220,38,38,.09);
+        rgba(255,190,70,0.08);
 
     border:
-        1px solid rgba(239,68,68,.18);
+        1px solid rgba(255,190,70,0.20);
+}
 
-    color:
-        #ffaaaa;
+.warning-box > strong {
+    color: #ffd477;
+}
 
-    line-height:
-        1.8;
+.warning-box p {
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 textarea {
-    width:
-        100%;
+    width: 100%;
 
-    min-height:
-        130px;
+    min-height: 130px;
 
-    resize:
-        vertical;
+    resize: vertical;
 
-    padding:
-        16px;
+    padding: 16px;
+
+    border-radius: 17px;
 
     border:
-        1px solid rgba(255,255,255,.15);
-
-    border-radius:
-        16px;
+        1px solid rgba(255,255,255,0.15);
 
     background:
-        rgba(0,0,0,.25);
+        rgba(0,0,0,0.22);
 
-    color:
-        white;
+    color: white;
 
-    font-family:
-        inherit;
+    font-family: inherit;
 
-    font-size:
-        16px;
+    font-size: 16px;
 
-    outline:
-        none;
+    outline: none;
 
-    margin-bottom:
-        14px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+textarea::placeholder {
+    color: rgba(255,255,255,0.40);
 }
 
 textarea:focus {
-    border-color:
-        #7c8cff;
+    border-color: #ffd477;
 
     box-shadow:
-        0 0 20px rgba(82,109,255,.15);
+        0 0 20px rgba(255,212,119,0.08);
 }
 
-.punish-btn {
-    color:
-        white;
+.character-count {
+    text-align: right;
+
+    margin-top: 6px;
+    margin-bottom: 15px;
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,0.40);
+}
+
+.punishment-button {
+    color: #211806;
 
     background:
         linear-gradient(
             135deg,
-            #f97316,
-            #ef4444
+            #ffd477,
+            #ffb97c
         );
 }
 
 .error {
-    color:
-        #ff9999;
+    display: none;
 
-    font-size:
-        13px;
+    margin-top: 12px;
 
-    margin:
-        12px 0 0;
+    margin-bottom: 0;
+
+    color: #ff9e9e;
+
+    font-size: 13px;
 }
 
 
 /* =========================
-   FINAL
+   PUNISHMENT DONE
 ========================= */
 
-.final-animation {
-    font-size:
-        70px;
+.received-animation {
+    font-size: 75px;
+
+    margin-bottom: 15px;
 
     animation:
-        float 2s infinite ease-in-out;
+        paperFloat 2s ease-in-out infinite;
 }
 
-.final-emojis {
-    font-size:
-        35px;
+.punishment-display {
+    margin: 25px 0;
 
-    margin:
-        25px 0;
+    padding: 20px;
 
-    animation:
-        party 1.2s infinite alternate;
-}
-
-.small-text {
-    font-size:
-        12px;
-
-    color:
-        rgba(255,255,255,.4);
-}
-
-
-/* =========================
-   BACKGROUND
-========================= */
-
-.bg-particle {
-    position:
-        fixed;
-
-    width:
-        4px;
-
-    height:
-        4px;
-
-    border-radius:
-        50%;
+    border-radius: 20px;
 
     background:
-        rgba(255,255,255,.35);
+        rgba(255,255,255,0.06);
 
-    pointer-events:
-        none;
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    text-align: left;
+}
+
+.punishment-display span {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 12px;
+
+    color: rgba(255,255,255,0.45);
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.punishment-display strong {
+    display: block;
+
+    font-size: 17px;
+
+    line-height: 1.55;
+
+    color: #ffe09a;
+
+    word-break: break-word;
+}
+
+
+/* =========================
+   FLOATING ICONS
+========================= */
+
+.floating-item {
+    position: fixed;
+
+    bottom: -50px;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    opacity: 0;
 
     animation:
-        particleFloat linear infinite;
+        floatUp linear forwards;
 }
 
 
@@ -891,39 +816,29 @@ textarea:focus {
 ========================= */
 
 footer {
-    width:
-        100%;
+    width: 100%;
+    max-width: 530px;
 
-    max-width:
-        540px;
+    text-align: center;
 
-    text-align:
-        center;
+    margin-top: 15px;
 
-    margin-top:
-        14px;
+    font-size: 10px;
 
-    font-size:
-        10px;
+    color: rgba(255,255,255,0.30);
 
-    color:
-        rgba(255,255,255,.3);
+    position: relative;
 
-    position:
-        relative;
-
-    z-index:
-        10;
+    z-index: 10;
 }
 
 
 /* =========================
-   HIDDEN IFRAME
+   IFRAME
 ========================= */
 
 #submitFrame {
-    display:
-        none;
+    display: none;
 }
 
 
@@ -934,238 +849,268 @@ footer {
 @keyframes cardEnter {
 
     from {
-        opacity:
-            0;
-
+        opacity: 0;
         transform:
-            translateY(35px)
-            scale(.94);
+            translateY(30px)
+            scale(0.95);
     }
 
     to {
-        opacity:
-            1;
-
+        opacity: 1;
         transform:
             translateY(0)
             scale(1);
     }
 }
 
-@keyframes titleShine {
+@keyframes textShine {
 
     to {
-        background-position:
-            200% center;
+        background-position: 200% center;
     }
 }
 
 @keyframes phoneShake {
 
-    0%,100% {
-        transform:
-            rotate(0);
+    0%, 100% {
+        transform: rotate(0);
     }
 
     10% {
-        transform:
-            rotate(-12deg);
+        transform: rotate(-13deg);
     }
 
     20% {
-        transform:
-            rotate(12deg);
+        transform: rotate(13deg);
     }
 
     30% {
-        transform:
-            rotate(-10deg);
+        transform: rotate(-11deg);
     }
 
     40% {
-        transform:
-            rotate(10deg);
+        transform: rotate(11deg);
     }
 
     50% {
-        transform:
-            rotate(0);
+        transform: rotate(0);
     }
 }
 
-@keyframes glow {
+@keyframes phoneFloat {
 
-    0%,100% {
-        box-shadow:
-            0 0 0 rgba(82,109,255,0);
+    0%, 100% {
+        translate: 0 0;
     }
 
     50% {
-        box-shadow:
-            0 0 35px rgba(82,109,255,.35);
+        translate: 0 -7px;
     }
 }
 
-@keyframes blink {
+@keyframes ringPulse {
 
-    50% {
-        opacity:
-            0;
+    0% {
+        transform: scale(0.75);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
     }
 }
 
-@keyframes slideIn {
+@keyframes slideRight {
 
     from {
-        opacity:
-            0;
-
-        transform:
-            translateX(-30px);
+        opacity: 0;
+        transform: translateX(-25px);
     }
 
     to {
-        opacity:
-            1;
-
-        transform:
-            translateX(0);
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
-@keyframes ring {
+@keyframes warningPulse {
 
-    0%,100% {
-        transform:
-            rotate(0);
-    }
-
-    25% {
-        transform:
-            rotate(-15deg);
-    }
-
-    75% {
-        transform:
-            rotate(15deg);
-    }
-}
-
-@keyframes pulse {
-
-    50% {
-        transform:
-            scale(1.5);
-
-        opacity:
-            .5;
-    }
-}
-
-@keyframes float {
-
-    0%,100% {
-        transform:
-            translateY(0);
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(255,190,90,0);
     }
 
     50% {
-        transform:
-            translateY(-8px);
+        box-shadow:
+            0 0 25px rgba(255,190,90,0.08);
     }
 }
 
-@keyframes balance {
+@keyframes gentleFloat {
 
-    0%,100% {
-        transform:
-            rotate(-4deg);
+    0%, 100% {
+        transform: translateY(0);
     }
 
     50% {
-        transform:
-            rotate(4deg);
+        transform: translateY(-7px);
     }
 }
 
-@keyframes celebration {
+@keyframes handshake {
+
+    0%, 100% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(-8deg);
+    }
+}
+
+@keyframes sadBounce {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes littleBounce {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+@keyframes questionBounce {
+
+    0%, 100% {
+        transform: scale(1) rotate(0);
+    }
+
+    50% {
+        transform: scale(1.12) rotate(-5deg);
+    }
+}
+
+@keyframes celebrate {
 
     from {
         transform:
             scale(1)
-            rotate(-6deg);
+            rotate(-7deg);
     }
 
     to {
         transform:
-            scale(1.2)
-            rotate(6deg);
+            scale(1.18)
+            rotate(7deg);
     }
 }
 
-@keyframes party {
+@keyframes successGlow {
 
-    from {
-        transform:
-            scale(1);
+    0%, 100% {
+        box-shadow:
+            0 0 0 rgba(56,201,139,0);
     }
-
-    to {
-        transform:
-            scale(1.1)
-            rotate(2deg);
-    }
-}
-
-@keyframes glowGreen {
 
     50% {
         box-shadow:
-            0 0 30px rgba(34,197,94,.25);
+            0 0 30px rgba(56,201,139,0.12);
     }
 }
 
-@keyframes shake {
-
-    0%,100% {
-        transform:
-            translateX(0);
-    }
-
-    25% {
-        transform:
-            translateX(-7px)
-            rotate(-3deg);
-    }
-
-    75% {
-        transform:
-            translateX(7px)
-            rotate(3deg);
-    }
-}
-
-@keyframes particleFloat {
+@keyframes checkPop {
 
     from {
-        transform:
-            translateY(110vh);
-
-        opacity:
-            0;
+        transform: scale(0);
     }
 
-    20% {
-        opacity:
-            .6;
+    70% {
+        transform: scale(1.2);
     }
 
     to {
-        transform:
-            translateY(-20vh);
+        transform: scale(1);
+    }
+}
 
-        opacity:
-            0;
+@keyframes badgePulse {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes angryShake {
+
+    0%, 100% {
+        transform: translateX(0) rotate(0);
+    }
+
+    20% {
+        transform: translateX(-7px) rotate(-5deg);
+    }
+
+    40% {
+        transform: translateX(7px) rotate(5deg);
+    }
+
+    60% {
+        transform: translateX(-5px) rotate(-3deg);
+    }
+
+    80% {
+        transform: translateX(5px) rotate(3deg);
+    }
+}
+
+@keyframes paperFloat {
+
+    0%, 100% {
+        transform: translateY(0) rotate(-4deg);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(4deg);
+    }
+}
+
+@keyframes floatUp {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0)
+            scale(0.6);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg)
+            scale(1.2);
+
+        opacity: 0;
     }
 }
 
@@ -1174,47 +1119,53 @@ footer {
    MOBILE
 ========================= */
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
 
     body {
-        padding:
-            14px 11px;
+        padding: 15px 12px;
     }
 
     .card {
-        padding:
-            32px 19px;
+        padding: 34px 20px;
 
-        border-radius:
-            24px;
+        border-radius: 25px;
     }
 
     h1 {
-        font-size:
-            30px;
+        font-size: 31px;
     }
 
     p {
-        font-size:
-            15.5px;
+        font-size: 16px;
     }
 
-    .big-phone {
-        width:
-            82px;
-
-        height:
-            82px;
-
-        font-size:
-            42px;
+    .phone-wrapper {
+        transform: scale(0.9);
     }
 
-    .main-btn,
-    .yes-btn,
-    .no-btn,
-    .punish-btn {
-        padding:
-            16px;
+    .message-line {
+        padding: 13px;
+    }
+
+    .main-button,
+    .yes-button,
+    .no-button,
+    .punishment-button {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .card {
+        padding: 28px 17px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    p {
+        font-size: 15px;
     }
 }
