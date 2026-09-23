@@ -1,367 +1,306 @@
-/* =========================
-   GET ELEMENTS
-========================= */
-
-const pages = [
-    document.getElementById("page1"),
-    document.getElementById("page2"),
-    document.getElementById("page3"),
-    document.getElementById("page4"),
-    document.getElementById("pageYes"),
-    document.getElementById("pageNo"),
-    document.getElementById("pageFinal")
+const screens = [
+    "screenApology",
+    "screenMessage",
+    "screenQuestion",
+    "screenYes",
+    "screenPunishment",
+    "screenPunishmentDone"
 ];
 
-const startBtn = document.getElementById("startBtn");
-const sorryBtn = document.getElementById("sorryBtn");
-const courtBtn = document.getElementById("courtBtn");
+const apologyNext = document.getElementById("apologyNext");
+const questionNext = document.getElementById("questionNext");
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
+const yesButton = document.getElementById("yesButton");
+const noButton = document.getElementById("noButton");
 
 const submitPunishment =
     document.getElementById("submitPunishment");
 
-const tryAgainBtn = null;
+const tryAgainButton = document.getElementById("tryAgainButton");
 
-const punishment =
-    document.getElementById("punishment");
+const punishmentText =
+    document.getElementById("punishmentText");
+
+const punishmentDisplay =
+    document.getElementById("punishmentDisplay");
 
 const punishmentError =
     document.getElementById("punishmentError");
 
-const responseForm =
-    document.getElementById("responseForm");
+const characterCount =
+    document.getElementById("characterCount");
+
+const replyForm =
+    document.getElementById("replyForm");
 
 const replyInput =
     document.getElementById("replyInput");
 
 
-/* =========================
-   SHOW PAGE
-========================= */
+/* =========================================
+   CHANGE SCREEN
+========================================= */
 
-function showPage(page) {
+function showScreen(screenId) {
 
-    pages.forEach(function(item) {
-        item.classList.add("hidden");
+    screens.forEach(function(id) {
+
+        const screen =
+            document.getElementById(id);
+
+        screen.classList.add("hidden");
     });
 
-    page.classList.remove("hidden");
+    const selected =
+        document.getElementById(screenId);
+
+    selected.classList.remove("hidden");
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
-
-    createBurst();
 }
 
 
-/* =========================
-   TYPING ANIMATION
-========================= */
+/* =========================================
+   SAVE TO GOOGLE SHEET
+========================================= */
 
-const typingText =
-    document.getElementById("typingText");
+function saveResponse(response) {
 
-const message =
-    "I need to say sorry for something...";
+    /*
+       The response is placed inside the hidden
+       form and submitted to Google Apps Script.
+    */
 
-let typingIndex = 0;
+    replyInput.value = response;
 
-function typeMessage() {
-
-    if (typingIndex < message.length) {
-
-        typingText.textContent +=
-            message.charAt(typingIndex);
-
-        typingIndex++;
-
-        setTimeout(
-            typeMessage,
-            55
-        );
-    }
-}
-
-setTimeout(
-    typeMessage,
-    700
-);
-
-
-/* =========================
-   PAGE 1
-========================= */
-
-startBtn.addEventListener(
-    "click",
-    function() {
-
-        showPage(
-            document.getElementById("page2")
-        );
-
-    }
-);
-
-
-/* =========================
-   PAGE 2
-========================= */
-
-sorryBtn.addEventListener(
-    "click",
-    function() {
-
-        showPage(
-            document.getElementById("page3")
-        );
-
-    }
-);
-
-
-/* =========================
-   PAGE 3
-========================= */
-
-courtBtn.addEventListener(
-    "click",
-    function() {
-
-        showPage(
-            document.getElementById("page4")
-        );
-
-    }
-);
-
-
-/* =========================
-   SAVE TO GOOGLE SHEETS
-========================= */
-
-function saveResponse(text) {
-
-    replyInput.value = text;
-
-    responseForm.submit();
+    replyForm.submit();
 }
 
 
-/* =========================
+/* =========================================
+   SCREEN 1 → SCREEN 2
+========================================= */
+
+apologyNext.addEventListener(
+    "click",
+    function() {
+
+        showScreen("screenMessage");
+
+        createBurst("✨", 15);
+        createBurst("⭐", 10);
+    }
+);
+
+
+/* =========================================
+   SCREEN 2 → SCREEN 3
+========================================= */
+
+questionNext.addEventListener(
+    "click",
+    function() {
+
+        showScreen("screenQuestion");
+
+        createBurst("✨", 18);
+        createBurst("⭐", 12);
+    }
+);
+
+
+/* =========================================
    YES
-========================= */
+========================================= */
 
-yesBtn.addEventListener(
+yesButton.addEventListener(
     "click",
     function() {
 
         /*
-         * This is immediately saved
-         * to Google Sheets.
-         */
+           This is what will appear in Google Sheet.
+        */
 
         saveResponse(
-            "YES - Apology accepted ✅"
+            "ACCEPTED MY SORRY 😊"
         );
 
-        showPage(
-            document.getElementById("pageYes")
-        );
+        showScreen("screenYes");
 
-        createBigCelebration();
+        createBurst("🎉", 25);
+        createBurst("✨", 25);
+        createBurst("⭐", 20);
 
+        createConfetti(50);
     }
 );
 
 
-/* =========================
+/* =========================================
    NO
-========================= */
+========================================= */
 
-noBtn.addEventListener(
+noButton.addEventListener(
     "click",
     function() {
 
-        /*
-         * First record that she
-         * rejected the apology.
-         */
+        showScreen("screenPunishment");
 
-        saveResponse(
-            "NO - Punishment requested ❌"
-        );
-
-        showPage(
-            document.getElementById("pageNo")
-        );
-
+        createBurst("😤", 8);
+        createBurst("⚡", 8);
     }
 );
 
 
-/* =========================
+/* =========================================
+   PUNISHMENT CHARACTER COUNT
+========================================= */
+
+punishmentText.addEventListener(
+    "input",
+    function() {
+
+        characterCount.textContent =
+            punishmentText.value.length;
+    }
+);
+
+
+/* =========================================
    SUBMIT PUNISHMENT
-========================= */
+========================================= */
 
 submitPunishment.addEventListener(
     "click",
     function() {
 
-        const text =
-            punishment.value.trim();
+        const punishment =
+            punishmentText.value.trim();
 
-        if (!text) {
+        /*
+           Don't allow an empty punishment.
+        */
 
-            punishmentError.textContent =
-                "You have to give me a punishment 😂";
+        if (!punishment) {
 
-            punishment.focus();
+            punishmentError.style.display =
+                "block";
+
+            punishmentText.focus();
 
             return;
         }
 
+        punishmentError.style.display =
+            "none";
+
+
         /*
-         * Save the actual punishment.
-         */
+           Show the punishment on final screen.
+        */
+
+        punishmentDisplay.textContent =
+            punishment;
+
+
+        /*
+           Save BOTH the fact that she rejected
+           the apology and the punishment.
+        */
 
         saveResponse(
-            "NO - Punishment: " + text
+            "NOT ACCEPTED — PUNISHMENT: " +
+            punishment
         );
 
-        punishmentError.textContent = "";
 
-        showPage(
-            document.getElementById("pageFinal")
+        /*
+           Show final screen.
+        */
+
+        showScreen(
+            "screenPunishmentDone"
         );
 
-        createBigCelebration();
 
+        createBurst("😭", 12);
+        createBurst("📜", 8);
     }
 );
 
 
-/* =========================
-   FLOATING EMOJIS
-========================= */
+/* =========================================
+   FLOATING BACKGROUND ICONS
+========================================= */
 
-const floatingEmojis =
-    document.getElementById(
-        "floatingEmojis"
-    );
-
-function createFloatingEmoji() {
+function createFloatingIcon() {
 
     const item =
         document.createElement("div");
 
-    const emojis = [
-        "😂",
-        "📞",
-        "😭",
-        "🤝",
-        "⚖️",
+    item.className =
+        "floating-item";
+
+    const icons = [
+        "⭐",
         "✨",
-        "📱",
-        "🤣",
-        "😅"
+        "🌟",
+        "💫",
+        "📞",
+        "😊",
+        "🥺",
+        "☁️"
     ];
 
     item.textContent =
-        emojis[
+        icons[
             Math.floor(
-                Math.random() *
-                emojis.length
+                Math.random() * icons.length
             )
         ];
-
-    item.style.position =
-        "fixed";
 
     item.style.left =
         Math.random() * 100 + "vw";
 
-    item.style.bottom =
-        "-50px";
-
     item.style.fontSize =
-        15 + Math.random() * 20 + "px";
+        (14 + Math.random() * 20) + "px";
 
-    item.style.zIndex =
-        "1";
+    item.style.animationDuration =
+        (7 + Math.random() * 8) + "s";
 
-    item.style.pointerEvents =
-        "none";
-
-    const duration =
-        5 + Math.random() * 6;
-
-    item.animate(
-        [
-            {
-                transform:
-                    "translateY(0) rotate(0deg)",
-                opacity:
-                    0
-            },
-            {
-                transform:
-                    "translateY(-110vh) rotate(360deg)",
-                opacity:
-                    .65
-            },
-            {
-                transform:
-                    "translateY(-120vh) rotate(720deg)",
-                opacity:
-                    0
-            }
-        ],
-        {
-            duration:
-                duration * 1000,
-
-            easing:
-                "linear"
-        }
-    );
-
-    floatingEmojis.appendChild(item);
+    document.body.appendChild(item);
 
     setTimeout(
         function() {
             item.remove();
         },
-        duration * 1000
+        16000
     );
 }
 
+
+/*
+   Create floating objects continuously.
+*/
+
 setInterval(
-    createFloatingEmoji,
+    createFloatingIcon,
     600
 );
 
 
-/* =========================
-   BUTTON BURST
-========================= */
+/* =========================================
+   BURST EFFECT
+========================================= */
 
-function createBurst() {
-
-    const emojis = [
-        "✨",
-        "😂",
-        "📞",
-        "🤝"
-    ];
+function createBurst(symbol, amount) {
 
     for (
         let i = 0;
-        i < 8;
+        i < amount;
         i++
     ) {
 
@@ -371,60 +310,23 @@ function createBurst() {
                 const item =
                     document.createElement("div");
 
-                item.textContent =
-                    emojis[
-                        Math.floor(
-                            Math.random() *
-                            emojis.length
-                        )
-                    ];
+                item.className =
+                    "floating-item";
 
-                item.style.position =
-                    "fixed";
+                item.textContent =
+                    symbol;
 
                 item.style.left =
-                    35 + Math.random() * 30 + "vw";
-
-                item.style.top =
-                    40 + Math.random() * 20 + "vh";
+                    (35 + Math.random() * 30) +
+                    "vw";
 
                 item.style.fontSize =
-                    "24px";
+                    (16 + Math.random() * 20) +
+                    "px";
 
-                item.style.zIndex =
-                    "1000";
-
-                item.style.pointerEvents =
-                    "none";
-
-                item.animate(
-                    [
-                        {
-                            transform:
-                                "translate(0,0) scale(.4)",
-                            opacity:
-                                1
-                        },
-                        {
-                            transform:
-                                `translate(
-                                    ${(Math.random() - .5) * 300}px,
-                                    ${(Math.random() - .5) * 250}px
-                                )
-                                scale(1.2)
-                                rotate(360deg)`,
-                            opacity:
-                                0
-                        }
-                    ],
-                    {
-                        duration:
-                            900,
-
-                        easing:
-                            "cubic-bezier(.2,.8,.2,1)"
-                    }
-                );
+                item.style.animationDuration =
+                    (3 + Math.random() * 3) +
+                    "s";
 
                 document.body.appendChild(item);
 
@@ -432,7 +334,7 @@ function createBurst() {
                     function() {
                         item.remove();
                     },
-                    1000
+                    7000
                 );
 
             },
@@ -442,80 +344,79 @@ function createBurst() {
 }
 
 
-/* =========================
-   BIG CELEBRATION
-========================= */
+/* =========================================
+   CONFETTI
+========================================= */
 
-function createBigCelebration() {
+function createConfetti(amount) {
 
-    const emojis = [
+    const items = [
         "🎉",
-        "🥳",
-        "😂",
         "✨",
-        "🤝",
-        "📞",
-        "🎊",
-        "🤣",
-        "👏"
+        "⭐",
+        "🌟",
+        "💫",
+        "🥳",
+        "😊"
     ];
 
     for (
         let i = 0;
-        i < 45;
+        i < amount;
         i++
     ) {
 
         setTimeout(
             function() {
 
-                const item =
+                const piece =
                     document.createElement("div");
 
-                item.textContent =
-                    emojis[
+                piece.style.position =
+                    "fixed";
+
+                piece.style.left =
+                    Math.random() * 100 +
+                    "vw";
+
+                piece.style.top =
+                    "-50px";
+
+                piece.style.fontSize =
+                    (16 + Math.random() * 22) +
+                    "px";
+
+                piece.style.zIndex =
+                    "999";
+
+                piece.textContent =
+                    items[
                         Math.floor(
                             Math.random() *
-                            emojis.length
+                            items.length
                         )
                     ];
 
-                item.style.position =
-                    "fixed";
+                document.body.appendChild(piece);
 
-                item.style.left =
-                    Math.random() * 100 + "vw";
-
-                item.style.top =
-                    "-40px";
-
-                item.style.fontSize =
-                    18 + Math.random() * 22 + "px";
-
-                item.style.zIndex =
-                    "2000";
-
-                item.style.pointerEvents =
-                    "none";
 
                 const duration =
-                    1800 +
-                    Math.random() * 2500;
+                    2000 +
+                    Math.random() * 3000;
 
-                item.animate(
+
+                piece.animate(
                     [
                         {
                             transform:
                                 "translateY(0) rotate(0deg)",
-                            opacity:
-                                1
+                            opacity: 1
                         },
+
                         {
                             transform:
-                                `translateY(110vh)
-                                 rotate(${360 + Math.random() * 720}deg)`,
-                            opacity:
-                                0
+                                "translateY(110vh) rotate(720deg)",
+                            opacity: 0
                         }
                     ],
                     {
@@ -527,53 +428,32 @@ function createBigCelebration() {
                     }
                 );
 
-                document.body.appendChild(item);
 
                 setTimeout(
                     function() {
-                        item.remove();
+                        piece.remove();
                     },
                     duration + 100
                 );
 
             },
-            i * 40
+            i * 35
         );
     }
 }
 
 
-/* =========================
-   BACKGROUND PARTICLES
-========================= */
-
-const background =
-    document.getElementById(
-        "background"
-    );
+/* =========================================
+   INITIAL BACKGROUND
+========================================= */
 
 for (
     let i = 0;
-    i < 40;
+    i < 12;
     i++
 ) {
-
-    const particle =
-        document.createElement("div");
-
-    particle.className =
-        "bg-particle";
-
-    particle.style.left =
-        Math.random() * 100 + "vw";
-
-    particle.style.animationDuration =
-        8 + Math.random() * 12 + "s";
-
-    particle.style.animationDelay =
-        Math.random() * 10 + "s";
-
-    background.appendChild(
-        particle
+    setTimeout(
+        createFloatingIcon,
+        i * 300
     );
 }
