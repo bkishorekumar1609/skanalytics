@@ -23,18 +23,18 @@ body {
     background:
         radial-gradient(
             circle at 20% 10%,
-            rgba(168, 85, 247, 0.25),
+            rgba(139, 92, 246, 0.25),
             transparent 30%
         ),
         radial-gradient(
             circle at 85% 85%,
-            rgba(124, 58, 237, 0.22),
+            rgba(124, 58, 237, 0.20),
             transparent 32%
         ),
         linear-gradient(
             145deg,
             #080312,
-            #130724,
+            #16082a,
             #090312
         );
 
@@ -50,7 +50,7 @@ body {
 
 
 /* =========================
-   BACKGROUND ORBS
+   PURPLE BACKGROUND
 ========================= */
 
 .bg-orb {
@@ -63,36 +63,29 @@ body {
 
     filter: blur(90px);
 
-    opacity: .28;
+    opacity: .25;
 
     pointer-events: none;
 
     z-index: 0;
 
-    animation:
-        orbFloat
-        9s
-        ease-in-out
-        infinite alternate;
+    animation: orbFloat 10s ease-in-out infinite alternate;
 }
 
 .orb1 {
     background: #8b5cf6;
-
-    top: -100px;
-    left: -100px;
+    top: -110px;
+    left: -110px;
 }
 
 .orb2 {
-    background: #c026d3;
-
+    background: #a855f7;
     right: -120px;
-    top: 30%;
+    top: 35%;
 }
 
 .orb3 {
     background: #6d28d9;
-
     left: 20%;
     bottom: -140px;
 
@@ -109,13 +102,12 @@ body {
     max-width: 520px;
 
     position: relative;
-
     z-index: 10;
 }
 
 
 /* =========================
-   IMPORTANT SCREEN FIX
+   SCREEN CONTROL
 ========================= */
 
 .screen {
@@ -148,7 +140,7 @@ body {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.105),
+            rgba(255,255,255,.10),
             rgba(255,255,255,.035)
         );
 
@@ -160,11 +152,8 @@ body {
     -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 30px 100px
-        rgba(0,0,0,.48),
-
-        inset 0 1px 0
-        rgba(255,255,255,.08);
+        0 30px 100px rgba(0,0,0,.48),
+        inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 
@@ -176,7 +165,6 @@ body {
     margin-bottom: 14px;
 
     font-size: 10px;
-
     font-weight: 900;
 
     letter-spacing: 3px;
@@ -189,7 +177,6 @@ h1 {
     margin: 0 0 20px;
 
     font-size: 40px;
-
     line-height: 1.1;
 
     font-weight: 850;
@@ -215,10 +202,6 @@ h1 {
         infinite;
 }
 
-h1 span {
-    color: #d8b4fe;
-}
-
 p {
     margin: 0 0 20px;
 
@@ -230,13 +213,9 @@ p {
         rgba(255,255,255,.76);
 }
 
-.intro {
-    font-size: 18px;
-}
-
 
 /* =========================
-   ICONS
+   MAIN EMOJIS
 ========================= */
 
 .top-icon {
@@ -246,7 +225,6 @@ p {
     margin: 0 auto 20px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -270,20 +248,28 @@ p {
         rgba(139,92,246,.18);
 }
 
+
+/* Phone */
+
 .phone-icon {
     animation:
         phoneShake
-        1.5s
+        1.4s
         infinite;
 }
 
-.heart-icon,
-.question-heart {
+
+/* Heart */
+
+.heart-icon {
     animation:
-        heartbeat
-        1.35s
+        gentleHeart
+        2s
         infinite;
 }
+
+
+/* Promise */
 
 .promise-icon {
     animation:
@@ -292,10 +278,26 @@ p {
         infinite;
 }
 
+
+/* =========================
+   SAD EMOJI
+========================= */
+
 .sad-icon {
     animation:
         sadBounce
-        1.5s
+        1.3s
+        infinite;
+}
+
+
+/* This is the big sad emoji
+   on the punishment screen */
+
+#screen5 .sad-icon {
+    animation:
+        sadCry
+        2.2s
         infinite;
 }
 
@@ -359,7 +361,6 @@ p {
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -410,21 +411,20 @@ p {
     font-size: 25px;
 
     animation:
-        tinyPulse
+        missedPulse
         1.5s
         infinite;
 }
 
 
 /* =========================
-   ONLINE
+   ONLINE BOX
 ========================= */
 
 .online-box {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 7px;
@@ -461,8 +461,7 @@ p {
     background: #86efac;
 
     box-shadow:
-        0 0 12px
-        #86efac;
+        0 0 12px #86efac;
 
     animation:
         onlinePulse
@@ -472,7 +471,7 @@ p {
 
 
 /* =========================
-   BUTTON
+   BUTTONS
 ========================= */
 
 .primary-btn {
@@ -602,6 +601,11 @@ p {
 
 .sorry-emoji {
     font-size: 37px;
+
+    animation:
+        sadTiny
+        2s
+        infinite;
 }
 
 .sorry-card strong {
@@ -686,6 +690,11 @@ p {
     font-size: 72px;
 
     margin-bottom: 15px;
+
+    animation:
+        questionPulse
+        2s
+        infinite;
 }
 
 .decision-area {
@@ -890,7 +899,7 @@ textarea::placeholder {
 
     animation:
         heartbeat
-        1.2s
+        1.4s
         infinite;
 }
 
@@ -910,6 +919,11 @@ textarea::placeholder {
         2s
         infinite;
 }
+
+
+/* =========================
+   ACCEPTED
+========================= */
 
 .accepted-card,
 .received-card {
@@ -988,6 +1002,11 @@ textarea::placeholder {
         infinite;
 }
 
+
+/* =========================
+   PUNISHMENT SUCCESS
+========================= */
+
 .punishment-success {
     width: 90px;
     height: 90px;
@@ -1011,8 +1030,8 @@ textarea::placeholder {
         rgba(196,181,253,.15);
 
     animation:
-        gentleFloat
-        2.5s
+        punishmentShake
+        1.8s
         infinite;
 }
 
@@ -1044,11 +1063,11 @@ textarea::placeholder {
     border-radius: 50%;
 
     background:
-        rgba(216,180,254,.55);
+        rgba(216,180,254,.45);
 
     box-shadow:
         0 0 7px
-        rgba(192,132,252,.55);
+        rgba(192,132,252,.45);
 
     animation:
         particleMove
@@ -1058,7 +1077,7 @@ textarea::placeholder {
 
 
 /* =========================
-   LIMITED HEARTS
+   VERY FEW HEARTS
 ========================= */
 
 #floatingHearts {
@@ -1078,18 +1097,18 @@ textarea::placeholder {
 
     opacity: 0;
 
-    font-size: 15px;
+    font-size: 14px;
 
     animation:
         heartFloat
-        6s
+        7s
         linear
         forwards;
 }
 
 
 /* =========================
-   GOOGLE FORM
+   HIDDEN FORM
 ========================= */
 
 #replyForm,
@@ -1141,6 +1160,7 @@ footer {
     }
 }
 
+
 @keyframes phoneShake {
 
     0%,100% {
@@ -1168,6 +1188,284 @@ footer {
     }
 }
 
+
+@keyframes gentleHeart {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+
+@keyframes questionPulse {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.10);
+    }
+}
+
+
+/* Sad emoji movement */
+
+@keyframes sadBounce {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    25% {
+        transform:
+            translateY(-8px)
+            rotate(-5deg);
+    }
+
+    50% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    75% {
+        transform:
+            translateY(-5px)
+            rotate(5deg);
+    }
+}
+
+
+/* Crying emoji shake */
+
+@keyframes sadCry {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    15% {
+        transform:
+            translateY(-8px)
+            rotate(-8deg);
+    }
+
+    30% {
+        transform:
+            translateY(0)
+            rotate(8deg);
+    }
+
+    45% {
+        transform:
+            translateY(-5px)
+            rotate(-6deg);
+    }
+
+    60% {
+        transform:
+            translateY(0)
+            rotate(6deg);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+}
+
+
+/* Tiny sad face */
+
+@keyframes sadTiny {
+
+    0%,100% {
+        transform:
+            rotate(0);
+    }
+
+    30% {
+        transform:
+            rotate(-7deg);
+    }
+
+    60% {
+        transform:
+            rotate(7deg);
+    }
+}
+
+
+@keyframes missedPulse {
+
+    0%,100% {
+        opacity: .5;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+
+@keyframes onlinePulse {
+
+    0%,100% {
+        opacity: .5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+
+@keyframes callAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0);
+    }
+}
+
+
+@keyframes gentleFloat {
+
+    0%,100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-6px);
+    }
+}
+
+
+@keyframes handshake {
+
+    0%,100% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(-8deg);
+    }
+
+    75% {
+        transform: rotate(8deg);
+    }
+}
+
+
+@keyframes blink {
+
+    0%,45% {
+        opacity: 1;
+    }
+
+    46%,100% {
+        opacity: 0;
+    }
+}
+
+
+@keyframes textShimmer {
+
+    to {
+        background-position:
+            250% center;
+    }
+}
+
+
+@keyframes orbFloat {
+
+    from {
+        transform:
+            translate(0,0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate(45px,30px)
+            scale(1.12);
+    }
+}
+
+
+@keyframes particleMove {
+
+    from {
+        transform:
+            translateY(105vh);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .6;
+    }
+
+    to {
+        transform:
+            translateY(-10vh);
+
+        opacity: 0;
+    }
+}
+
+
+/* Very slow heart */
+
+@keyframes heartFloat {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(.7);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .45;
+    }
+
+    100% {
+        transform:
+            translateY(-105vh)
+            scale(1);
+
+        opacity: 0;
+    }
+}
+
+
 @keyframes heartbeat {
 
     0%,100% {
@@ -1191,35 +1489,48 @@ footer {
     }
 }
 
-@keyframes callAppear {
 
-    from {
-        opacity: 0;
+@keyframes successRing {
 
-        transform:
-            translateX(-25px);
+    0% {
+        transform: scale(.8);
+        opacity: .8;
     }
 
-    to {
-        opacity: 1;
-
-        transform:
-            translateX(0);
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
     }
 }
 
-@keyframes onlinePulse {
+
+@keyframes punishmentShake {
 
     0%,100% {
-        opacity: .5;
-        transform: scale(1);
+        transform:
+            rotate(0)
+            translateY(0);
+    }
+
+    25% {
+        transform:
+            rotate(-8deg)
+            translateY(-5px);
     }
 
     50% {
-        opacity: 1;
-        transform: scale(1.3);
+        transform:
+            rotate(8deg)
+            translateY(0);
+    }
+
+    75% {
+        transform:
+            rotate(-5deg)
+            translateY(-3px);
     }
 }
+
 
 @keyframes tinyPulse {
 
@@ -1228,136 +1539,7 @@ footer {
     }
 
     50% {
-        transform: scale(1.15);
-    }
-}
-
-@keyframes textShimmer {
-
-    to {
-        background-position: 250% center;
-    }
-}
-
-@keyframes gentleFloat {
-
-    0%,100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-6px);
-    }
-}
-
-@keyframes handshake {
-
-    0%,100% {
-        transform: rotate(0);
-    }
-
-    25% {
-        transform: rotate(-8deg);
-    }
-
-    75% {
-        transform: rotate(8deg);
-    }
-}
-
-@keyframes sadBounce {
-
-    0%,100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-@keyframes blink {
-
-    0%,45% {
-        opacity: 1;
-    }
-
-    46%,100% {
-        opacity: 0;
-    }
-}
-
-@keyframes orbFloat {
-
-    from {
-        transform:
-            translate(0,0)
-            scale(1);
-    }
-
-    to {
-        transform:
-            translate(50px,35px)
-            scale(1.15);
-    }
-}
-
-@keyframes particleMove {
-
-    from {
-        transform:
-            translateY(105vh);
-
-        opacity: 0;
-    }
-
-    20% {
-        opacity: .6;
-    }
-
-    to {
-        transform:
-            translateY(-10vh);
-
-        opacity: 0;
-    }
-}
-
-@keyframes heartFloat {
-
-    0% {
-        transform:
-            translateY(0)
-            scale(.6);
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: .65;
-    }
-
-    100% {
-        transform:
-            translateY(-105vh)
-            scale(1);
-
-        opacity: 0;
-    }
-}
-
-@keyframes successRing {
-
-    0% {
-        transform: scale(.8);
-
-        opacity: .8;
-    }
-
-    100% {
-        transform: scale(1.5);
-
-        opacity: 0;
+        transform: scale(1.10);
     }
 }
 
@@ -1403,6 +1585,7 @@ footer {
         padding: 16px;
     }
 }
+
 
 @media (max-width: 380px) {
 
