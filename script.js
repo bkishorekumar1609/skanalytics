@@ -1,389 +1,306 @@
-const screens = [
-    "screen-start",
-    "screen-loading",
-    "screen-secret",
-    "screen-sherly",
-    "screen-message",
-    "screen-proposal",
-    "screen-yes"
-];
+const apologyCard = document.getElementById("apologyCard");
+const messageCard = document.getElementById("messageCard");
+const questionCard = document.getElementById("questionCard");
+const yesCard = document.getElementById("yesCard");
+const noCard = document.getElementById("noCard");
+
+const continueBtn = document.getElementById("continueBtn");
+const questionBtn = document.getElementById("questionBtn");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const tryAgainBtn = document.getElementById("tryAgainBtn");
+
+const replyForm = document.getElementById("replyForm");
+const replyInput = document.getElementById("replyInput");
 
 
-// =====================================
-// SCREEN SWITCH
-// =====================================
+/* =========================
+   SCREEN SWITCHING
+========================= */
 
-function showScreen(id) {
+function showScreen(screen) {
 
-    screens.forEach(function(screen) {
+    const screens = [
+        apologyCard,
+        messageCard,
+        questionCard,
+        yesCard,
+        noCard
+    ];
 
-        const element =
-            document.getElementById(screen);
-
-        if (element) {
-            element.classList.add("hidden");
-        }
-
+    screens.forEach(function(item) {
+        item.classList.add("hidden");
     });
 
-    const target =
-        document.getElementById(id);
+    screen.classList.remove("hidden");
 
-    if (target) {
-        target.classList.remove("hidden");
-    }
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-// =====================================
-// START
-// =====================================
-
-document
-    .getElementById("startBtn")
-    .addEventListener("click", function() {
-
-        showScreen("screen-loading");
-
-        const text =
-            document.getElementById("loadingText");
-
-        const messages = [
-
-            "Finding the right words... 💭",
-
-            "Gathering some courage... 🥹",
-
-            "Listening to her heart... ❤️",
-
-            "Almost ready... 🦋",
-
-            "Okay... here we go. 💌"
-
-        ];
-
-        let index = 0;
-
-        const timer =
-            setInterval(function() {
-
-                text.textContent =
-                    messages[index];
-
-                index++;
-
-                if (index >= messages.length) {
-                    clearInterval(timer);
-                }
-
-            }, 650);
-
-
-        setTimeout(function() {
-
-            showScreen("screen-secret");
-
-        }, 3500);
-
-    });
-
-
-// =====================================
-// REVEAL
-// =====================================
-
-document
-    .getElementById("revealBtn")
-    .addEventListener("click", function() {
-
-        showScreen("screen-sherly");
-
-        createMiniHearts();
-
-    });
-
-
-// =====================================
-// SHERLY MESSAGE
-// =====================================
-
-document
-    .getElementById("messageBtn")
-    .addEventListener("click", function() {
-
-        showScreen("screen-message");
-
-        createMiniHearts();
-
-    });
-
-
-// =====================================
-// PROPOSAL
-// =====================================
-
-document
-    .getElementById("proposalBtn")
-    .addEventListener("click", function() {
-
-        showScreen("screen-proposal");
-
-        createMiniHearts();
-
-    });
-
-
-// =====================================
-// YES
-// =====================================
-
-document
-    .getElementById("yesBtn")
-    .addEventListener("click", function() {
-
-        showScreen("screen-yes");
-
-        createLoveExplosion();
-
-        createButterflies();
-
-    });
-
-
-// =====================================
-// CREATE FLOATING HEARTS
-// =====================================
-
-function createMiniHearts() {
-
-    for (let i = 0; i < 8; i++) {
-
-        const heart =
-            document.createElement("div");
-
-        heart.textContent =
-            Math.random() > 0.5
-                ? "❤️"
-                : "💕";
-
-        heart.style.position = "fixed";
-
-        heart.style.left =
-            Math.random() * 100 + "%";
-
-        heart.style.bottom =
-            "-40px";
-
-        heart.style.fontSize =
-            (15 + Math.random() * 20) + "px";
-
-        heart.style.zIndex = "20";
-
-        heart.style.pointerEvents =
-            "none";
-
-        heart.style.transition =
-            "transform 5s ease-out, opacity 5s ease-out";
-
-        document.body.appendChild(heart);
-
-
-        setTimeout(function() {
-
-            heart.style.transform =
-                `translateY(-${window.innerHeight + 100}px)
-                 rotate(${Math.random() * 360}deg)`;
-
-            heart.style.opacity = "0";
-
-        }, 50);
-
-
-        setTimeout(function() {
-
-            heart.remove();
-
-        }, 5200);
-
-    }
-
+/* =========================
+   SAVE RESPONSE TO GOOGLE SHEET
+========================= */
+
+function saveResponse(response) {
+
+    replyInput.value = response;
+
+    /*
+     * Submit silently to Google Apps Script.
+     * The iframe prevents the user from leaving the website.
+     */
+    replyForm.submit();
 }
 
 
-// =====================================
-// BIG LOVE EXPLOSION
-// =====================================
+/* =========================
+   FIRST BUTTON
+========================= */
 
-function createLoveExplosion() {
+continueBtn.addEventListener("click", function() {
 
-    const symbols = [
+    showScreen(messageCard);
+
+    createHeartBurst(8);
+});
+
+
+/* =========================
+   SECOND BUTTON
+========================= */
+
+questionBtn.addEventListener("click", function() {
+
+    showScreen(questionCard);
+
+    createHeartBurst(12);
+});
+
+
+/* =========================
+   YES BUTTON
+========================= */
+
+yesBtn.addEventListener("click", function() {
+
+    saveResponse("Yes, I accept your sorry ❤️");
+
+    showScreen(yesCard);
+
+    createHeartBurst(35);
+    createConfetti(45);
+});
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+noBtn.addEventListener("click", function() {
+
+    saveResponse("Not yet 😭");
+
+    showScreen(noCard);
+
+    createHeartBurst(5);
+});
+
+
+/* =========================
+   TRY AGAIN
+========================= */
+
+tryAgainBtn.addEventListener("click", function() {
+
+    showScreen(questionCard);
+
+    createHeartBurst(10);
+});
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const emojis = [
         "❤️",
-        "💕",
         "💗",
         "💖",
-        "💘",
-        "💝",
-        "🌹",
-        "✨",
-        "🦋"
+        "💕",
+        "💓",
+        "💞"
     ];
 
-    for (let i = 0; i < 45; i++) {
+    heart.textContent =
+        emojis[Math.floor(Math.random() * emojis.length)];
 
-        const item =
-            document.createElement("div");
+    heart.style.left =
+        Math.random() * 100 + "vw";
 
-        item.textContent =
-            symbols[
-                Math.floor(
-                    Math.random() *
-                    symbols.length
-                )
-            ];
+    heart.style.fontSize =
+        (14 + Math.random() * 22) + "px";
 
-        item.style.position =
-            "fixed";
+    heart.style.animationDuration =
+        (5 + Math.random() * 6) + "s";
 
-        item.style.left =
-            "50%";
+    document.body.appendChild(heart);
 
-        item.style.top =
-            "50%";
-
-        item.style.fontSize =
-            (16 + Math.random() * 28) + "px";
-
-        item.style.zIndex =
-            "9999";
-
-        item.style.pointerEvents =
-            "none";
-
-        item.style.transition =
-            "transform 2.5s ease-out, opacity 2.5s ease-out";
-
-        document.body.appendChild(item);
+    setTimeout(function() {
+        heart.remove();
+    }, 12000);
+}
 
 
-        const angle =
-            Math.random() * Math.PI * 2;
+/* Create hearts continuously */
 
-        const distance =
-            150 + Math.random() * 400;
+setInterval(function() {
 
-        const x =
-            Math.cos(angle) * distance;
+    createHeart();
 
-        const y =
-            Math.sin(angle) * distance;
+}, 700);
 
+
+/* =========================
+   HEART BURST
+========================= */
+
+function createHeartBurst(amount) {
+
+    for (let i = 0; i < amount; i++) {
 
         setTimeout(function() {
 
-            item.style.transform =
-                `translate(${x}px, ${y}px)
-                 rotate(${Math.random() * 720}deg)
-                 scale(${0.8 + Math.random()})`;
+            const heart = document.createElement("div");
 
-            item.style.opacity = "0";
+            heart.className = "heart";
 
-        }, 50);
+            heart.textContent = "❤️";
 
+            heart.style.left =
+                (40 + Math.random() * 20) + "vw";
 
-        setTimeout(function() {
+            heart.style.fontSize =
+                (18 + Math.random() * 20) + "px";
 
-            item.remove();
+            heart.style.animationDuration =
+                (3 + Math.random() * 3) + "s";
 
-        }, 2800);
+            document.body.appendChild(heart);
 
+            setTimeout(function() {
+                heart.remove();
+            }, 7000);
+
+        }, i * 80);
     }
-
 }
 
 
-// =====================================
-// EXTRA BUTTERFLIES
-// =====================================
+/* =========================
+   CONFETTI
+========================= */
 
-function createButterflies() {
+function createConfetti(amount) {
 
-    const butterflies = [
-        "🦋",
-        "🦋",
-        "🦋",
-        "🦋",
-        "🦋",
-        "🦋"
+    const emojis = [
+        "🎉",
+        "✨",
+        "💖",
+        "❤️",
+        "🥳",
+        "💕"
     ];
 
-    butterflies.forEach(function(symbol, index) {
-
-        const butterfly =
-            document.createElement("div");
-
-        butterfly.textContent =
-            symbol;
-
-        butterfly.style.position =
-            "fixed";
-
-        butterfly.style.left =
-            "50%";
-
-        butterfly.style.top =
-            "50%";
-
-        butterfly.style.fontSize =
-            (25 + Math.random() * 20) + "px";
-
-        butterfly.style.zIndex =
-            "9998";
-
-        butterfly.style.pointerEvents =
-            "none";
-
-        butterfly.style.transition =
-            "transform 4s ease-out, opacity 4s ease-out";
-
-        document.body.appendChild(butterfly);
-
+    for (let i = 0; i < amount; i++) {
 
         setTimeout(function() {
 
-            const direction =
-                index % 2 === 0
-                    ? 1
-                    : -1;
+            const piece = document.createElement("div");
 
-            butterfly.style.transform =
-                `translate(
-                    ${direction * (150 + Math.random() * 300)}px,
-                    ${-(150 + Math.random() * 500)}px
-                )
-                rotate(${direction * 360}deg)`;
+            piece.style.position = "fixed";
+            piece.style.left =
+                Math.random() * 100 + "vw";
 
-            butterfly.style.opacity = "0";
+            piece.style.top = "-40px";
 
-        }, 100);
+            piece.style.fontSize =
+                (18 + Math.random() * 20) + "px";
 
+            piece.style.zIndex = "999";
 
-        setTimeout(function() {
+            piece.textContent =
+                emojis[Math.floor(Math.random() * emojis.length)];
 
-            butterfly.remove();
+            document.body.appendChild(piece);
 
-        }, 4300);
+            const duration =
+                2000 + Math.random() * 3000;
 
-    });
+            piece.animate(
+                [
+                    {
+                        transform:
+                            "translateY(0) rotate(0deg)",
+                        opacity: 1
+                    },
+                    {
+                        transform:
+                            "translateY(110vh) rotate(720deg)",
+                        opacity: 0
+                    }
+                ],
+                {
+                    duration: duration,
+                    easing: "cubic-bezier(.2,.8,.3,1)"
+                }
+            );
 
+            setTimeout(function() {
+                piece.remove();
+            }, duration + 100);
+
+        }, i * 40);
+    }
 }
 
 
-// =====================================
-// KEEP NO DISABLED
-// =====================================
+/* =========================
+   BACKGROUND PARTICLES
+========================= */
 
-const noButton =
-    document.getElementById("noBtn");
+function createParticles() {
 
-noButton.disabled = true;
+    const container =
+        document.getElementById("particles");
+
+    for (let i = 0; i < 35; i++) {
+
+        const particle =
+            document.createElement("div");
+
+        particle.className = "particle";
+
+        particle.style.left =
+            Math.random() * 100 + "vw";
+
+        particle.style.animationDuration =
+            (8 + Math.random() * 12) + "s";
+
+        particle.style.animationDelay =
+            Math.random() * 8 + "s";
+
+        container.appendChild(particle);
+    }
+}
+
+createParticles();
