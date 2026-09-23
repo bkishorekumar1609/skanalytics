@@ -1,1 +1,809 @@
+* {
+    box-sizing: border-box;
+}
 
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 105, 180, 0.22), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.25), transparent 30%),
+        linear-gradient(135deg, #10051c, #210b2f, #090313);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   APP
+========================= */
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    width: 100%;
+
+    padding: 42px 30px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.09);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    animation: cardIn 0.7s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.small-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 800;
+
+    color: rgba(255, 255, 255, 0.48);
+
+    margin-bottom: 15px;
+}
+
+h1 {
+    margin: 0 0 20px;
+
+    font-size: 40px;
+    line-height: 1.12;
+
+    font-weight: 850;
+
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #ffd6ed,
+        #ffffff
+    );
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: shineText 4s linear infinite;
+}
+
+p {
+    margin: 0 0 20px;
+
+    font-size: 17px;
+    line-height: 1.65;
+
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.main-text {
+    font-size: 18px;
+}
+
+
+/* =========================
+   PHONE ANIMATION
+========================= */
+
+.phone-animation {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 24px;
+}
+
+.phone-ring {
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 46px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 105, 180, 0.25),
+            rgba(155, 89, 182, 0.25)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow:
+        0 0 0 0 rgba(255, 105, 180, 0.5);
+
+    animation:
+        phoneShake 1.3s infinite,
+        phoneGlow 2s infinite;
+}
+
+
+/* =========================
+   CALL BOX
+========================= */
+
+.call-box {
+    margin: 25px 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.call-item {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px 16px;
+
+    text-align: left;
+
+    background: rgba(0, 0, 0, 0.20);
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 16px;
+
+    animation: slideIn 0.7s ease backwards;
+}
+
+.call-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.call-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.call-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.call-item > span {
+    font-size: 27px;
+}
+
+.call-item strong {
+    display: block;
+
+    color: white;
+
+    font-size: 15px;
+}
+
+.call-item small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #ff9ccc;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   APOLOGY
+========================= */
+
+.apology-text {
+    padding: 16px;
+
+    border-radius: 16px;
+
+    background: rgba(255, 105, 180, 0.08);
+
+    border: 1px solid rgba(255, 105, 180, 0.16);
+}
+
+.apology-text strong {
+    color: #ffb6d9;
+}
+
+.sorry-line {
+    color: #ffc5df;
+    font-weight: 700;
+}
+
+
+/* =========================
+   PROMISE
+========================= */
+
+.promise-box {
+    margin: 25px 0;
+
+    padding: 22px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 105, 180, 0.12),
+            rgba(155, 89, 182, 0.10)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+.promise-icon {
+    font-size: 44px;
+
+    margin-bottom: 5px;
+
+    animation: handshake 2s infinite;
+}
+
+.promise-box p {
+    margin-bottom: 10px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary,
+.yes-btn,
+.no-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 17px 20px;
+
+    border-radius: 16px;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.primary {
+    color: #26051a;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff8fc7,
+            #ffc1e0
+        );
+
+    box-shadow:
+        0 10px 30px rgba(255, 105, 180, 0.20);
+}
+
+.primary:hover,
+.yes-btn:hover,
+.no-btn:hover {
+    transform: translateY(-3px);
+}
+
+.primary:active,
+.yes-btn:active,
+.no-btn:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question-heart {
+    font-size: 65px;
+
+    margin-bottom: 15px;
+
+    animation:
+        heartbeat 1.2s infinite;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.yes-btn {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4f9a,
+            #ff77b7
+        );
+
+    box-shadow:
+        0 10px 30px rgba(255, 79, 154, 0.25);
+}
+
+.no-btn {
+    color: white;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.tiny-note {
+    margin-top: 20px;
+    margin-bottom: 0;
+
+    font-size: 12px;
+
+    color: rgba(255, 255, 255, 0.40);
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.celebration {
+    font-size: 65px;
+
+    animation:
+        celebration 1s infinite alternate;
+}
+
+.heart-big {
+    font-size: 70px;
+
+    margin-bottom: 20px;
+
+    animation:
+        heartbeat 1.2s infinite;
+}
+
+.floating-heart {
+    animation:
+        heartbeat 1.2s infinite,
+        gentleFloat 3s ease-in-out infinite;
+}
+
+.promise-final {
+    display: inline-block;
+
+    padding: 12px 20px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 105, 180, 0.12);
+
+    color: #ffc1df;
+
+    font-weight: 800;
+
+    animation: pulseGlow 2s infinite;
+}
+
+.sad-animation {
+    font-size: 70px;
+
+    animation:
+        sadShake 1.5s infinite;
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.heart {
+    position: fixed;
+
+    bottom: -50px;
+
+    font-size: 20px;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    opacity: 0;
+
+    animation: floatHeart linear forwards;
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particle {
+    position: fixed;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.45);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation: particleFloat linear infinite;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    width: 100%;
+    max-width: 520px;
+
+    text-align: center;
+
+    margin-top: 16px;
+
+    font-size: 11px;
+
+    color: rgba(255, 255, 255, 0.35);
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =========================
+   HIDDEN FORM
+========================= */
+
+#replyForm {
+    display: none;
+}
+
+.hidden-frame {
+    display: none;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes cardIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+@keyframes slideIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes phoneShake {
+
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(-12deg);
+    }
+
+    20% {
+        transform: rotate(12deg);
+    }
+
+    30% {
+        transform: rotate(-10deg);
+    }
+
+    40% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
+
+@keyframes phoneGlow {
+
+    0%, 100% {
+        box-shadow:
+            0 0 0 0 rgba(255, 105, 180, 0.45);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 18px rgba(255, 105, 180, 0);
+    }
+}
+
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.18);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.12);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes gentleFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+@keyframes handshake {
+
+    0%, 100% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(-8deg);
+    }
+}
+
+
+@keyframes shineText {
+
+    to {
+        background-position: 200% center;
+    }
+}
+
+
+@keyframes pulseGlow {
+
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(255, 105, 180, 0);
+    }
+
+    50% {
+        box-shadow:
+            0 0 25px rgba(255, 105, 180, 0.20);
+    }
+}
+
+
+@keyframes celebration {
+
+    from {
+        transform: scale(1) rotate(-5deg);
+    }
+
+    to {
+        transform: scale(1.15) rotate(5deg);
+    }
+}
+
+
+@keyframes sadShake {
+
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-7px);
+    }
+
+    75% {
+        transform: translateX(7px);
+    }
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(0.5)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            scale(1.2)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+@keyframes particleFloat {
+
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.6;
+    }
+
+    to {
+        transform: translateY(-20vh);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 16px 12px;
+    }
+
+    .card {
+        padding: 34px 20px;
+        border-radius: 25px;
+    }
+
+    h1 {
+        font-size: 31px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .phone-ring {
+        width: 78px;
+        height: 78px;
+        font-size: 40px;
+    }
+
+    .call-item {
+        padding: 13px;
+    }
+
+    .primary,
+    .yes-btn,
+    .no-btn {
+        padding: 16px;
+    }
+
+    footer {
+        font-size: 9px;
+    }
+}
+
+
+@media (max-width: 380px) {
+
+    .card {
+        padding: 28px 17px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+  }
