@@ -22,22 +22,20 @@ body {
 
     background:
         radial-gradient(
-            circle at 15% 15%,
-            rgba(255, 91, 163, 0.18),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 85% 85%,
-            rgba(123, 78, 255, 0.20),
+            circle at 20% 10%,
+            rgba(168, 85, 247, 0.25),
             transparent 30%
         ),
-
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(124, 58, 237, 0.22),
+            transparent 32%
+        ),
         linear-gradient(
-            135deg,
-            #0d0615,
-            #1a0a27,
-            #08030d
+            145deg,
+            #080312,
+            #130724,
+            #090312
         );
 
     display: flex;
@@ -45,45 +43,58 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding: 24px;
+    padding: 20px;
 
     overflow-x: hidden;
 }
 
 
 /* =========================
-   BACKGROUND
+   BACKGROUND ORBS
 ========================= */
 
-.background-glow {
+.bg-orb {
     position: fixed;
 
-    width: 280px;
-    height: 280px;
+    width: 250px;
+    height: 250px;
 
     border-radius: 50%;
 
-    filter: blur(80px);
+    filter: blur(90px);
+
+    opacity: .28;
 
     pointer-events: none;
 
-    opacity: 0.22;
+    z-index: 0;
 
-    animation: glowMove 8s ease-in-out infinite alternate;
+    animation:
+        orbFloat
+        9s
+        ease-in-out
+        infinite alternate;
 }
 
-.glow-one {
-    background: #ff4f9a;
+.orb1 {
+    background: #8b5cf6;
 
     top: -100px;
     left: -100px;
 }
 
-.glow-two {
-    background: #7b4dff;
+.orb2 {
+    background: #c026d3;
 
-    right: -100px;
-    bottom: -100px;
+    right: -120px;
+    top: 30%;
+}
+
+.orb3 {
+    background: #6d28d9;
+
+    left: 20%;
+    bottom: -140px;
 
     animation-delay: 2s;
 }
@@ -104,6 +115,24 @@ body {
 
 
 /* =========================
+   IMPORTANT SCREEN FIX
+========================= */
+
+.screen {
+    display: none !important;
+}
+
+.screen.active {
+    display: block !important;
+
+    animation:
+        screenIn
+        .65s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =========================
    CARD
 ========================= */
 
@@ -119,33 +148,23 @@ body {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.11),
-            rgba(255,255,255,0.045)
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.035)
         );
 
-    border: 1px solid rgba(255,255,255,0.16);
+    border:
+        1px solid
+        rgba(255,255,255,.14);
 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,0.45),
+        0 30px 100px
+        rgba(0,0,0,.48),
 
         inset 0 1px 0
-        rgba(255,255,255,0.08);
-}
-
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-
-    animation:
-        screenEnter
-        0.65s
-        cubic-bezier(.2,.8,.2,1);
+        rgba(255,255,255,.08);
 }
 
 
@@ -154,7 +173,7 @@ body {
 ========================= */
 
 .eyebrow {
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 
     font-size: 10px;
 
@@ -163,15 +182,15 @@ body {
     letter-spacing: 3px;
 
     color:
-        rgba(255,255,255,0.43);
+        rgba(255,255,255,.42);
 }
 
 h1 {
     margin: 0 0 20px;
 
-    font-size: 39px;
+    font-size: 40px;
 
-    line-height: 1.12;
+    line-height: 1.1;
 
     font-weight: 850;
 
@@ -179,20 +198,25 @@ h1 {
         linear-gradient(
             90deg,
             #ffffff,
-            #ffc8e2,
+            #d8b4fe,
+            #f0abfc,
             #ffffff
         );
 
-    background-size: 200% auto;
+    background-size: 250% auto;
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
     animation:
-        textShine
-        4s
+        textShimmer
+        5s
         linear
         infinite;
+}
+
+h1 span {
+    color: #d8b4fe;
 }
 
 p {
@@ -203,95 +227,84 @@ p {
     line-height: 1.65;
 
     color:
-        rgba(255,255,255,0.78);
+        rgba(255,255,255,.76);
 }
 
-.lead {
+.intro {
     font-size: 18px;
-}
-
-.soft-text {
-    color: #ffc3df;
-
-    font-weight: 650;
 }
 
 
 /* =========================
-   PHONE
+   ICONS
 ========================= */
 
-.phone-wrap {
-    width: 120px;
-    height: 120px;
+.top-icon {
+    width: 90px;
+    height: 90px;
 
     margin: 0 auto 20px;
 
-    position: relative;
-
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.phone {
-    width: 82px;
-    height: 82px;
-
-    display: flex;
     align-items: center;
     justify-content: center;
 
     border-radius: 50%;
 
-    font-size: 42px;
+    font-size: 45px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,93,164,0.22),
-            rgba(125,73,255,0.18)
+            rgba(139,92,246,.18),
+            rgba(192,38,211,.13)
         );
 
-    border: 1px solid
-        rgba(255,255,255,0.18);
+    border:
+        1px solid
+        rgba(255,255,255,.13);
 
     box-shadow:
         0 0 35px
-        rgba(255,91,163,0.18);
+        rgba(139,92,246,.18);
+}
 
+.phone-icon {
     animation:
         phoneShake
         1.5s
         infinite;
 }
 
-.phone-ripple {
-    position: absolute;
-
-    width: 82px;
-    height: 82px;
-
-    border-radius: 50%;
-
-    border: 1px solid
-        rgba(255,105,180,0.35);
-
+.heart-icon,
+.question-heart {
     animation:
-        ripple 2.4s
+        heartbeat
+        1.35s
         infinite;
 }
 
-.ripple-two {
-    animation-delay: 1.2s;
+.promise-icon {
+    animation:
+        handshake
+        1.8s
+        infinite;
+}
+
+.sad-icon {
+    animation:
+        sadBounce
+        1.5s
+        infinite;
 }
 
 
 /* =========================
-   CALL CARDS
+   CALL LIST
 ========================= */
 
-.calls {
+.call-list {
     display: flex;
 
     flex-direction: column;
@@ -301,87 +314,100 @@ p {
     margin: 25px 0;
 }
 
-.call-card {
+.call-item {
     display: flex;
 
     align-items: center;
 
-    padding: 13px 15px;
-
     gap: 13px;
+
+    padding: 13px 15px;
 
     text-align: left;
 
     border-radius: 16px;
 
     background:
-        rgba(0,0,0,0.20);
+        rgba(0,0,0,.18);
 
     border:
         1px solid
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,.075);
 
     animation:
-        callSlide
-        0.7s
+        callAppear
+        .7s
         backwards;
 }
 
-.call-card:nth-child(1) {
+.call-item:nth-child(1) {
     animation-delay: .15s;
 }
 
-.call-card:nth-child(2) {
-    animation-delay: .3s;
+.call-item:nth-child(2) {
+    animation-delay: .30s;
 }
 
-.call-card:nth-child(3) {
+.call-item:nth-child(3) {
     animation-delay: .45s;
 }
 
-.app-icon {
-    width: 42px;
-    height: 42px;
+.service-icon {
+    width: 43px;
+    height: 43px;
 
     flex-shrink: 0;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border-radius: 12px;
+    border-radius: 13px;
 
     font-size: 22px;
 
     background:
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,.08);
 }
 
-.call-info {
+.instagram-icon {
+    color: #e879f9;
+}
+
+.whatsapp-icon {
+    color: #86efac;
+}
+
+.chat-icon {
+    color: #c4b5fd;
+}
+
+.call-details {
     flex: 1;
 }
 
-.call-info strong {
+.call-details strong {
     display: block;
 
     font-size: 15px;
 }
 
-.call-info span {
+.call-details small {
     display: block;
 
     margin-top: 3px;
 
-    font-size: 12px;
-
     color:
-        rgba(255,255,255,0.45);
+        rgba(255,255,255,.42);
+
+    font-size: 12px;
 }
 
-.missed {
-    color: #ff79ad;
+.missed-icon {
+    color: #f0abfc;
 
-    font-size: 19px;
+    font-size: 25px;
 
     animation:
         tinyPulse
@@ -391,10 +417,10 @@ p {
 
 
 /* =========================
-   ONLINE WARNING
+   ONLINE
 ========================= */
 
-.online-warning {
+.online-box {
     display: flex;
 
     align-items: center;
@@ -405,25 +431,25 @@ p {
 
     padding: 13px;
 
-    margin-bottom: 22px;
+    margin-bottom: 23px;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
     background:
-        rgba(255,90,160,0.07);
+        rgba(139,92,246,.08);
 
     border:
         1px solid
-        rgba(255,90,160,0.13);
-
-    font-size: 14px;
+        rgba(167,139,250,.18);
 
     color:
-        rgba(255,255,255,0.65);
+        rgba(255,255,255,.65);
+
+    font-size: 14px;
 }
 
-.online-warning strong {
-    color: #ffafd2;
+.online-box strong {
+    color: #d8b4fe;
 }
 
 .online-dot {
@@ -432,10 +458,11 @@ p {
 
     border-radius: 50%;
 
-    background: #61e294;
+    background: #86efac;
 
     box-shadow:
-        0 0 12px #61e294;
+        0 0 12px
+        #86efac;
 
     animation:
         onlinePulse
@@ -448,7 +475,7 @@ p {
    BUTTON
 ========================= */
 
-.primary {
+.primary-btn {
     width: 100%;
 
     border: none;
@@ -457,7 +484,7 @@ p {
 
     border-radius: 16px;
 
-    color: #260616;
+    color: #190525;
 
     font-size: 16px;
 
@@ -468,68 +495,56 @@ p {
     background:
         linear-gradient(
             135deg,
-            #ff86bd,
-            #ffc2df
+            #c084fc,
+            #e879f9
         );
 
     box-shadow:
-        0 12px 30px
-        rgba(255,89,160,0.18);
+        0 12px 35px
+        rgba(168,85,247,.22);
 
     transition:
-        transform .2s,
-        box-shadow .2s;
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.primary:hover {
+.primary-btn:hover {
     transform: translateY(-3px);
 
     box-shadow:
-        0 18px 35px
-        rgba(255,89,160,0.28);
+        0 18px 45px
+        rgba(168,85,247,.32);
 }
 
-.primary:active {
+.primary-btn:active {
     transform: scale(.97);
 }
 
 
 /* =========================
-   APOLOGY
+   TYPING
 ========================= */
 
-.heart-icon,
-.question-icon {
-    font-size: 64px;
+.typing-container {
+    min-height: 145px;
 
-    margin-bottom: 15px;
+    margin: 22px 0;
 
-    animation:
-        heartBeat
-        1.4s
-        infinite;
-}
-
-.typing-box {
-    min-height: 110px;
-
-    margin: 20px 0;
-
-    padding: 18px;
+    padding: 19px;
 
     text-align: left;
 
-    border-radius: 17px;
+    border-radius: 18px;
 
     background:
-        rgba(0,0,0,0.18);
+        rgba(0,0,0,.17);
 
     border:
         1px solid
-        rgba(255,255,255,0.08);
+        rgba(196,181,253,.12);
 }
 
-.typing-box p {
+.typing-container p {
     margin: 0;
 
     font-size: 16px;
@@ -537,25 +552,26 @@ p {
     line-height: 1.7;
 }
 
-.cursor {
+.typing-cursor {
     display: inline-block;
 
     width: 2px;
     height: 18px;
 
-    margin-left: 3px;
-
-    vertical-align: middle;
-
-    background: #ff9ac7;
+    background: #d8b4fe;
 
     animation:
-        cursorBlink
+        blink
         .8s
         infinite;
 }
 
-.sorry-highlight {
+
+/* =========================
+   SORRY CARD
+========================= */
+
+.sorry-card {
     display: flex;
 
     align-items: center;
@@ -564,18 +580,18 @@ p {
 
     padding: 16px;
 
-    margin: 20px 0;
+    margin-bottom: 23px;
 
     text-align: left;
 
-    border-radius: 17px;
+    border-radius: 18px;
 
     background:
-        rgba(255,105,180,0.08);
+        rgba(168,85,247,.08);
 
     border:
         1px solid
-        rgba(255,105,180,0.13);
+        rgba(196,181,253,.15);
 
     animation:
         gentleFloat
@@ -584,23 +600,23 @@ p {
         infinite;
 }
 
-.sorry-highlight span {
-    font-size: 35px;
+.sorry-emoji {
+    font-size: 37px;
 }
 
-.sorry-highlight strong {
+.sorry-card strong {
     display: block;
 
-    color: #ffc0dd;
+    color: #ddd6fe;
 }
 
-.sorry-highlight small {
+.sorry-card small {
     display: block;
 
-    margin-top: 3px;
+    margin-top: 4px;
 
     color:
-        rgba(255,255,255,0.52);
+        rgba(255,255,255,.45);
 }
 
 
@@ -608,33 +624,22 @@ p {
    PROMISE
 ========================= */
 
-.promise-animation {
-    font-size: 68px;
-
-    margin-bottom: 12px;
-
-    animation:
-        promiseShake
-        2s
-        infinite;
-}
-
-.promise-card {
+.promise-list {
     margin: 24px 0;
 
-    padding: 8px 15px;
+    padding: 8px 16px;
 
     border-radius: 19px;
 
     background:
-        rgba(255,255,255,0.045);
+        rgba(255,255,255,.04);
 
     border:
         1px solid
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,.08);
 }
 
-.promise-line {
+.promise-row {
     display: flex;
 
     align-items: center;
@@ -643,29 +648,47 @@ p {
 
     padding: 14px 0;
 
+    text-align: left;
+
     border-bottom:
         1px solid
-        rgba(255,255,255,0.06);
+        rgba(255,255,255,.06);
+}
 
-    text-align: left;
+.promise-row:last-child {
+    border-bottom: none;
+}
+
+.promise-row span {
+    font-size: 22px;
+}
+
+.promise-row p {
+    margin: 0;
 
     font-size: 14px;
 }
 
-.promise-line:last-child {
-    border-bottom: none;
-}
+.promise-message {
+    margin-bottom: 22px;
 
-.promise-line span:first-child {
-    font-size: 22px;
+    color: #d8b4fe;
+
+    font-weight: 700;
 }
 
 
 /* =========================
-   DECISION
+   QUESTION
 ========================= */
 
-.decision-buttons {
+.question-heart {
+    font-size: 72px;
+
+    margin-bottom: 15px;
+}
+
+.decision-area {
     display: flex;
 
     flex-direction: column;
@@ -675,8 +698,8 @@ p {
     margin-top: 28px;
 }
 
-.yes-button,
-.no-button {
+.yes-btn,
+.no-btn {
     width: 100%;
 
     padding: 17px;
@@ -690,11 +713,11 @@ p {
     cursor: pointer;
 
     transition:
-        transform .2s,
-        box-shadow .2s;
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.yes-button {
+.yes-btn {
     border: none;
 
     color: white;
@@ -702,43 +725,43 @@ p {
     background:
         linear-gradient(
             135deg,
-            #ff438f,
-            #ff78b1
+            #8b5cf6,
+            #c026d3
         );
 
     box-shadow:
-        0 12px 30px
-        rgba(255,67,143,0.18);
+        0 12px 35px
+        rgba(139,92,246,.25);
 }
 
-.no-button {
+.no-btn {
     color: white;
 
     background:
-        rgba(255,255,255,0.055);
+        rgba(255,255,255,.05);
 
     border:
         1px solid
-        rgba(255,255,255,0.12);
+        rgba(255,255,255,.12);
 }
 
-.yes-button:hover,
-.no-button:hover {
+.yes-btn:hover,
+.no-btn:hover {
     transform: translateY(-3px);
 }
 
-.yes-button:active,
-.no-button:active {
+.yes-btn:active,
+.no-btn:active {
     transform: scale(.97);
 }
 
-.answer-note {
-    margin-top: 17px;
+.privacy-text {
+    margin-top: 18px;
 
-    font-size: 11px;
+    font-size: 10px;
 
     color:
-        rgba(255,255,255,0.35);
+        rgba(255,255,255,.32);
 }
 
 
@@ -746,48 +769,34 @@ p {
    PUNISHMENT
 ========================= */
 
-.punishment-icon,
-.punishment-success {
-    font-size: 67px;
-
-    margin-bottom: 15px;
-
-    animation:
-        sadBounce
-        1.5s
-        infinite;
-}
-
-.punishment-question {
+.punishment-box {
     display: flex;
 
     flex-direction: column;
 
-    gap: 4px;
+    gap: 5px;
+
+    margin: 23px 0;
 
     padding: 16px;
-
-    margin: 22px 0;
 
     border-radius: 17px;
 
     background:
-        rgba(255,255,255,0.055);
+        rgba(139,92,246,.08);
 
     border:
         1px solid
-        rgba(255,255,255,0.09);
+        rgba(196,181,253,.13);
 }
 
-.punishment-question strong {
+.punishment-box strong {
     font-size: 15px;
 }
 
-.punishment-question span {
-    font-size: 12px;
-
+.punishment-box small {
     color:
-        rgba(255,255,255,0.42);
+        rgba(255,255,255,.43);
 }
 
 textarea {
@@ -806,55 +815,49 @@ textarea {
     color: white;
 
     background:
-        rgba(0,0,0,0.20);
+        rgba(0,0,0,.20);
 
     border:
         1px solid
-        rgba(255,255,255,0.12);
+        rgba(255,255,255,.12);
 
     font-family: inherit;
 
     font-size: 15px;
-
-    transition:
-        border .2s,
-        box-shadow .2s;
 }
 
 textarea:focus {
-    border-color: #ff8fbd;
+    border-color: #c084fc;
 
     box-shadow:
         0 0 0 3px
-        rgba(255,105,180,0.08);
+        rgba(168,85,247,.10);
 }
 
 textarea::placeholder {
     color:
-        rgba(255,255,255,0.35);
+        rgba(255,255,255,.32);
 }
 
-.character-count {
+.counter {
     text-align: right;
 
-    margin: 6px 3px 14px;
+    margin: 6px 3px 13px;
 
     font-size: 10px;
 
     color:
-        rgba(255,255,255,0.35);
+        rgba(255,255,255,.32);
 }
 
-.error-message {
-    min-height: 20px;
+.error {
+    min-height: 18px;
 
-    margin-top: 12px;
-
-    margin-bottom: 0;
+    margin: 8px 0;
 
     font-size: 12px;
 
-    color: #ff91bb;
+    color: #f0abfc;
 }
 
 
@@ -863,66 +866,78 @@ textarea::placeholder {
 ========================= */
 
 .success-animation {
-    display: flex;
+    position: relative;
 
-    justify-content: center;
+    width: 115px;
+    height: 115px;
 
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
 }
 
-.success-ring {
-    width: 105px;
-    height: 105px;
+.success-heart {
+    position: absolute;
+
+    inset: 0;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 50%;
+    font-size: 52px;
 
-    font-size: 50px;
-
-    background:
-        rgba(255,105,180,0.10);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.14);
+    z-index: 2;
 
     animation:
-        successPulse
+        heartbeat
+        1.2s
+        infinite;
+}
+
+.success-ring {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(192,132,252,.55);
+
+    animation:
+        successRing
         2s
         infinite;
 }
 
-.accepted-box,
-.received-box {
+.accepted-card,
+.received-card {
     display: flex;
 
     align-items: center;
 
     gap: 14px;
 
-    text-align: left;
-
     padding: 16px;
 
     margin: 24px 0;
 
-    border-radius: 17px;
+    text-align: left;
+
+    border-radius: 18px;
 
     background:
-        rgba(97,226,148,0.07);
+        rgba(139,92,246,.08);
 
     border:
         1px solid
-        rgba(97,226,148,0.13);
+        rgba(196,181,253,.15);
 }
 
-.accepted-box > span {
-    width: 40px;
-    height: 40px;
+.check {
+    width: 42px;
+    height: 42px;
 
     display: flex;
 
@@ -931,56 +946,78 @@ textarea::placeholder {
 
     border-radius: 50%;
 
-    background: rgba(97,226,148,0.12);
+    background:
+        rgba(134,239,172,.12);
 
-    color: #7bf0a4;
+    color: #86efac;
 
-    font-size: 22px;
+    font-size: 23px;
 }
 
-.accepted-box strong,
-.received-box strong {
+.accepted-card strong,
+.received-card strong {
     display: block;
-
-    font-size: 14px;
 }
 
-.accepted-box small,
-.received-box small {
+.accepted-card small,
+.received-card small {
     display: block;
 
     margin-top: 4px;
 
     color:
-        rgba(255,255,255,0.45);
+        rgba(255,255,255,.42);
 }
 
-.received-box {
-    background:
-        rgba(255,105,180,0.07);
-}
-
-.received-box > span {
-    font-size: 30px;
-}
-
-.final-message {
-    color: #ffc0dd;
+.final-text {
+    color: #d8b4fe;
 
     font-weight: 700;
 }
 
-.mini-hearts {
+.final-hearts {
     margin-top: 20px;
 
-    color: #ff91bf;
+    color: #c084fc;
 
-    letter-spacing: 5px;
+    letter-spacing: 7px;
 
     animation:
         tinyPulse
         2s
         infinite;
+}
+
+.punishment-success {
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    font-size: 45px;
+
+    background:
+        rgba(139,92,246,.10);
+
+    border:
+        1px solid
+        rgba(196,181,253,.15);
+
+    animation:
+        gentleFloat
+        2.5s
+        infinite;
+}
+
+.received-icon {
+    font-size: 32px;
 }
 
 
@@ -995,7 +1032,7 @@ textarea::placeholder {
 
     pointer-events: none;
 
-    z-index: 0;
+    z-index: 1;
 }
 
 .particle {
@@ -1007,10 +1044,14 @@ textarea::placeholder {
     border-radius: 50%;
 
     background:
-        rgba(255,255,255,0.40);
+        rgba(216,180,254,.55);
+
+    box-shadow:
+        0 0 7px
+        rgba(192,132,252,.55);
 
     animation:
-        particleFloat
+        particleMove
         linear
         infinite;
 }
@@ -1035,12 +1076,12 @@ textarea::placeholder {
 
     bottom: -30px;
 
-    font-size: 16px;
-
     opacity: 0;
 
+    font-size: 15px;
+
     animation:
-        floatUp
+        heartFloat
         6s
         linear
         forwards;
@@ -1048,7 +1089,7 @@ textarea::placeholder {
 
 
 /* =========================
-   FORM
+   GOOGLE FORM
 ========================= */
 
 #replyForm,
@@ -1071,7 +1112,7 @@ footer {
     font-size: 10px;
 
     color:
-        rgba(255,255,255,0.32);
+        rgba(255,255,255,.28);
 
     text-align: center;
 }
@@ -1081,7 +1122,7 @@ footer {
    ANIMATIONS
 ========================= */
 
-@keyframes screenEnter {
+@keyframes screenIn {
 
     from {
         opacity: 0;
@@ -1100,10 +1141,9 @@ footer {
     }
 }
 
-
 @keyframes phoneShake {
 
-    0%, 100% {
+    0%,100% {
         transform: rotate(0);
     }
 
@@ -1128,44 +1168,9 @@ footer {
     }
 }
 
+@keyframes heartbeat {
 
-@keyframes ripple {
-
-    0% {
-        transform: scale(.8);
-
-        opacity: .6;
-    }
-
-    100% {
-        transform: scale(1.8);
-
-        opacity: 0;
-    }
-}
-
-
-@keyframes callSlide {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateX(-25px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateX(0);
-    }
-}
-
-
-@keyframes heartBeat {
-
-    0%, 100% {
+    0%,100% {
         transform: scale(1);
     }
 
@@ -1186,26 +1191,39 @@ footer {
     }
 }
 
+@keyframes callAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0);
+    }
+}
 
 @keyframes onlinePulse {
 
-    0%, 100% {
+    0%,100% {
         opacity: .5;
-
         transform: scale(1);
     }
 
     50% {
         opacity: 1;
-
-        transform: scale(1.25);
+        transform: scale(1.3);
     }
 }
 
-
 @keyframes tinyPulse {
 
-    0%, 100% {
+    0%,100% {
         transform: scale(1);
     }
 
@@ -1214,46 +1232,42 @@ footer {
     }
 }
 
-
-@keyframes textShine {
+@keyframes textShimmer {
 
     to {
-        background-position: 200% center;
+        background-position: 250% center;
     }
 }
 
-
 @keyframes gentleFloat {
 
-    0%, 100% {
+    0%,100% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-6px);
     }
 }
 
+@keyframes handshake {
 
-@keyframes promiseShake {
-
-    0%, 100% {
+    0%,100% {
         transform: rotate(0);
     }
 
     25% {
-        transform: rotate(-7deg);
+        transform: rotate(-8deg);
     }
 
     75% {
-        transform: rotate(7deg);
+        transform: rotate(8deg);
     }
 }
 
-
 @keyframes sadBounce {
 
-    0%, 100% {
+    0%,100% {
         transform: translateY(0);
     }
 
@@ -1262,40 +1276,33 @@ footer {
     }
 }
 
+@keyframes blink {
 
-@keyframes successPulse {
-
-    0%, 100% {
-        transform: scale(1);
-
-        box-shadow:
-            0 0 0
-            rgba(255,105,180,0);
+    0%,45% {
+        opacity: 1;
     }
 
-    50% {
-        transform: scale(1.06);
-
-        box-shadow:
-            0 0 35px
-            rgba(255,105,180,.20);
+    46%,100% {
+        opacity: 0;
     }
 }
 
-
-@keyframes glowMove {
+@keyframes orbFloat {
 
     from {
-        transform: translate(0,0);
+        transform:
+            translate(0,0)
+            scale(1);
     }
 
     to {
-        transform: translate(50px,30px);
+        transform:
+            translate(50px,35px)
+            scale(1.15);
     }
 }
 
-
-@keyframes particleFloat {
+@keyframes particleMove {
 
     from {
         transform:
@@ -1316,40 +1323,40 @@ footer {
     }
 }
 
-
-@keyframes floatUp {
+@keyframes heartFloat {
 
     0% {
         transform:
             translateY(0)
-            scale(.6)
-            rotate(-10deg);
+            scale(.6);
 
         opacity: 0;
     }
 
     15% {
-        opacity: .7;
+        opacity: .65;
     }
 
     100% {
         transform:
             translateY(-105vh)
-            scale(1)
-            rotate(15deg);
+            scale(1);
 
         opacity: 0;
     }
 }
 
+@keyframes successRing {
 
-@keyframes cursorBlink {
+    0% {
+        transform: scale(.8);
 
-    0%, 45% {
-        opacity: 1;
+        opacity: .8;
     }
 
-    46%, 100% {
+    100% {
+        transform: scale(1.5);
+
         opacity: 0;
     }
 }
@@ -1362,7 +1369,7 @@ footer {
 @media (max-width: 600px) {
 
     body {
-        padding: 16px 12px;
+        padding: 15px 12px;
     }
 
     .card {
@@ -1372,28 +1379,30 @@ footer {
     }
 
     h1 {
-        font-size: 31px;
+        font-size: 32px;
     }
 
     p {
         font-size: 16px;
     }
 
-    .phone-wrap {
-        transform: scale(.9);
+    .top-icon {
+        width: 78px;
+        height: 78px;
+
+        font-size: 39px;
     }
 
-    .call-card {
+    .call-item {
         padding: 12px;
     }
 
-    .primary,
-    .yes-button,
-    .no-button {
+    .primary-btn,
+    .yes-btn,
+    .no-btn {
         padding: 16px;
     }
 }
-
 
 @media (max-width: 380px) {
 
@@ -1402,7 +1411,7 @@ footer {
     }
 
     h1 {
-        font-size: 27px;
+        font-size: 28px;
     }
 
     p {
