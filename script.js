@@ -10,39 +10,11 @@ const screens = [
     "screen9"
 ];
 
+const replyForm =
+    document.getElementById("replyForm");
 
-const startBtn =
-    document.getElementById("startBtn");
-
-const continueBtn =
-    document.getElementById("continueBtn");
-
-const revealBtn =
-    document.getElementById("revealBtn");
-
-const storyBtn =
-    document.getElementById("storyBtn");
-
-const proposalBtn =
-    document.getElementById("proposalBtn");
-
-const yesBtn =
-    document.getElementById("yesBtn");
-
-const timeBtn =
-    document.getElementById("timeBtn");
-
-const sendResponseBtn =
-    document.getElementById("sendResponseBtn");
-
-const typingText =
-    document.getElementById("typingText");
-
-const clue =
-    document.getElementById("clue");
-
-const thinking =
-    document.getElementById("thinking");
+const replyInput =
+    document.getElementById("replyInput");
 
 const responseText =
     document.getElementById("responseText");
@@ -53,12 +25,6 @@ const counter =
 const error =
     document.getElementById("error");
 
-const replyForm =
-    document.getElementById("replyForm");
-
-const replyInput =
-    document.getElementById("replyInput");
-
 
 /* =========================
    SCREEN SYSTEM
@@ -66,21 +32,17 @@ const replyInput =
 
 function showScreen(id) {
 
-    screens.forEach(function(screenId) {
+    screens.forEach(function(screen) {
 
-        const screen =
-            document.getElementById(screenId);
-
-        screen.classList.remove("active");
+        document
+            .getElementById(screen)
+            .classList.remove("active");
 
     });
 
-
-    const target =
-        document.getElementById(id);
-
-    target.classList.add("active");
-
+    document
+        .getElementById(id)
+        .classList.add("active");
 
     window.scrollTo({
         top: 0,
@@ -90,7 +52,7 @@ function showScreen(id) {
 
 
 /* =========================
-   GOOGLE SHEETS
+   SAVE RESPONSE
 ========================= */
 
 function saveResponse(message) {
@@ -105,178 +67,103 @@ function saveResponse(message) {
    SCREEN 1
 ========================= */
 
-startBtn.addEventListener(
-    "click",
-    function() {
+document
+    .getElementById("openBtn")
+    .addEventListener("click", function() {
 
         showScreen("screen2");
 
-    }
-);
+    });
 
 
 /* =========================
    SCREEN 2
 ========================= */
 
-continueBtn.addEventListener(
-    "click",
-    function() {
+document
+    .getElementById("page2Btn")
+    .addEventListener("click", function() {
 
         showScreen("screen3");
 
-        startTyping();
-
-    }
-);
+    });
 
 
 /* =========================
-   SCREEN 3 TYPEWRITER
+   SCREEN 3
 ========================= */
 
-let typingStarted = false;
+document
+    .getElementById("revealBtn")
+    .addEventListener("click", function() {
 
+        showScreen("screen4");
 
-function startTyping() {
+        createStarsBurst();
 
-    if (typingStarted) {
-        return;
-    }
-
-    typingStarted = true;
-
-
-    const message =
-        "There is someone who makes my ordinary days feel a little more special...";
-
-
-    let index = 0;
-
-
-    function typeNext() {
-
-        if (index < message.length) {
-
-            typingText.textContent +=
-                message.charAt(index);
-
-            index++;
-
-            setTimeout(
-                typeNext,
-                45
-            );
-
-        } else {
-
-            setTimeout(
-                function() {
-
-                    clue.classList.remove(
-                        "hidden"
-                    );
-
-                    thinking.style.display =
-                        "none";
-
-                    revealBtn.classList.remove(
-                        "hidden"
-                    );
-
-                },
-                700
-            );
-        }
-    }
-
-
-    typeNext();
-}
+    });
 
 
 /* =========================
    SCREEN 4
 ========================= */
 
-revealBtn.addEventListener(
-    "click",
-    function() {
+document
+    .getElementById("messageBtn")
+    .addEventListener("click", function() {
 
-        showScreen("screen4");
+        showScreen("screen5");
 
-        celebration(18);
-
-    }
-);
+    });
 
 
 /* =========================
    SCREEN 5
 ========================= */
 
-storyBtn.addEventListener(
-    "click",
-    function() {
-
-        showScreen("screen5");
-
-    }
-);
-
-
-/* =========================
-   PROPOSAL
-========================= */
-
-proposalBtn.addEventListener(
-    "click",
-    function() {
+document
+    .getElementById("questionBtn")
+    .addEventListener("click", function() {
 
         showScreen("screen6");
 
-    }
-);
+    });
 
 
 /* =========================
    YES
 ========================= */
 
-yesBtn.addEventListener(
-    "click",
-    function() {
+document
+    .getElementById("yesBtn")
+    .addEventListener("click", function() {
 
         saveResponse(
             "YES ❤️ - Christopher accepted Sherly's proposal."
         );
 
-
         showScreen("screen7");
 
+        createStarsBurst();
 
-        celebration(55);
-
-    }
-);
+    });
 
 
 /* =========================
    NEED TIME
 ========================= */
 
-timeBtn.addEventListener(
-    "click",
-    function() {
+document
+    .getElementById("timeBtn")
+    .addEventListener("click", function() {
 
         showScreen("screen8");
 
-    }
-);
+    });
 
 
 /* =========================
-   MESSAGE COUNTER
+   COUNTER
 ========================= */
 
 responseText.addEventListener(
@@ -296,42 +183,35 @@ responseText.addEventListener(
    SEND MESSAGE
 ========================= */
 
-sendResponseBtn.addEventListener(
-    "click",
-    function() {
+document
+    .getElementById("sendBtn")
+    .addEventListener("click", function() {
 
         const message =
             responseText.value.trim();
 
-
         if (!message) {
 
             error.textContent =
-                "Please write a message first ❤️";
+                "Please write something first.";
 
             responseText.focus();
 
             return;
         }
 
-
         saveResponse(
-            "NEEDS TIME 🥺 - Christopher's message: " +
+            "NEEDS TIME - Christopher's message: " +
             message
         );
 
-
         showScreen("screen9");
 
-
-        celebration(20);
-
-    }
-);
+    });
 
 
 /* =========================
-   STARS
+   CREATE STARS
 ========================= */
 
 function createStars() {
@@ -339,360 +219,163 @@ function createStars() {
     const container =
         document.getElementById("stars");
 
-
     for (
         let i = 0;
-        i < 55;
+        i < 80;
         i++
     ) {
 
         const star =
             document.createElement("div");
 
-
         star.className =
-            "star";
-
+            "star-point";
 
         star.style.left =
             Math.random() * 100 + "vw";
 
-
         star.style.top =
             Math.random() * 100 + "vh";
-
 
         star.style.animationDelay =
             Math.random() * 3 + "s";
 
+        star.style.animationDuration =
+            1.5 +
+            Math.random() * 3 +
+            "s";
 
         container.appendChild(star);
-
     }
 }
 
 
 /* =========================
-   PARTICLES
+   SHOOTING STARS
 ========================= */
 
-function createParticles() {
+function createShootingStars() {
 
     const container =
         document.getElementById(
-            "particles"
+            "shootingStars"
         );
-
 
     for (
         let i = 0;
-        i < 30;
+        i < 3;
         i++
     ) {
 
-        const particle =
+        const star =
             document.createElement("div");
 
+        star.className =
+            "shooting-star";
 
-        particle.className =
-            "particle";
+        star.style.animationDelay =
+            i * 4 + "s";
 
-
-        particle.style.left =
-            Math.random() * 100 + "vw";
-
-
-        particle.style.animationDuration =
-            (7 +
-            Math.random() * 10) +
-            "s";
-
-
-        particle.style.animationDelay =
-            Math.random() * 8 +
-            "s";
-
-
-        container.appendChild(
-            particle
-        );
-
+        container.appendChild(star);
     }
 }
 
 
 /* =========================
-   FLOATING HEARTS
+   SPECIAL STAR BURST
 ========================= */
 
-function createHeart() {
-
-    const container =
-        document.getElementById(
-            "hearts"
-        );
-
-
-    const heart =
-        document.createElement("div");
-
-
-    heart.className =
-        "heart-particle";
-
-
-    const heartTypes = [
-        "❤️",
-        "💗",
-        "💕"
-    ];
-
-
-    heart.textContent =
-        heartTypes[
-            Math.floor(
-                Math.random() *
-                heartTypes.length
-            )
-        ];
-
-
-    heart.style.left =
-        Math.random() * 100 +
-        "vw";
-
-
-    heart.style.animationDuration =
-        (5 +
-        Math.random() * 3) +
-        "s";
-
-
-    container.appendChild(
-        heart
-    );
-
-
-    setTimeout(
-        function() {
-
-            heart.remove();
-
-        },
-        8500
-    );
-}
-
-
-/*
- * Keep the hearts limited.
- */
-
-setInterval(
-    createHeart,
-    2800
-);
-
-
-/* =========================
-   CELEBRATION
-========================= */
-
-function celebration(amount) {
-
-    const emojis = [
-        "❤️",
-        "💕",
-        "💗",
-        "✨",
-        "🎉",
-        "🥰"
-    ];
-
+function createStarsBurst() {
 
     for (
         let i = 0;
-        i < amount;
+        i < 25;
         i++
     ) {
 
-        setTimeout(
+        const star =
+            document.createElement("div");
+
+        star.textContent = "✦";
+
+        star.style.position =
+            "fixed";
+
+        star.style.left =
+            "50vw";
+
+        star.style.top =
+            "50vh";
+
+        star.style.zIndex =
+            "999";
+
+        star.style.color =
+            "#e5c979";
+
+        star.style.fontSize =
+            "14px";
+
+        document.body.appendChild(star);
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+        const distance =
+            80 +
+            Math.random() * 220;
+
+        const x =
+            Math.cos(angle) *
+            distance;
+
+        const y =
+            Math.sin(angle) *
+            distance;
+
+        const animation =
+            star.animate(
+                [
+                    {
+                        transform:
+                            "translate(-50%,-50%) scale(.2)",
+                        opacity: 1
+                    },
+                    {
+                        transform:
+                            `translate(
+                                calc(-50% + ${x}px),
+                                calc(-50% + ${y}px)
+                            ) scale(1.4)`,
+                        opacity: 0
+                    }
+                ],
+                {
+                    duration:
+                        1000 +
+                        Math.random() * 800,
+
+                    easing:
+                        "cubic-bezier(.2,.8,.3,1)"
+                }
+            );
+
+        animation.onfinish =
             function() {
 
-                const item =
-                    document.createElement("div");
+                star.remove();
 
-
-                item.textContent =
-                    emojis[
-                        Math.floor(
-                            Math.random() *
-                            emojis.length
-                        )
-                    ];
-
-
-                item.style.position =
-                    "fixed";
-
-
-                item.style.left =
-                    Math.random() * 100 +
-                    "vw";
-
-
-                item.style.top =
-                    "-50px";
-
-
-                item.style.fontSize =
-                    (16 +
-                    Math.random() * 24) +
-                    "px";
-
-
-                item.style.zIndex =
-                    "9999";
-
-
-                document.body.appendChild(
-                    item
-                );
-
-
-                const animation =
-                    item.animate(
-                        [
-                            {
-                                transform:
-                                    "translateY(0) rotate(0deg)",
-                                opacity: 1
-                            },
-
-                            {
-                                transform:
-                                    "translateY(110vh) rotate(720deg)",
-                                opacity: 0
-                            }
-                        ],
-                        {
-                            duration:
-                                2200 +
-                                Math.random() * 1800,
-
-                            easing:
-                                "cubic-bezier(.2,.8,.3,1)"
-                        }
-                    );
-
-
-                animation.onfinish =
-                    function() {
-
-                        item.remove();
-
-                    };
-
-            },
-            i * 45
-        );
-
+            };
     }
 }
 
 
 /* =========================
-   MUSIC BUTTON
-========================= */
-
-const musicBtn =
-    document.getElementById("musicBtn");
-
-
-let audioContext = null;
-let musicStarted = false;
-
-
-musicBtn.addEventListener(
-    "click",
-    function() {
-
-        /*
-         * This creates a tiny ambient tone
-         * without requiring an audio file.
-         */
-
-        try {
-
-            if (!audioContext) {
-
-                audioContext =
-                    new (
-                        window.AudioContext ||
-                        window.webkitAudioContext
-                    )();
-
-            }
-
-
-            const oscillator =
-                audioContext.createOscillator();
-
-            const gain =
-                audioContext.createGain();
-
-
-            oscillator.type =
-                "sine";
-
-
-            oscillator.frequency.value =
-                220;
-
-
-            gain.gain.value =
-                0.025;
-
-
-            oscillator.connect(
-                gain
-            );
-
-            gain.connect(
-                audioContext.destination
-            );
-
-
-            oscillator.start();
-
-
-            oscillator.stop(
-                audioContext.currentTime +
-                1.2
-            );
-
-
-            musicStarted = true;
-
-            musicBtn.textContent =
-                "♥";
-
-        } catch (e) {
-
-            console.log(
-                "Audio unavailable."
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================
-   INITIALIZE
+   START
 ========================= */
 
 createStars();
 
-createParticles();
+createShootingStars();
