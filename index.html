@@ -1,531 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050914">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>A Letter For Christopher</title>
 
-    <meta
-        name="theme-color"
-        content="#100308"
-    >
-
-    <title>Something For Christopher ❤️</title>
-
-    <!-- IMPORTANT: CSS must be in the same folder -->
-    <link rel="stylesheet" href="./style.css?v=10">
-
+    <link rel="stylesheet" href="./style.css?v=20">
 </head>
 
 <body>
 
-    <!-- =========================
-         BACKGROUND
-    ========================== -->
-
-    <div class="background"></div>
-
-    <div class="glow glow-one"></div>
-    <div class="glow glow-two"></div>
-    <div class="glow glow-three"></div>
-
+    <!-- Background -->
+    <div class="night"></div>
     <div id="stars"></div>
-    <div id="particles"></div>
-    <div id="hearts"></div>
+    <div id="shootingStars"></div>
 
+    <!-- Moon -->
+    <div class="moon"></div>
 
-    <!-- =========================
-         MUSIC BUTTON
-    ========================== -->
-
-    <button
-        id="musicBtn"
-        class="music-button"
-        aria-label="Music"
-    >
-        ♪
-    </button>
-
-
-    <!-- =========================
-         MAIN
-    ========================== -->
-
+    <!-- Main -->
     <main class="app">
 
 
         <!-- =========================
-             SCREEN 1
+             1. ENVELOPE
         ========================== -->
 
-        <section
-            id="screen1"
-            class="screen active"
-        >
+        <section class="screen active" id="screen1">
 
-            <div class="floating-icon">
-                🔐
+            <div class="date">
+                A PRIVATE LETTER
             </div>
 
-            <div class="eyebrow">
-                A LITTLE SECRET
+            <div class="envelope-wrap">
+
+                <div class="envelope">
+
+                    <div class="envelope-flap"></div>
+
+                    <div class="seal">
+                        S
+                    </div>
+
+                </div>
+
             </div>
 
-            <h1>
-                Christopher...
-            </h1>
-
-            <p class="hero-text">
-                Someone has created a little
-                surprise just for you.
+            <p class="tiny-label">
+                THIS LETTER HAS ONE RECIPIENT
             </p>
 
+            <h1>
+                Christopher
+            </h1>
 
-            <div class="glass-message">
+            <p class="intro">
+                There is something I have been
+                wanting to tell you.
+            </p>
 
-                <div class="message-icon">
-                    💌
-                </div>
-
-                <div>
-                    <strong>
-                        This message is only for you.
-                    </strong>
-
-                    <span>
-                        Please stay until the end...
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="sparkle-line">
-                ✦ ───────── ♥ ───────── ✦
-            </div>
-
-
-            <button
-                id="startBtn"
-                class="main-button"
-            >
-                Open Your Surprise
-                <span>✨</span>
+            <button class="gold-btn" id="openBtn">
+                Open the letter
+                <span>→</span>
             </button>
 
-
-            <p class="tiny-note">
-                Made with a little courage and a lot of feelings ❤️
+            <p class="bottom-note">
+                Take your time. Read every page.
             </p>
 
         </section>
 
 
-
         <!-- =========================
-             SCREEN 2
+             2. FIRST PAGE
         ========================== -->
 
-        <section
-            id="screen2"
-            class="screen"
-        >
+        <section class="screen" id="screen2">
 
-            <div class="chapter-number">
-                01
+            <div class="page-number">
+                I
             </div>
 
-            <div class="eyebrow">
-                BEFORE I SAY IT
+            <div class="date">
+                DEAR CHRISTOPHER
             </div>
 
-            <h1>
-                Some people
-                become special
-                without us noticing.
-            </h1>
+            <h2>
+                Some stories
+                begin quietly.
+            </h2>
+
+            <div class="gold-line"></div>
 
             <p>
-                It starts with small conversations,
-                random moments and little memories...
+                Sometimes, someone becomes important
+                without a grand moment announcing it.
             </p>
 
-
-            <div class="memory-card">
-
-                <div class="memory-glow">
-                    ♥
-                </div>
-
-                <div class="memory-content">
-
-                    <strong>
-                        A special connection
-                    </strong>
-
-                    <span>
-                        Some people simply feel different.
-                    </span>
-
-                </div>
-
-                <div class="memory-arrow">
-                    →
-                </div>
-
-            </div>
-
+            <p>
+                It happens through conversations,
+                little memories, unexpected smiles,
+                and moments that stay in your mind
+                longer than they should.
+            </p>
 
             <div class="quote">
-                "Maybe some meetings are not
-                just coincidences."
+                "The most beautiful chapters
+                are often the ones we never planned."
             </div>
 
-
-            <button
-                id="continueBtn"
-                class="main-button"
-            >
-                Continue
-                <span>❤️</span>
+            <button class="gold-btn" id="page2Btn">
+                Turn the page
+                <span>→</span>
             </button>
 
         </section>
 
 
-
         <!-- =========================
-             SCREEN 3
+             3. CLUES
         ========================== -->
 
-        <section
-            id="screen3"
-            class="screen"
-        >
+        <section class="screen" id="screen3">
 
-            <div class="chapter-number">
-                02
+            <div class="page-number">
+                II
             </div>
 
-            <div class="eyebrow">
-                THERE IS SOMEONE...
+            <div class="date">
+                A FEW CLUES
             </div>
 
-            <div class="typing-area">
+            <h2>
+                Maybe you can
+                guess who...
+            </h2>
 
-                <h1>
-                    <span id="typingText"></span>
-                    <span class="cursor">|</span>
-                </h1>
+            <div class="clues">
 
-            </div>
+                <div class="clue">
+                    <span>01</span>
+                    <p>
+                        Someone who makes
+                        ordinary moments memorable.
+                    </p>
+                </div>
 
+                <div class="clue">
+                    <span>02</span>
+                    <p>
+                        Someone whose name has
+                        appeared in this letter before.
+                    </p>
+                </div>
 
-            <div
-                id="clue"
-                class="clue hidden"
-            >
-
-                <span class="clue-icon">
-                    💭
-                </span>
-
-                <p>
-                    Someone who makes ordinary
-                    moments feel a little more special.
-                </p>
-
-            </div>
-
-
-            <div
-                id="thinking"
-                class="thinking"
-            >
-                <span class="dot"></span>
-                <span>Think carefully...</span>
-            </div>
-
-
-            <button
-                id="revealBtn"
-                class="main-button hidden"
-            >
-                I think I know who... 👀
-            </button>
-
-        </section>
-
-
-
-        <!-- =========================
-             SCREEN 4
-        ========================== -->
-
-        <section
-            id="screen4"
-            class="screen"
-        >
-
-            <div class="reveal-stage">
-
-                <div class="ring ring-one"></div>
-                <div class="ring ring-two"></div>
-                <div class="ring ring-three"></div>
-
-                <div class="heart-core">
-                    ❤️
+                <div class="clue">
+                    <span>03</span>
+                    <p>
+                        Someone who is reading
+                        this right now.
+                    </p>
                 </div>
 
             </div>
 
+            <p class="guess">
+                Do you have an idea?
+            </p>
 
-            <div class="eyebrow">
-                YES...
+            <button class="gold-btn" id="revealBtn">
+                Reveal the name
+                <span>✦</span>
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             4. NAME
+        ========================== -->
+
+        <section class="screen name-screen" id="screen4">
+
+            <div class="constellation">
+
+                <span class="star s1"></span>
+                <span class="star s2"></span>
+                <span class="star s3"></span>
+                <span class="star s4"></span>
+                <span class="star s5"></span>
+
+                <div class="constellation-line"></div>
+
             </div>
 
+            <div class="date">
+                THE ANSWER
+            </div>
 
-            <h1 class="name-title">
+            <p class="small-intro">
+                The person this letter was always meant for...
+            </p>
+
+            <h1 class="gold-name">
                 Christopher
                 <span>Sebastin</span>
             </h1>
 
-
-            <div class="reveal-message">
-
-                <span>✨</span>
-
-                <strong>
-                    I'm talking about YOU.
-                </strong>
-
-                <span>✨</span>
-
-            </div>
-
+            <div class="gold-line"></div>
 
             <p>
-                And there is something
-                I've been wanting to tell you.
+                Yes.
+                <br>
+                It's you.
             </p>
 
-
-            <button
-                id="storyBtn"
-                class="main-button"
-            >
-                Tell me more
-                <span>💌</span>
+            <button class="gold-btn" id="messageBtn">
+                Continue reading
+                <span>→</span>
             </button>
 
         </section>
 
 
-
         <!-- =========================
-             SCREEN 5
+             5. SHERLY LETTER
         ========================== -->
 
-        <section
-            id="screen5"
-            class="screen"
-        >
+        <section class="screen" id="screen5">
 
-            <div class="chapter-number">
-                03
+            <div class="page-number">
+                III
             </div>
 
-            <div class="eyebrow">
-                A MESSAGE FROM SHERLY
+            <div class="date">
+                FROM SHERLY
             </div>
 
+            <div class="paper">
 
-            <div class="letter">
-
-                <div class="letter-heart">
-                    ♥
+                <div class="paper-top">
+                    ✦
                 </div>
 
-                <p class="letter-greeting">
+                <p>
                     Christopher,
                 </p>
 
                 <p>
-                    I don't know exactly what the
-                    future will look like...
+                    There are some feelings that are
+                    easier to write than to say.
                 </p>
 
                 <p>
-                    But I know that having you
-                    in my life feels special.
+                    I don't know what tomorrow will
+                    bring, and I don't want to pretend
+                    that I know where everything leads.
                 </p>
 
                 <p>
-                    There are some things that are
-                    difficult to say face to face.
+                    But I do know that you have become
+                    someone very special to me.
                 </p>
 
                 <p>
-                    So I decided to put them
-                    here instead. ❤️
+                    And there is one question I have
+                    been carrying with me.
                 </p>
 
-                <div class="letter-signature">
-                    — Sherly
+                <div class="signature">
+                    Sherly
                 </div>
 
             </div>
 
-
-            <button
-                id="proposalBtn"
-                class="main-button"
-            >
-                Ask me the question...
-                <span>💗</span>
+            <button class="gold-btn" id="questionBtn">
+                One final page
+                <span>→</span>
             </button>
 
         </section>
 
 
-
         <!-- =========================
-             SCREEN 6
+             6. PROPOSAL
         ========================== -->
 
-        <section
-            id="screen6"
-            class="screen proposal-screen"
-        >
+        <section class="screen proposal" id="screen6">
 
-            <div class="proposal-light"></div>
+            <div class="ring-animation">
 
-            <div class="proposal-heart">
-                ❤️
+                <div class="ring-circle"></div>
+
+                <div class="diamond">
+                    ◆
+                </div>
+
             </div>
 
-
-            <div class="eyebrow">
-                ONE LAST QUESTION
+            <div class="date">
+                THE QUESTION
             </div>
-
 
             <h1>
                 Christopher...
             </h1>
 
-
-            <div class="proposal-question">
+            <h2 class="question">
                 Will you be mine?
-            </div>
+            </h2>
 
+            <div class="gold-line"></div>
 
             <p>
-                I don't know where this journey
-                will take us...
+                I don't need a perfect answer.
             </p>
 
-            <p class="proposal-small">
-                But I'd love to discover it with you.
+            <p>
+                I just want an honest one.
             </p>
 
-
-            <div class="proposal-buttons">
+            <div class="answer-buttons">
 
                 <button
+                    class="yes-btn"
                     id="yesBtn"
-                    class="yes-button"
                 >
-                    <span>❤️</span>
                     Yes
-                    <span>❤️</span>
+                    <span>♥</span>
                 </button>
 
-
                 <button
+                    class="time-btn"
                     id="timeBtn"
-                    class="time-button"
                 >
-                    🥺 I need some time
+                    I need some time
                 </button>
 
             </div>
-
-
-            <p class="no-pressure">
-                Whatever your answer,
-                please be honest. ❤️
-            </p>
 
         </section>
 
 
-
         <!-- =========================
-             SCREEN 7 YES
+             7. YES
         ========================== -->
 
-        <section
-            id="screen7"
-            class="screen"
-        >
+        <section class="screen success" id="screen7">
 
-            <div class="celebration-heart">
-                ❤️
+            <div class="success-symbol">
+                ✓
             </div>
 
-
-            <div class="eyebrow">
-                ANSWER RECEIVED
+            <div class="date">
+                YOUR ANSWER
             </div>
-
 
             <h1>
-                You said YES! 🥹
+                Yes.
             </h1>
 
+            <div class="gold-line"></div>
 
             <p>
-                You just made Sherly
-                incredibly happy.
+                Somewhere tonight,
+                someone is smiling very hard.
             </p>
 
+            <div class="final-card">
 
-            <div class="success-card">
-
-                <div class="success-check">
-                    ✓
+                <div class="final-title">
+                    A NEW CHAPTER
                 </div>
 
-                <div>
-
-                    <strong>
-                        A new chapter begins
-                    </strong>
-
-                    <span>
-                        Christopher said YES ❤️
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="final-letter">
-
                 <p>
-                    Thank you for taking the time
-                    to read this little surprise.
-                </p>
-
-                <p>
-                    Maybe this is where
-                    something beautiful begins. ❤️
+                    Maybe this little letter
+                    will become the first page
+                    of something beautiful.
                 </p>
 
                 <strong>
@@ -534,76 +387,65 @@
 
             </div>
 
-
-            <div class="celebration-text">
-                ❤️ ✨ 💕 ✨ ❤️
+            <div class="stars-text">
+                ✦ &nbsp; ✧ &nbsp; ✦
             </div>
 
         </section>
 
 
-
         <!-- =========================
-             SCREEN 8
+             8. NEED TIME
         ========================== -->
 
-        <section
-            id="screen8"
-            class="screen"
-        >
+        <section class="screen" id="screen8">
 
-            <div class="time-heart">
-                🌙
+            <div class="clock-icon">
+                ◷
             </div>
 
-
-            <div class="eyebrow">
-                THAT'S OKAY
+            <div class="date">
+                NO RUSH
             </div>
 
+            <h2>
+                Take your time.
+            </h2>
 
-            <h1>
-                Take your time. 💜
-            </h1>
-
+            <div class="gold-line"></div>
 
             <p>
                 You don't have to answer immediately.
-                Sherly will understand.
             </p>
 
+            <p>
+                If you'd like, leave Sherly
+                a message.
+            </p>
 
-            <div class="response-card">
-
-                <div class="response-title">
-                    If you want, leave her a message.
-                </div>
-
+            <div class="reply-box">
 
                 <textarea
                     id="responseText"
                     maxlength="500"
-                    placeholder="Write something for Sherly..."
+                    placeholder="Write your message here..."
                 ></textarea>
 
-
                 <div class="counter">
-                    <span id="counter">0</span>/500
+                    <span id="counter">0</span> / 500
                 </div>
 
-
                 <button
-                    id="sendResponseBtn"
-                    class="main-button"
+                    class="gold-btn"
+                    id="sendBtn"
                 >
-                    Send Message
-                    <span>💌</span>
+                    Send message
+                    <span>→</span>
                 </button>
 
-
                 <p
-                    id="error"
                     class="error"
+                    id="error"
                 ></p>
 
             </div>
@@ -611,45 +453,39 @@
         </section>
 
 
-
         <!-- =========================
-             SCREEN 9
+             9. SENT
         ========================== -->
 
-        <section
-            id="screen9"
-            class="screen"
-        >
+        <section class="screen" id="screen9">
 
-            <div class="sent-animation">
-                💌
+            <div class="sent-envelope">
+                ✉
             </div>
 
-
-            <div class="eyebrow">
-                MESSAGE SENT
+            <div class="date">
+                DELIVERED
             </div>
 
+            <h2>
+                Your message
+                has been sent.
+            </h2>
 
-            <h1>
-                Thank you. ❤️
-            </h1>
-
+            <div class="gold-line"></div>
 
             <p>
-                Your message has been sent
-                to Sherly.
+                Thank you for being honest,
+                Christopher.
             </p>
 
-
-            <div class="celebration-text">
-                ✨ ❤️ ✨
+            <div class="stars-text">
+                ✦ &nbsp; ♥ &nbsp; ✦
             </div>
 
         </section>
 
     </main>
-
 
 
     <!-- =========================
@@ -677,7 +513,6 @@
 
     </form>
 
-
     <iframe
         id="submitFrame"
         name="submitFrame"
@@ -685,11 +520,11 @@
 
 
     <footer>
-        A little surprise made with ❤️
+        A letter written with courage.
     </footer>
 
 
-    <script src="./script.js?v=10"></script>
+    <script src="./script.js?v=20"></script>
 
 </body>
 </html>
