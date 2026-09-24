@@ -10,6 +10,7 @@ const screens = [
     "screen9"
 ];
 
+
 const startBtn =
     document.getElementById("startBtn");
 
@@ -28,46 +29,57 @@ const proposalBtn =
 const yesBtn =
     document.getElementById("yesBtn");
 
-const maybeBtn =
-    document.getElementById("maybeBtn");
+const timeBtn =
+    document.getElementById("timeBtn");
 
 const sendResponseBtn =
     document.getElementById("sendResponseBtn");
 
+const typingText =
+    document.getElementById("typingText");
+
+const clue =
+    document.getElementById("clue");
+
+const thinking =
+    document.getElementById("thinking");
+
 const responseText =
     document.getElementById("responseText");
 
-const replyInput =
-    document.getElementById("replyInput");
-
-const replyForm =
-    document.getElementById("replyForm");
-
-const count =
-    document.getElementById("count");
+const counter =
+    document.getElementById("counter");
 
 const error =
     document.getElementById("error");
 
+const replyForm =
+    document.getElementById("replyForm");
+
+const replyInput =
+    document.getElementById("replyInput");
+
 
 /* =========================
-   SCREEN CHANGE
+   SCREEN SYSTEM
 ========================= */
 
 function showScreen(id) {
 
     screens.forEach(function(screenId) {
 
-        document
-            .getElementById(screenId)
-            .classList.remove("active");
+        const screen =
+            document.getElementById(screenId);
+
+        screen.classList.remove("active");
 
     });
 
 
-    document
-        .getElementById(id)
-        .classList.add("active");
+    const target =
+        document.getElementById(id);
+
+    target.classList.add("active");
 
 
     window.scrollTo({
@@ -78,7 +90,7 @@ function showScreen(id) {
 
 
 /* =========================
-   SAVE TO GOOGLE SHEET
+   GOOGLE SHEETS
 ========================= */
 
 function saveResponse(message) {
@@ -120,11 +132,8 @@ continueBtn.addEventListener(
 
 
 /* =========================
-   SCREEN 3
+   SCREEN 3 TYPEWRITER
 ========================= */
-
-const typingText =
-    document.getElementById("typingText");
 
 let typingStarted = false;
 
@@ -145,7 +154,7 @@ function startTyping() {
     let index = 0;
 
 
-    function type() {
+    function typeNext() {
 
         if (index < message.length) {
 
@@ -155,17 +164,40 @@ function startTyping() {
             index++;
 
             setTimeout(
-                type,
+                typeNext,
                 45
             );
 
+        } else {
+
+            setTimeout(
+                function() {
+
+                    clue.classList.remove(
+                        "hidden"
+                    );
+
+                    thinking.style.display =
+                        "none";
+
+                    revealBtn.classList.remove(
+                        "hidden"
+                    );
+
+                },
+                700
+            );
         }
     }
 
 
-    type();
+    typeNext();
 }
 
+
+/* =========================
+   SCREEN 4
+========================= */
 
 revealBtn.addEventListener(
     "click",
@@ -173,14 +205,14 @@ revealBtn.addEventListener(
 
         showScreen("screen4");
 
-        createCelebration(15);
+        celebration(18);
 
     }
 );
 
 
 /* =========================
-   SCREEN 4
+   SCREEN 5
 ========================= */
 
 storyBtn.addEventListener(
@@ -194,7 +226,7 @@ storyBtn.addEventListener(
 
 
 /* =========================
-   SCREEN 5
+   PROPOSAL
 ========================= */
 
 proposalBtn.addEventListener(
@@ -219,9 +251,11 @@ yesBtn.addEventListener(
             "YES ❤️ - Christopher accepted Sherly's proposal."
         );
 
+
         showScreen("screen7");
 
-        createCelebration(45);
+
+        celebration(55);
 
     }
 );
@@ -231,7 +265,7 @@ yesBtn.addEventListener(
    NEED TIME
 ========================= */
 
-maybeBtn.addEventListener(
+timeBtn.addEventListener(
     "click",
     function() {
 
@@ -249,7 +283,7 @@ responseText.addEventListener(
     "input",
     function() {
 
-        count.textContent =
+        counter.textContent =
             responseText.value.length;
 
         error.textContent = "";
@@ -273,7 +307,7 @@ sendResponseBtn.addEventListener(
         if (!message) {
 
             error.textContent =
-                "Please write a message first 💜";
+                "Please write a message first ❤️";
 
             responseText.focus();
 
@@ -289,10 +323,53 @@ sendResponseBtn.addEventListener(
 
         showScreen("screen9");
 
-        createCelebration(15);
+
+        celebration(20);
 
     }
 );
+
+
+/* =========================
+   STARS
+========================= */
+
+function createStars() {
+
+    const container =
+        document.getElementById("stars");
+
+
+    for (
+        let i = 0;
+        i < 55;
+        i++
+    ) {
+
+        const star =
+            document.createElement("div");
+
+
+        star.className =
+            "star";
+
+
+        star.style.left =
+            Math.random() * 100 + "vw";
+
+
+        star.style.top =
+            Math.random() * 100 + "vh";
+
+
+        star.style.animationDelay =
+            Math.random() * 3 + "s";
+
+
+        container.appendChild(star);
+
+    }
+}
 
 
 /* =========================
@@ -309,7 +386,7 @@ function createParticles() {
 
     for (
         let i = 0;
-        i < 35;
+        i < 30;
         i++
     ) {
 
@@ -317,87 +394,119 @@ function createParticles() {
             document.createElement("div");
 
 
-        particle.style.position =
-            "fixed";
+        particle.className =
+            "particle";
 
-        particle.style.width =
-            "2px";
-
-        particle.style.height =
-            "2px";
-
-        particle.style.borderRadius =
-            "50%";
-
-        particle.style.background =
-            "#c084fc";
-
-        particle.style.boxShadow =
-            "0 0 8px #c084fc";
 
         particle.style.left =
             Math.random() * 100 + "vw";
 
-        particle.style.top =
-            Math.random() * 100 + "vh";
 
-        particle.style.opacity =
-            Math.random();
+        particle.style.animationDuration =
+            (7 +
+            Math.random() * 10) +
+            "s";
 
 
-        particle.animate(
-            [
-                {
-                    transform:
-                        "translateY(0)",
-                    opacity: 0
-                },
-                {
-                    transform:
-                        "translateY(-100px)",
-                    opacity: .7
-                },
-                {
-                    transform:
-                        "translateY(-200px)",
-                    opacity: 0
-                }
-            ],
-            {
-                duration:
-                    5000 +
-                    Math.random() * 7000,
-
-                iterations: Infinity,
-
-                delay:
-                    Math.random() * 5000
-            }
-        );
+        particle.style.animationDelay =
+            Math.random() * 8 +
+            "s";
 
 
         container.appendChild(
             particle
         );
+
     }
 }
 
 
-createParticles();
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart() {
+
+    const container =
+        document.getElementById(
+            "hearts"
+        );
+
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.className =
+        "heart-particle";
+
+
+    const heartTypes = [
+        "❤️",
+        "💗",
+        "💕"
+    ];
+
+
+    heart.textContent =
+        heartTypes[
+            Math.floor(
+                Math.random() *
+                heartTypes.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 +
+        "vw";
+
+
+    heart.style.animationDuration =
+        (5 +
+        Math.random() * 3) +
+        "s";
+
+
+    container.appendChild(
+        heart
+    );
+
+
+    setTimeout(
+        function() {
+
+            heart.remove();
+
+        },
+        8500
+    );
+}
+
+
+/*
+ * Keep the hearts limited.
+ */
+
+setInterval(
+    createHeart,
+    2800
+);
 
 
 /* =========================
    CELEBRATION
 ========================= */
 
-function createCelebration(amount) {
+function celebration(amount) {
 
     const emojis = [
-        "💜",
         "❤️",
-        "✨",
+        "💕",
         "💗",
-        "🎉"
+        "✨",
+        "🎉",
+        "🥰"
     ];
 
 
@@ -426,16 +535,21 @@ function createCelebration(amount) {
                 item.style.position =
                     "fixed";
 
+
                 item.style.left =
-                    Math.random() * 100 + "vw";
+                    Math.random() * 100 +
+                    "vw";
+
 
                 item.style.top =
-                    "-40px";
+                    "-50px";
+
 
                 item.style.fontSize =
                     (16 +
-                    Math.random() * 22) +
+                    Math.random() * 24) +
                     "px";
+
 
                 item.style.zIndex =
                     "9999";
@@ -463,7 +577,7 @@ function createCelebration(amount) {
                         ],
                         {
                             duration:
-                                2500 +
+                                2200 +
                                 Math.random() * 1800,
 
                             easing:
@@ -480,7 +594,105 @@ function createCelebration(amount) {
                     };
 
             },
-            i * 50
+            i * 45
         );
+
     }
 }
+
+
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+const musicBtn =
+    document.getElementById("musicBtn");
+
+
+let audioContext = null;
+let musicStarted = false;
+
+
+musicBtn.addEventListener(
+    "click",
+    function() {
+
+        /*
+         * This creates a tiny ambient tone
+         * without requiring an audio file.
+         */
+
+        try {
+
+            if (!audioContext) {
+
+                audioContext =
+                    new (
+                        window.AudioContext ||
+                        window.webkitAudioContext
+                    )();
+
+            }
+
+
+            const oscillator =
+                audioContext.createOscillator();
+
+            const gain =
+                audioContext.createGain();
+
+
+            oscillator.type =
+                "sine";
+
+
+            oscillator.frequency.value =
+                220;
+
+
+            gain.gain.value =
+                0.025;
+
+
+            oscillator.connect(
+                gain
+            );
+
+            gain.connect(
+                audioContext.destination
+            );
+
+
+            oscillator.start();
+
+
+            oscillator.stop(
+                audioContext.currentTime +
+                1.2
+            );
+
+
+            musicStarted = true;
+
+            musicBtn.textContent =
+                "♥";
+
+        } catch (e) {
+
+            console.log(
+                "Audio unavailable."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+createStars();
+
+createParticles();
